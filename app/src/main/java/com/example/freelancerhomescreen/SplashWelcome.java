@@ -8,8 +8,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.window.SplashScreen;
 
-import androidx.core.splashscreen.SplashScreen;
+//import androidx.core.splashscreen.SplashScreen;
 
 public class SplashWelcome extends AppCompatActivity {
 
@@ -157,7 +158,7 @@ public class SplashWelcome extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         /*handle the splash screen transition just before calling super.onCreate()*/
-        SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
+//        SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 //        if (startTimes < 1) {

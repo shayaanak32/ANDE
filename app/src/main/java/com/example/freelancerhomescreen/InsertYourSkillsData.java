@@ -3,8 +3,8 @@ package com.example.freelancerhomescreen;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+//import com.google.firebase.database.DatabaseReference;
+//import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,13 +12,13 @@ import java.util.Date;
 
 public class InsertYourSkillsData extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-    DatabaseReference yourSkillsDbRef;
+//    DatabaseReference yourSkillsDbRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        yourSkillsDbRef = FirebaseDatabase.getInstance().getReference().child("YourSkills");
+//        yourSkillsDbRef = FirebaseDatabase.getInstance().getReference().child("YourSkills");
         insertYourSkillsData();
     }
 
@@ -71,14 +71,14 @@ public class InsertYourSkillsData extends AppCompatActivity {
         YourSkills s8 = new YourSkills(3,2,"JavaScript");
         YourSkills s9 = new YourSkills(3,5,"C#");
 
-        yourSkillsDbRef.push().setValue(s1);
-        yourSkillsDbRef.push().setValue(s2);
-        yourSkillsDbRef.push().setValue(s3);
-        yourSkillsDbRef.push().setValue(s4);
-        yourSkillsDbRef.push().setValue(s5);
-        yourSkillsDbRef.push().setValue(s6);
-        yourSkillsDbRef.push().setValue(s7);
-        yourSkillsDbRef.push().setValue(s8);
-        yourSkillsDbRef.push().setValue(s9);
+//        yourSkillsDbRef.push().setValue(s1);
+//        yourSkillsDbRef.push().setValue(s2);
+//        yourSkillsDbRef.push().setValue(s3);
+//        yourSkillsDbRef.push().setValue(s4);
+//        yourSkillsDbRef.push().setValue(s5);
+//        yourSkillsDbRef.push().setValue(s6);
+//        yourSkillsDbRef.push().setValue(s7);
+//        yourSkillsDbRef.push().setValue(s8);
+//        yourSkillsDbRef.push().setValue(s9);
     }
 }
