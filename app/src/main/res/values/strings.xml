@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">FreelancerHomeScreen</string>
+    <string name="backArrow"><![CDATA[<--]]></string>
+    <string name="forwardArrow"><![CDATA[-->]]></string>
+
+
 </resources>

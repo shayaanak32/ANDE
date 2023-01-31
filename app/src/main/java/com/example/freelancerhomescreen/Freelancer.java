@@ -8,29 +8,38 @@ public class Freelancer {
     private String email;
     private String hashPassword;
     private String description;
+    private String listOfSkills;
     private int id;
     private String skills;
     private String[] individualSkill;
 
-    public Freelancer(String name, String email, String hashPassword, String description, String skills) {
+    public Freelancer(String name, String email, String hashPassword, String description,String listOfSkills) {
         this.name = name;
         this.email = email;
         this.hashPassword = hashPassword;
         this.description = description;
-        this.skills = skills;
+        this.listOfSkills = listOfSkills;
     }
 
     public Freelancer() {
 
     }
 
-    public Freelancer(int id, String name, String email, String hashPassword, String description, String skills) {
+    public Freelancer(int id, String name, String email, String hashPassword, String description,String listOfSkills) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.hashPassword = hashPassword;
         this.description = description;
-        this.skills = skills;
+        this.listOfSkills = listOfSkills;
+    }
+
+    public String getListOfSkills() {
+        return listOfSkills;
+    }
+
+    public void setListOfSkills(String listOfSkills) {
+        this.listOfSkills = listOfSkills;
     }
 
     public int getId() {
