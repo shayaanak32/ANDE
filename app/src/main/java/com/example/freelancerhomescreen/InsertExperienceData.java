@@ -4,8 +4,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+//import com.google.firebase.database.DatabaseReference;
+//import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,7 +15,7 @@ import java.util.Date;
 public class InsertExperienceData extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    DatabaseReference experienceDBRef;
+//    DatabaseReference experienceDBRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

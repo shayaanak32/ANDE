@@ -13,14 +13,14 @@ import java.util.List;
 public class CreateTables extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
-//    private static final String TABLE_CERTIFICATIONS = "Certifications";
-//    private static final String TABLE_FREELANCERS = "Freelancers";
+    private static final String TABLE_CERTIFICATIONS = "Certifications";
+    private static final String TABLE_FREELANCERS = "Freelancers";
     private static final String TABLE_EMPLOYERS = "Employers";
 //
     private static final String TABLE_PROJECTS = "Projects";
-//    private static final String TABLE_SKILLS = "Skills";
-//    private static final String TABLE_EXPERIENCE = "Experience";
-//    private static final String TABLE_YOURSKILLS = "YourSkills";
+    private static final String TABLE_SKILLS = "Skills";
+    private static final String TABLE_EXPERIENCE = "Experience";
+    private static final String TABLE_YOURSKILLS = "YourSkills";
 
     private static final String DATABASE_NAME = "Firehire.db";
     private static final String KEY_USERID = "userid";
@@ -112,14 +112,14 @@ public class CreateTables extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         //Log.d("CreateTables onCreate", "Inside Now");
-        Log.d("onCreate Experience", CREATE_EXPERIENCE_TABLE);
+//        Log.d("onCreate Experience", CREATE_EXPERIENCE_TABLE);
         db.execSQL(CREATE_CERTIFICATIONS_TABLE);
         db.execSQL(CREATE_FREELANCERS_TABLE);
         db.execSQL(CREATE_EMPLOYERS_TABLE);
         db.execSQL(CREATE_EXPERIENCE_TABLE);
         db.execSQL(CREATE_PROJECTS_TABLE);
         db.execSQL(CREATE_SKILLS_TABLE);
-        //db.execSQL(CREATE_YOURSKILLS_TABLE);
+        db.execSQL(CREATE_YOURSKILLS_TABLE);
         Log.d("Tables Created", "Created.");
         //insertCertificationData();
     }
