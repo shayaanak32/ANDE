@@ -18,10 +18,21 @@ import com.example.freelancerhomescreen.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+import com.google.android.material.button.MaterialButton;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private final String TAG = "MainActivity";
+
+    //InsertCertificationData db = new InsertCertificationData(this);
+CreateTables ct = new CreateTables(this);
+//    ShowData sd = new ShowData(this);
+//    CreateTables ct = new CreateTables(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("Status ", "Inside onCreate !!!");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         CreateTables cr = new CreateTables(this);
