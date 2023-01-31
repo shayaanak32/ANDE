@@ -7,25 +7,29 @@ import android.os.Bundle;
 import java.util.Date;
 
 public class Projects {
-private int userId;
-private String nameOfProject;
+    private int userId;
+    private String nameOfProject;
     private String startDate;
+    private int projectID;
+    private String endDate;
+    private String link;
+    private String skills;
+    private String description;
 
-private String endDate;
-private String link;
-private String skills;
-private String description;
-
-    public Projects(String nameOfProject,String startDate, String endDate, String link, String skills, String description) {
+    public Projects(String nameOfProject, String startDate, String endDate, String link, String skills, String description, int userId) {
         this.nameOfProject = nameOfProject;
         this.startDate = startDate;
         this.endDate = endDate;
         this.link = link;
         this.skills = skills;
         this.description = description;
-    }
-    public Projects(String nameOfProject,String startDate, String endDate, String link, String skills, String description, int userId ) {
+        this.userId = userId;
 
+    }
+
+
+    public Projects(int projectID, String nameOfProject, String startDate, String endDate, String link, String skills, String description,int userId) {
+        this.projectID = projectID;
         this.nameOfProject = nameOfProject;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -34,8 +38,17 @@ private String description;
         this.description = description;
         this.userId = userId;
     }
+
     public Projects() {
 
+    }
+
+    public int getProjectID() {
+        return projectID;
+    }
+
+    public void setProjectID(int projectID) {
+        this.projectID = projectID;
     }
 
     public String getStartDate() {
@@ -49,6 +62,7 @@ private String description;
     public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
+
     public String getEndDate() {
         return endDate;
     }
@@ -68,7 +82,6 @@ private String description;
     public void setNameOfProject(String nameOfProject) {
         this.nameOfProject = nameOfProject;
     }
-
 
 
     public String getLink() {

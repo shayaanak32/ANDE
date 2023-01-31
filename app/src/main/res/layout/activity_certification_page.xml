@@ -52,179 +52,188 @@
                 android:textSize="20dp">
 
             </TextView>
-
-            <LinearLayout
-                android:layout_width="360dp"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/currentCertifications"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="12dp"
-                android:background="@drawable/sub_card"
-                android:orientation="vertical">
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+<!--            <LinearLayout-->
+<!--                android:layout_width="360dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:layout_marginBottom="12dp"-->
+<!--                android:background="@drawable/sub_card"-->
+<!--                android:orientation="vertical">-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:orientation="horizontal">-->
 
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginRight="8dp"
+<!--                    <ImageView-->
+<!--                        android:layout_width="50dp"-->
+<!--                        android:layout_height="50dp"-->
+<!--                        android:layout_marginRight="8dp"-->
 
-                        android:src="@drawable/certifications_picture">
+<!--                        android:src="@drawable/certifications_picture">-->
 
-                    </ImageView>
+<!--                    </ImageView>-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat"
-                        android:text="OCP 11 Certified Java Programmer"></TextView>
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:fontFamily="@font/montserrat"-->
+<!--                        android:text="OCP 11 Certified Java Programmer"></TextView>-->
 
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="28dp"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="10dp"
-                        app:icon="@drawable/cross_icon"
-                        app:iconGravity="textEnd"
-                        app:iconPadding="3dp">
+<!--                    <com.google.android.material.button.MaterialButton-->
+<!--                        android:layout_width="28dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_marginLeft="10dp"-->
+<!--                        app:icon="@drawable/cross_icon"-->
+<!--                        app:iconGravity="textEnd"-->
+<!--                        app:iconPadding="3dp">-->
 
-                    </com.google.android.material.button.MaterialButton>
-                </LinearLayout>
+<!--                    </com.google.android.material.button.MaterialButton>-->
+<!--                </LinearLayout>-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="15dp"
-                    android:orientation="horizontal">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginLeft="15dp"-->
+<!--                    android:orientation="horizontal">-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat"
-                        android:text="January 2020"
-                        android:textSize="12dp">
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:fontFamily="@font/montserrat"-->
+<!--                        android:text="January 2020"-->
+<!--                        android:textSize="12dp">-->
 
-                    </TextView>
+<!--                    </TextView>-->
 
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="10dp"
-                        android:gravity="center"
-                        android:textSize="10dp"
-                        app:icon="@drawable/link"
-                        app:iconGravity="textEnd"
-                        app:iconPadding="3dp"
-                        tools:text="View Link">
+<!--                    <com.google.android.material.button.MaterialButton-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_marginLeft="10dp"-->
+<!--                        android:gravity="center"-->
+<!--                        android:textSize="10dp"-->
+<!--                        app:icon="@drawable/link"-->
+<!--                        app:iconGravity="textEnd"-->
+<!--                        app:iconPadding="3dp"-->
+<!--                        tools:text="View Link">-->
 
-                    </com.google.android.material.button.MaterialButton>
-
-
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="20dp"
-                        android:gravity="center"
-                        android:textSize="10dp"
-                        app:icon="@drawable/edit"
-                        app:iconGravity="textEnd"
-                        app:iconPadding="3dp"
-                        tools:text="Edit">
-
-                    </com.google.android.material.button.MaterialButton>
-
-                </LinearLayout>
-
-            </LinearLayout>
+<!--                    </com.google.android.material.button.MaterialButton>-->
 
 
-            <LinearLayout
-                android:layout_width="360dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="12dp"
-                android:background="@drawable/sub_card"
-                android:orientation="vertical">
+<!--                    <com.google.android.material.button.MaterialButton-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_marginLeft="20dp"-->
+<!--                        android:gravity="center"-->
+<!--                        android:textSize="10dp"-->
+<!--                        app:icon="@drawable/edit"-->
+<!--                        app:iconGravity="textEnd"-->
+<!--                        app:iconPadding="3dp"-->
+<!--                        tools:text="Edit">-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
+<!--                    </com.google.android.material.button.MaterialButton>-->
 
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginRight="8dp"
+<!--                </LinearLayout>-->
 
-                        android:src="@drawable/certifications_picture">
-
-                    </ImageView>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat"
-                        android:text="OCP 11 Certified Java Programmer"></TextView>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="28dp"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="10dp"
-                        app:icon="@drawable/cross_icon"
-                        app:iconGravity="textEnd"
-                        app:iconPadding="3dp">
-
-                    </com.google.android.material.button.MaterialButton>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="15dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat"
-                        android:text="January 2020"
-                        android:textSize="12dp">
-
-                    </TextView>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="10dp"
-                        android:gravity="center"
-                        android:textSize="10dp"
-                        app:icon="@drawable/link"
-                        app:iconGravity="textEnd"
-                        app:iconPadding="3dp"
-                        tools:text="View Link">
-
-                    </com.google.android.material.button.MaterialButton>
+<!--            </LinearLayout>-->
 
 
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="20dp"
-                        android:gravity="center"
-                        android:textSize="10dp"
-                        app:icon="@drawable/edit"
-                        app:iconGravity="textEnd"
-                        app:iconPadding="3dp"
-                        tools:text="Edit">
+<!--            <LinearLayout-->
+<!--                android:layout_width="360dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:layout_marginBottom="12dp"-->
+<!--                android:background="@drawable/sub_card"-->
+<!--                android:orientation="vertical">-->
 
-                    </com.google.android.material.button.MaterialButton>
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:orientation="horizontal">-->
 
-                </LinearLayout>
+<!--                    <ImageView-->
+<!--                        android:layout_width="50dp"-->
+<!--                        android:layout_height="50dp"-->
+<!--                        android:layout_marginRight="8dp"-->
 
-            </LinearLayout>
+<!--                        android:src="@drawable/certifications_picture">-->
+
+<!--                    </ImageView>-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:fontFamily="@font/montserrat"-->
+<!--                        android:text="OCP 11 Certified Java Programmer"></TextView>-->
+
+<!--                    <com.google.android.material.button.MaterialButton-->
+<!--                        android:layout_width="28dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_marginLeft="10dp"-->
+<!--                        app:icon="@drawable/cross_icon"-->
+<!--                        app:iconGravity="textEnd"-->
+<!--                        app:iconPadding="3dp">-->
+
+<!--                    </com.google.android.material.button.MaterialButton>-->
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginLeft="15dp"-->
+<!--                    android:orientation="horizontal">-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:fontFamily="@font/montserrat"-->
+<!--                        android:text="January 2020"-->
+<!--                        android:textSize="12dp">-->
+
+<!--                    </TextView>-->
+
+<!--                    <com.google.android.material.button.MaterialButton-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_marginLeft="10dp"-->
+<!--                        android:gravity="center"-->
+<!--                        android:textSize="10dp"-->
+<!--                        app:icon="@drawable/link"-->
+<!--                        app:iconGravity="textEnd"-->
+<!--                        app:iconPadding="3dp"-->
+<!--                        tools:text="View Link">-->
+
+<!--                    </com.google.android.material.button.MaterialButton>-->
+
+
+<!--                    <com.google.android.material.button.MaterialButton-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_marginLeft="20dp"-->
+<!--                        android:gravity="center"-->
+<!--                        android:textSize="10dp"-->
+<!--                        app:icon="@drawable/edit"-->
+<!--                        app:iconGravity="textEnd"-->
+<!--                        app:iconPadding="3dp"-->
+<!--                        tools:text="Edit">-->
+
+<!--                    </com.google.android.material.button.MaterialButton>-->
+
+<!--                </LinearLayout>-->
+
+<!--            </LinearLayout>-->
 
         </LinearLayout>
 
@@ -341,5 +350,10 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        <WebView
+            android:id="@+id/certificationWebView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

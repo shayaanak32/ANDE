@@ -1,11 +1,14 @@
 package com.example.freelancerhomescreen;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.List;
 
 public class InsertEmployerData extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -26,7 +29,14 @@ public class InsertEmployerData extends AppCompatActivity {
         db.addEmployers(e1);
         db.addEmployers(e2);
         db.addEmployers(e3);
-
+        List<Employer> certifications = db.getAllEmployer();
+//
+        for (Employer cn : certifications) {
+            String log = "Id: " + cn.getEmployerID() + " ,Name: " + cn.getCompanyName() + " ,Link: " +
+                    cn.getDescription();
+            // Writing Contacts to log
+            Log.d("Name: ", log);
+        }
 
     }
 

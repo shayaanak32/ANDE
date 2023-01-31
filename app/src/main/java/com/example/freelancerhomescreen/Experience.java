@@ -13,27 +13,51 @@ public class Experience {
     private String endDate;
     private String description;
     private String company;
-    private String userid;
+    private int experienceID;
+    private int freelancerID;
+    private boolean descVisibility;
 
-    public Experience(String name, String startDate, String endDate, String description, String company, String userid) {
+    public Experience(String name, String startDate, String endDate, String description, String company,int freelancerID, int experienceID) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.description = description;
         this.company = company;
+        this.freelancerID = freelancerID;
+        this.experienceID = experienceID;
+
     }
-    public Experience(String name, String startDate, String endDate, String description, String company) {
+    public Experience(String name, String startDate, String endDate, String description, String company,int freelancerID) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.description = description;
         this.company = company;
+        this.freelancerID = freelancerID;
+
     }
     public Experience() {
 
     }
+
+    public int getFreelancerID() {
+        return freelancerID;
+    }
+
+    public void setFreelancerID(int freelancerID) {
+        this.freelancerID = freelancerID;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public int getExperienceID() {
+        return experienceID;
+    }
+
+    public void setExperienceID(int experienceID) {
+        this.experienceID = experienceID;
     }
 
     public void setName(String name) {

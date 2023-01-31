@@ -58,18 +58,18 @@ public class InsertYourSkillsData extends AppCompatActivity {
 //            e.printStackTrace();
 //        }
 
-        YourSkills s1 = new YourSkills("-NLl4BQkHkhZmfTI5Kuz","-NLnl__U7HcQtDTj8zK2","Java");
-        YourSkills s2 = new YourSkills("-NLl4BQkHkhZmfTI5Kuz", "-NLnl__dzz4znJ1dPGnW","Scala");
-        YourSkills s3 = new YourSkills("-NLl4BQkHkhZmfTI5Kuz","-NLnl__c6-tbHS5TAWYp","JavaScript");
+        YourSkills s1 = new YourSkills(1,1,"Java");
+        YourSkills s2 = new YourSkills(1, 9,"Scala");
+        YourSkills s3 = new YourSkills(1,2,"JavaScript");
 
 
-        YourSkills s4 = new YourSkills("-NLl4BR2gq9EwVWUHixE","-NLnl__c6-tbHS5TAWYq","Go");
-        YourSkills s5 = new YourSkills("-NLl4BR2gq9EwVWUHixE","-NLnl__c6-tbHS5TAWYp","JavaScript");
-        YourSkills s6 = new YourSkills("-NLl4BR2gq9EwVWUHixE","-NLnl__c6-tbHS5TAWYs","C#");
+        YourSkills s4 = new YourSkills(2,3,"Go");
+        YourSkills s5 = new YourSkills(2,2,"JavaScript");
+        YourSkills s6 = new YourSkills(2,5,"C#");
 
-        YourSkills s7 = new YourSkills("-NLl4BR2gq9EwVWUHixF","-NLnl__c6-tbHS5TAWYt","C++");
-        YourSkills s8 = new YourSkills("-NLl4BR2gq9EwVWUHixF","-NLnl__c6-tbHS5TAWYp","JavaScript");
-        YourSkills s9 = new YourSkills("-NLl4BR2gq9EwVWUHixF","-NLnl__c6-tbHS5TAWYs","C#");
+        YourSkills s7 = new YourSkills(3,6,"C++");
+        YourSkills s8 = new YourSkills(3,2,"JavaScript");
+        YourSkills s9 = new YourSkills(3,5,"C#");
 
         yourSkillsDbRef.push().setValue(s1);
         yourSkillsDbRef.push().setValue(s2);

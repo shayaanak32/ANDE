@@ -21,15 +21,15 @@ public class InsertFreelancerData extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         CreateTables db = new CreateTables(this);
 
-        Freelancer f1 = new Freelancer("Rai Shayaan Kharal","rskharal@icloud.com","pgfjfisen21423","I am a driven individual who specialises in object" +
-                "oriented languages, with a knack for finishing work to the highest quality");
-        Freelancer f2 =  new Freelancer("Jared Jaimon","jumbobeatz@gmail.com","gtfbgdfxvf","I am a driven individual who is willing to put in effort with regards to" +
-                "anything i am assigned. I am great with all languages but my best ones are JavaScript, and Java");
-        Freelancer f3 =  new Freelancer("Mohd Syauqi","deadingeneral@gmail.com","gtfrefbgdfxvf","I am a driven individual who is willing to put in effort with regards to" +
-                "anything i am assigned. I am great with web security and JavaScript, and Java");
-        db.addFreelancers(f1);
-        db.addFreelancers(f2);
-        db.addFreelancers(f3);
+//        Freelancer f1 = new Freelancer("Rai Shayaan Kharal","rskharal@icloud.com","pgfjfisen21423","I am a driven individual who specialises in object" +
+//                "oriented languages, with a knack for finishing work to the highest quality");
+//        Freelancer f2 =  new Freelancer("Jared Jaimon","jumbobeatz@gmail.com","gtfbgdfxvf","I am a driven individual who is willing to put in effort with regards to" +
+//                "anything i am assigned. I am great with all languages but my best ones are JavaScript, and Java");
+//        Freelancer f3 =  new Freelancer("Mohd Syauqi","deadingeneral@gmail.com","gtfrefbgdfxvf","I am a driven individual who is willing to put in effort with regards to" +
+//                "anything i am assigned. I am great with web security and JavaScript, and Java");
+//        db.addFreelancers(f1);
+//        db.addFreelancers(f2);
+//        db.addFreelancers(f3);
 
     }
 

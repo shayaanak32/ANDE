@@ -24,6 +24,22 @@ private String description;
 
     }
 
+    public int getEmployerID() {
+        return employerID;
+    }
+
+    public void setEmployerID(int employerID) {
+        this.employerID = employerID;
+    }
+
+    public String getPriorities() {
+        return priorities;
+    }
+
+    public void setPriorities(String priorities) {
+        this.priorities = priorities;
+    }
+
     public String getDescription() {
         return description;
     }

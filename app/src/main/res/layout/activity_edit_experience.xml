@@ -28,7 +28,7 @@
             android:fontFamily="@font/montserrat"
             android:gravity="center"
             android:padding="15dp"
-            android:text="Add Experience"
+            android:text="Edit Experience"
             android:textFontWeight="@integer/material_motion_duration_long_2"
             android:textColor="@color/white"
             />
@@ -67,7 +67,7 @@
                     </TextView>
 
                     <EditText
-                        android:id="@+id/editTextExpName"
+                        android:id="@+id/editTextUpdateName"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
                         android:layout_weight="1"
@@ -101,7 +101,7 @@
                     </TextView>
 
                     <TextView
-                        android:id="@+id/startDatePickerExp"
+                        android:id="@+id/startDatePickerUpd"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
 
@@ -135,7 +135,7 @@
                     </TextView>
 
                     <TextView
-                        android:id="@+id/endDatePicker"
+                        android:id="@+id/endDatePickerUpd"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
                         android:layout_weight="1"
@@ -208,7 +208,7 @@
                         </TextView>
 
                         <EditText
-                            android:id="@+id/descriptionField"
+                            android:id="@+id/descriptionFieldUpd"
                             android:layout_width="wrap_content"
                             android:layout_height="100dp"
                             android:layout_weight="1"
@@ -228,7 +228,7 @@
 
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/addExperienceButton"
+                    android:id="@+id/updateExperienceButton"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_gravity="right"
@@ -238,7 +238,7 @@
                     app:icon="@drawable/add"
                     app:iconGravity="textEnd"
                     app:iconPadding="3dp"
-                    tools:text="Add">
+                    tools:text="Update">
 
                 </com.google.android.material.button.MaterialButton>
             </LinearLayout>

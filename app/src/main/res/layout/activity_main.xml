@@ -4,15 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".MainActivity">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/bannerColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        app:menu="@menu/bottom_nav_menu"
+
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,12 +34,13 @@
             android:gravity="center"
             android:padding="15dp"
             android:text="Profile"
-            android:textFontWeight="@integer/material_motion_duration_long_2"
             android:textColor="@color/white"
-            />
+            android:textFontWeight="@integer/material_motion_duration_long_2" />
         <!--
          can remove later
        -->
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="110dp"
@@ -116,10 +121,10 @@
 
                     <TextView
                         android:layout_width="90dp"
-                        android:gravity="center"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:background="@drawable/interested_background"
+                        android:gravity="center"
                         android:text="Interested!">
 
 
@@ -168,13 +173,19 @@
                 android:layout_margin="12dp"
                 app:cardBackgroundColor="@color/boxColor"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="2dp">
+                app:cardElevation="2dp"
+                android:id="@+id/certificationsCard"
+                android:clickable="true"
+                >
 
                 <LinearLayout
+                    android:id="@+id/certificationsLinearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+
+                    >
 
                     <ImageView
                         android:layout_width="90dp"
@@ -204,13 +215,19 @@
                 android:layout_margin="12dp"
                 app:cardBackgroundColor="@color/boxColor"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="2dp">
+                app:cardElevation="2dp"
+                android:id="@+id/skillsCard"
+                android:clickable="true"
+                android:onClick="onClick"
+                >
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:id="@+id/settingsLinearLayout"
+                    >
 
                     <ImageView
                         android:layout_width="90dp"
@@ -223,7 +240,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat"
-                        android:text="Settings">
+                        android:text="Skills">
 
                     </TextView>
 
@@ -241,13 +258,17 @@
                 android:layout_margin="12dp"
                 app:cardBackgroundColor="@color/boxColor"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="2dp">
+                app:cardElevation="2dp"
+                android:id="@+id/experienceCard"
+                android:clickable="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:id="@+id/experienceLinearLayout"
+                    >
 
                     <ImageView
                         android:layout_width="90dp"
@@ -279,13 +300,16 @@
                 android:layout_margin="12dp"
                 app:cardBackgroundColor="@color/boxColor"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="2dp">
+                app:cardElevation="2dp"
+                android:id="@+id/projectsCard"
+                android:clickable="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:id="@+id/projectsLinearLayout">
 
                     <ImageView
                         android:layout_width="90dp"
@@ -308,6 +332,20 @@
 
 
         </GridLayout>
+
+        <Button
+            android:id="@+id/skillsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Skills"
+          />
+
+        <Button
+            android:id="@+id/experienceBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button"
+            />
 
 
     </LinearLayout>

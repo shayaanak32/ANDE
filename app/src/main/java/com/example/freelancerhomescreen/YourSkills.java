@@ -2,29 +2,33 @@ package com.example.freelancerhomescreen;
 
 public class YourSkills {
 
-    private String userID;
-    private String skillsID;
+    private int userID;
+    private int skillsID;
     private String skillsName;
 
-    public YourSkills(String userID, String skillsID, String skillsName) {
+    public YourSkills(int userID, int skillsID, String skillsName) {
         this.userID = userID;
         this.skillsID = skillsID;
         this.skillsName = skillsName;
     }
+    public YourSkills(){
 
-    public String getUserID() {
+    }
+
+
+    public int getUserID() {
         return userID;
     }
 
-    public void setUserID(String userID) {
+    public void setUserID(int userID) {
         this.userID = userID;
     }
 
-    public String getSkillsID() {
+    public int getSkillsID() {
         return skillsID;
     }
 
-    public void setSkillsID(String skillsID) {
+    public void setSkillsID(int skillsID) {
         this.skillsID = skillsID;
     }
 
