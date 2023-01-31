@@ -1,5 +1,7 @@
 package com.example.freelancerhomescreen;
 
+import android.util.Log;
+
 public class Freelancer {
 
     private String name;
@@ -8,6 +10,8 @@ public class Freelancer {
     private String description;
     private String listOfSkills;
     private int id;
+    private String skills;
+    private String[] individualSkill;
 
     public Freelancer(String name, String email, String hashPassword, String description,String listOfSkills) {
         this.name = name;
@@ -77,5 +81,22 @@ public class Freelancer {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String[] getIndividualSkill(String skills) {
+        Log.d("of freelancer",skills);
+        individualSkill = skills.split(",");
+        for(int i =0; i<individualSkill.length;i++){
+            Log.d("skill of freelancer", individualSkill[i]);
+        }
+        return individualSkill;
+    }
+
+    public void setSkills(String skills) {
+        this.skills = skills;
+    }
+
+    public String getSkills(){
+        return skills;
     }
 }

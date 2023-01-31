@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context="com.example.freelancerhomescreen.MainActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -26,6 +26,8 @@
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="50dp"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/pagetitle"
+                android:fontFamily="@font/montserrat"
                 android:gravity="center"
                 android:padding="15dp"
                 android:text="Business Profile"
@@ -41,7 +43,7 @@
                 android:layout_marginTop="10dp"
 
                 android:layout_marginRight="10dp"
-
+                android:background="@drawable/name"
                 android:orientation="horizontal">
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -49,25 +51,24 @@
                     android:id="@+id/profile_image"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/profile_pic"
                     app:civ_border_width="2dp"
                     app:civ_border_color="#FF000000"/>
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/companyName"
                     android:layout_width="272dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
-
+                    android:fontFamily="@font/montserrat"
                     android:gravity="center_vertical|center_horizontal"
                     android:padding="15dp"
-                    android:text="Prince Kharal Tech"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:textSize="25sp" />
             </LinearLayout>
 
             <Button
+                android:id="@+id/editProfileBtn"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginHorizontal="100dp"
@@ -83,6 +84,7 @@
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
                 android:layout_margin="12dp"
+                app:cardBackgroundColor="@color/boxColor"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="2dp">
 
@@ -93,10 +95,12 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/aboutOrg"
                         android:layout_width="358dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="20dp"
+                        android:fontFamily="@font/montserrat"
                         android:text="About Organization"
                         android:textStyle="bold"
                         android:textSize="20sp">
@@ -105,9 +109,10 @@
 
                     <TextView
                         android:layout_width="358dp"
+                        android:id="@+id/aboutOrgInput"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
-                        android:text="Prince Kharal Tech is a startup in Singapore aiming to equip users with 21st Century Skills"
+                        android:fontFamily="@font/montserrat"
                         android:textAlignment="center">
 
                     </TextView>
@@ -119,38 +124,48 @@
             <androidx.cardview.widget.CardView
 
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="300dp"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
                 android:layout_margin="12dp"
                 android:layout_marginBottom="100dp"
+                app:cardBackgroundColor="@color/boxColor"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/orgPrios"
                         android:layout_width="358dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="15dp"
                         android:layout_marginTop="20dp"
+                        android:fontFamily="@font/montserrat"
                         android:gravity="top"
                         android:text="Prioritizes:"
-                        android:textSize="20sp"
-                        android:textStyle="bold">
+                        android:textStyle="bold"
+                        android:textSize="20sp">
 
                     </TextView>
 
-                    <TextView
-                        android:id="@+id/tView3"
+                    <ListView
+                        android:id="@+id/orgPriosInput"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginBottom="20dp"
-                        android:text="React Native \nReact\nSQL" />
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/noContentMsg"
+                        android:textAlignment="center"
+                        />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -162,11 +177,13 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
+        app:itemIconTint="@drawable/bottom_navigation_selector"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-
+        android:background="@color/bannerColor"
         android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottom_nav_menu">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 

@@ -13,14 +13,14 @@ import java.util.List;
 public class CreateTables extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
-    private static final String TABLE_CERTIFICATIONS = "Certifications";
-    private static final String TABLE_FREELANCERS = "Freelancers";
+//    private static final String TABLE_CERTIFICATIONS = "Certifications";
+//    private static final String TABLE_FREELANCERS = "Freelancers";
     private static final String TABLE_EMPLOYERS = "Employers";
-
+//
     private static final String TABLE_PROJECTS = "Projects";
-    private static final String TABLE_SKILLS = "Skills";
-    private static final String TABLE_EXPERIENCE = "Experience";
-    private static final String TABLE_YOURSKILLS = "YourSkills";
+//    private static final String TABLE_SKILLS = "Skills";
+//    private static final String TABLE_EXPERIENCE = "Experience";
+//    private static final String TABLE_YOURSKILLS = "YourSkills";
 
     private static final String DATABASE_NAME = "Firehire.db";
     private static final String KEY_USERID = "userid";
@@ -33,6 +33,7 @@ public class CreateTables extends SQLiteOpenHelper {
 
     private static final String KEY_DATE = "end_date";
     private static final String KEY_SKILLS = "skills";
+    private static final String KEY_PRIORITIES = "priorities";
     private static final String KEY_EMAIL = "email";
     private static final String KEY_PASSWORD = "password";
     private static final String KEY_KEY_SKILLS = "skills";
@@ -46,6 +47,7 @@ public class CreateTables extends SQLiteOpenHelper {
 
     }
 
+    // use these strings to create table when doing onCreate
     private String CREATE_CERTIFICATIONS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_CERTIFICATIONS + "("
             + KEY_CERTID + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
             + KEY_NAME + " TEXT NOT NULL,"
@@ -63,6 +65,7 @@ public class CreateTables extends SQLiteOpenHelper {
             + KEY_DESCRIPTION + " TEXT NOT NULL,"
             + KEY_SKILLS + " TEXT NOT NULL"
             + ");";
+
     private String CREATE_EMPLOYERS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_EMPLOYERS + "("
             + "employer_id INTEGER PRIMARY KEY AUTOINCREMENT ,"
             + KEY_NAME + " TEXT NOT NULL,"
@@ -81,6 +84,7 @@ public class CreateTables extends SQLiteOpenHelper {
             + "freelancerID INTEGER NOT NULL,"
             + "FOREIGN KEY(freelancerID) REFERENCES Freelancers(freelancerId)"
             + ");";
+
     private String CREATE_SKILLS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_SKILLS + "("
             + "skillsID INTEGER PRIMARY KEY AUTOINCREMENT ,"
             + KEY_NAME + " TEXT NOT NULL"
@@ -91,6 +95,7 @@ public class CreateTables extends SQLiteOpenHelper {
             + KEY_USERID + "INTEGER NOT NULL,"
             + "skillsName TEXT NOT NULL "
             + ");";
+
     private String CREATE_EXPERIENCE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_EXPERIENCE + "("
             + KEY_EXPERIENCEID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + KEY_NAME + " TEXT NOT NULL, "
@@ -102,10 +107,11 @@ public class CreateTables extends SQLiteOpenHelper {
             + "FOREIGN KEY(freelancerID) REFERENCES Freelancers(freelancerId)"
             + ");";
 
+
     @Override
     public void onCreate(SQLiteDatabase db) {
+
         //Log.d("CreateTables onCreate", "Inside Now");
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_EXPERIENCE);
         Log.d("onCreate Experience", CREATE_EXPERIENCE_TABLE);
         db.execSQL(CREATE_CERTIFICATIONS_TABLE);
         db.execSQL(CREATE_FREELANCERS_TABLE);
@@ -179,90 +185,6 @@ public class CreateTables extends SQLiteOpenHelper {
         Cursor c = db.rawQuery(query, null);
     }
 
-    void createCertificationTable() {
-        String CREATE_CERTIFICATIONS_TABLE = "CREATE TABLE " + TABLE_CERTIFICATIONS + "("
-                + KEY_CERTID + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
-                + KEY_NAME + " TEXT NOT NULL,"
-                + KEY_LINK + " TEXT NOT NULL,"
-                + KEY_DATE + " TEXT NOT NULL,"
-                + KEY_SKILLS + " TEXT NOT NULL,"
-                + KEY_DESCRIPTION + " TEXT NOT NULL"
-                + ");";
-        db.execSQL(CREATE_CERTIFICATIONS_TABLE);
-
-    }
-
-    void createTheTables() {
-
-        boolean b = (db == null);
-        Log.d("CreateTables onCreate", "Inside Now");
-
-        Log.d("is database null?", Boolean.toString(b));
-        //certDBRef = FirebaseDatabase.getInstance().getReference().child("Certifications");
-        String CREATE_CERTIFICATIONS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_CERTIFICATIONS + "("
-                + KEY_CERTID + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
-                + KEY_NAME + " TEXT NOT NULL,"
-                + KEY_LINK + " TEXT NOT NULL,"
-                + KEY_DATE + " TEXT NOT NULL,"
-                + KEY_SKILLS + " TEXT NOT NULL,"
-                + KEY_DESCRIPTION + " TEXT NOT NULL"
-
-                + ");";
-
-        String CREATE_FREELANCERS_TABLE = "CREATE TABLE " + TABLE_FREELANCERS + "("
-                + "freelancerId INTEGER PRIMARY KEY AUTOINCREMENT ,"
-                + KEY_NAME + " TEXT NOT NULL,"
-                + KEY_EMAIL + " TEXT NOT NULL,"
-                + KEY_PASSWORD + " TEXT NOT NULL,"
-                + KEY_DESCRIPTION + " TEXT NOT NULL"
-                + ");";
-        String CREATE_EMPLOYERS_TABLE = "CREATE TABLE " + TABLE_EMPLOYERS + "("
-                + "employer_id INTEGER PRIMARY KEY AUTOINCREMENT ,"
-                + KEY_NAME + " TEXT NOT NULL,"
-                + KEY_DESCRIPTION + " TEXT NOT NULL," +
-                "priorities TEXT NOT NULL"
-                + ");";
-
-        String CREATE_PROJECTS_TABLE = "CREATE TABLE " + TABLE_PROJECTS + "("
-                + KEY_NAME + " TEXT NOT NULL,"
-                + KEY_startDATE + " TEXT NOT NULL,"
-                + KEY_DATE + "TEXT NOT NULL,"
-                + KEY_LINK + "TEXT NOT NULL,"
-                + KEY_SKILLS + "TEXT NOT NULL,"
-                + KEY_DESCRIPTION + " TEXT NOT NULL,"
-                + "freelancerID INTEGER NOT NULL,"
-                + "FOREIGN KEY(freelancerID) REFERENCES Freelancers(freelancerId)"
-                + ");";
-        String CREATE_SKILLS_TABLE = "CREATE TABLE " + TABLE_SKILLS + "("
-                + "skillsID INTEGER PRIMARY KEY AUTOINCREMENT ,"
-                + KEY_NAME + " TEXT NOT NULL"
-                + ");";
-
-        String CREATE_YOURSKILLS_TABLE = "CREATE TABLE " + TABLE_YOURSKILLS + "("
-                + "skillsID INTEGER NOT NULL,"
-                + KEY_USERID + "INTEGER NOT NULL,"
-                + "skillsName TEXT NOT NULL,"
-                + "PRIMARY KEY (skillsID," + KEY_USERID + ")"
-
-                + ");";
-        String CREATE_EXPERIENCE_TABLE = "CREATE TABLE " + TABLE_EXPERIENCE + "("
-                + "experienceID INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + KEY_NAME + " TEXT NOT NULL,"
-                + KEY_startDATE + "TEXT NOT NULL, "
-                + KEY_DATE + " TEXT NOT NULL, "
-                + KEY_DESCRIPTION + " TEXT NOT NULL, "
-                + "company_name " + "TEXT NOT NULL"
-                + ");";
-        db.execSQL(CREATE_CERTIFICATIONS_TABLE);
-//        db.execSQL(CREATE_FREELANCERS_TABLE);
-//        db.execSQL(CREATE_EMPLOYERS_TABLE);
-//        db.execSQL(CREATE_EXPERIENCE_TABLE);
-//        db.execSQL(CREATE_PROJECTS_TABLE);
-//        db.execSQL(CREATE_SKILLS_TABLE);
-//        db.execSQL(CREATE_EXPERIENCE_TABLE);
-//        db.execSQL(CREATE_YOURSKILLS_TABLE);
-        Log.d("Tables Created", "Created.");
-    }
 
     void addCertifications(Certification certification) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -465,9 +387,9 @@ public class CreateTables extends SQLiteOpenHelper {
         return cursor.getCount();
     }
 
-
     void addEmployers(Employer employer) {
         SQLiteDatabase db = this.getWritableDatabase();
+
 
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, employer.getCompanyName());
@@ -481,11 +403,6 @@ public class CreateTables extends SQLiteOpenHelper {
         // Closing database connection
     }
 
-    //    CREATE TABLE " + TABLE_EMPLOYERS + "("
-//            + "employer_id INTEGER PRIMARY KEY AUTOINCREMENT ,"
-//            + KEY_NAME + " TEXT NOT NULL,"
-//            + KEY_DESCRIPTION + " TEXT NOT NULL," +
-//            "priorities TEXT NOT NULL"
     Employer getEmployer(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -526,6 +443,7 @@ public class CreateTables extends SQLiteOpenHelper {
         // return contact list
         return contactList;
     }
+
 
     public int updateEmployer(Employer e) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -916,15 +834,6 @@ public class CreateTables extends SQLiteOpenHelper {
         return contactList;
     }
 
-
-
-    //    CREATE TABLE " + TABLE_EXPERIENCE + "("
-//            + "experienceID INTEGER PRIMARY KEY AUTOINCREMENT,"
-//            + KEY_NAME + " TEXT NOT NULL,"
-//            + KEY_startDATE + "TEXT NOT NULL, "
-//            + KEY_DATE + " TEXT NOT NULL, "
-//            + KEY_DESCRIPTION + " TEXT NOT NULL, "
-//            + "company_name " + "TEXT NOT NULL"
     Experience getExperience(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -977,14 +886,15 @@ public class CreateTables extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_CERTIFICATIONS);
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_FREELANCERS);
+sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_CERTIFICATIONS);
+sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_FREELANCERS);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_EMPLOYERS);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_PROJECTS);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_SKILLS);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_EXPERIENCE);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_YOURSKILLS);
         Log.d("DB Status", "Database Created");
+
         // Create tables again
         onCreate(sqLiteDatabase);
 
