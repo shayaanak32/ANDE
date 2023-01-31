@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:background="#D9D9D9">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:id="@+id/uploadPhotoText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload Photo"
+            android:layout_marginLeft="50dp"
+            android:textSize="24dp"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/editPhotoClickable"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:layout_width="242dp"
+        android:layout_height="206dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/camera_img" />
+
+</LinearLayout>
