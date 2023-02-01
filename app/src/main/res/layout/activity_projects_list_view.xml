@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/light_col_card"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <TextView
+        android:id="@+id/projName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@color/black"
+        android:textSize="20dp"></TextView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/skillcircleshapes"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center"
+            android:id="@+id/Skills1"
+            android:textColor="@color/black"
+            android:textSize="20dp">
+
+
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/skillcircleshapes"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center"
+            android:id="@+id/Skills2"
+            android:textColor="@color/black"
+            android:textSize="20dp"></TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/skillcircleshapes"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center"
+            android:id="@+id/Skills3"
+            android:textColor="@color/black"
+            android:textSize="20dp"></TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/skillcircleshapes"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center"
+            android:id="@+id/Skills4"
+            android:textColor="@color/black"
+            android:textSize="20dp"></TextView>
+
+    </LinearLayout>
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/briefDescription"
+    android:layout_marginHorizontal="10dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="end"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+
+</LinearLayout>

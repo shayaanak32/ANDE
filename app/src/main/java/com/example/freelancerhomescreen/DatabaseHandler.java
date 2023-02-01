@@ -30,6 +30,11 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
     private static final String KEY_DATE = "end_date";
     private static final String KEY_SKILLS = "skills";
 
+    private static final String TABLE_USERS = "Users";
+    private static final String KEY_ROLE = "role";
+
+    private static final String TAG = "DatabaseHandler";
+
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         //3rd argument to be passed is CursorFactory instance
@@ -67,10 +72,25 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
                 + "freelancerID INTEGER NOT NULL,"
                 + "FOREIGN KEY(freelancerID) REFERENCES Freelancers(freelancerId)"
                 + ");";
+        String CREATE_USERS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_USERS + "("
+                + KEY_USERID + " INTEGER PRIMARY KEY,"
+                + KEY_NAME + " TEXT,"
+                + KEY_ROLE + " INT, "
+                + KEY_EMAIL + " TEXT,"
+                + KEY_PASSWORD + " TEXT," +
+                KEY_DESCRIPTION + " TEXT" + ")";
         db.execSQL(CREATE_EMPLOYERS_TABLE);
         db.execSQL(CREATE_FREELANCERS_TABLE);
         db.execSQL(CREATE_PROJECTS_TABLE);
+        db.execSQL(CREATE_USERS_TABLE);
     }
+    void openUsers() {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_USERS;
+        Cursor c = db.rawQuery(query,null);
+}
+
 
     // Upgrading database
     @Override
@@ -79,6 +99,7 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_EMPLOYERS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_FREELANCERS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_PROJECTS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
         // Create tables again
         onCreate(db);
     }
@@ -208,7 +229,7 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_PROJECTS, new String[] { KEY_NAME,
-                        KEY_startDATE,KEY_DATE,KEY_LINK,KEY_SKILLS, KEY_DESCRIPTION, KEY_USERID }, KEY_PROJECTID + "=?",
+                        KEY_startDATE,KEY_DATE,KEY_LINK,KEY_SKILLS, KEY_DESCRIPTION, "freelancerID" }, KEY_PROJECTID + "=?",
                 new String[] { String.valueOf(projId) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
@@ -219,9 +240,11 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
     }
 
     public ArrayList<Projects> getAllProjects (int userid){
+        Log.d(TAG, "get all projects called");
         ArrayList <Projects> projectList = new ArrayList<Projects>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_PROJECTS +" WHERE "+KEY_USERID+" = "+userid;
+//        String selectQuery = "SELECT  * FROM " + TABLE_PROJECTS +" WHERE freelancerID = "+userid;
+        String selectQuery = "SELECT  * FROM " + TABLE_PROJECTS +" WHERE freelancerID = "+userid;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -230,6 +253,7 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 Projects proj = new Projects();
+                proj.setProjectID(Integer.parseInt(cursor.getString(0)));
                 proj.setNameOfProject(cursor.getString(1));
                 proj.setStartDate(cursor.getString(2));
                 proj.setEndDate(cursor.getString(3));
@@ -243,6 +267,77 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         // return contact list
         return projectList;
     }
+
+    public Users checkUser(String email, String password) {
+        Log.i("Info", "Trying to run query...");
+        String selectQuery = "SELECT * FROM " + TABLE_USERS + " WHERE " + KEY_EMAIL + " = '" + email + "' AND " + KEY_PASSWORD + " = '" + password +"'";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        boolean exists = cursor.moveToFirst();
+        Log.d("Record Exists", Boolean.toString(exists));
+
+
+        Users u = new Users(Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1), Integer.parseInt(cursor.getString(2)), cursor.getString(3),
+                (cursor.getString(4)), cursor.getString(5));
+
+
+        cursor.close();
+        db.close();
+        return u;
+    }
+
+    public void addUser(String uName, int uRole, String uEmail, String uPassword, String uDescription) {
+        ContentValues values = new ContentValues();
+        Log.i("Info", "Setting values...");
+        values.put(KEY_NAME, uName);
+        values.put(KEY_ROLE, uRole);
+        values.put(KEY_EMAIL, uEmail);
+        values.put(KEY_PASSWORD, uPassword);
+        values.put(KEY_DESCRIPTION, uDescription);
+        SQLiteDatabase db = this.getWritableDatabase();
+        // Inserting Row
+        db.insert(TABLE_USERS, null, values);
+        Log.i("Info", "User Added");
+        db.close(); // Closing database connection
+    }
+    void addProjects(Projects projects) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Log.d(KEY_NAME, projects.getNameOfProject());
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME, projects.getNameOfProject()); // Contact Name
+        values.put(KEY_startDATE, projects.getStartDate()); // Contact Phone
+        values.put(KEY_DATE, projects.getEndDate());
+        values.put(KEY_LINK, projects.getLink());
+        values.put(KEY_SKILLS, projects.getSkills());
+        values.put(KEY_DESCRIPTION, projects.getDescription());
+        values.put("freelancerID", projects.getUserId());
+        db.insert(TABLE_PROJECTS, null, values);
+        //db.execSQL("SELECT * FROM " + TABLE_PROJECTS);
+
+        // Closing database connection
+    }
+
+    public int updateProjects(Projects p) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME, p.getNameOfProject());
+        values.put(KEY_startDATE, p.getStartDate());
+        values.put(KEY_DATE, p.getEndDate());
+        values.put(KEY_LINK, p.getLink());
+        values.put(KEY_SKILLS, p.getSkills());
+        values.put(KEY_DESCRIPTION, p.getDescription());
+        values.put(KEY_USERID, p.getUserId());
+
+
+        // updating row
+        return db.update(TABLE_PROJECTS, values, "projectID = ?",
+                new String[]{String.valueOf(p.getProjectID())});
+    }
+
+
 //    // Deleting single contact
 //    public void deleteContact(Contact contact) {
 //        SQLiteDatabase db = this.getWritableDatabase();

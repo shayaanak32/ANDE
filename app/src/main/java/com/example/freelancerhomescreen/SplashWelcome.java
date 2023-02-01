@@ -124,7 +124,7 @@ public class SplashWelcome extends AppCompatActivity {
 //                Projects p3 = new Projects("Software Engineering Practice", startDate3, endDate3, "https://github.com/GGsendhelpGG/SEP_CA2", "Node.js,JavaScript", "Description3",3);
 
         Projects p1 = new Projects("Student Management System", startDate1, endDate1, "https://github.com/shayaanak32/JADProjectRepo", "Java,J2EE", "Description1", 1);
-        Projects p2 = new Projects("IceBreaker!", startDate2, endDate2, "https://github.com/VielenKaat/ADES-Repo", "Java,J2EE", "Description1", 2);
+        Projects p2 = new Projects("IceBreaker!", startDate2, endDate2, "https://github.com/VielenKaat/ADES-Repo", "Java,J2EE", "Description1", 1   );
         Projects p3 = new Projects("Software Engineering Practice", startDate3, endDate3, "https://github.com/GGsendhelpGG/SEP_CA2", "Node.js,JavaScript", "Description3", 3);
 
         ct.addProjects(p1);

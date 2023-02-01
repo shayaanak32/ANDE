@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,7 +13,6 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-
         android:theme="@style/Theme.FreelancerHomeScreen"
         tools:targetApi="31">
 
@@ -38,11 +38,78 @@
 
         </activity>
         <activity
-            android:name=".AddProject"
+            android:name=".RegisterSuccess"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+        </activity>
+        <activity
+            android:name=".RegisterFreelancer"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".RegisterEmployer"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".RegisterCheckScreen"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".LoginScreen"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".WelcomeScreen"
+            android:exported="true"
+            android:theme="@style/Theme.SplashTheme">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".AddProject"
+            android:exported="false"
+            android:windowSoftInputMode="adjustNothing">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+
+        </activity>
+        <activity
+            android:name=".ProjectsListView"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".EditProject"
+            android:exported="false"
+            android:windowSoftInputMode="adjustNothing">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+
+
         </activity>
         <activity
             android:name=".SinglePostLayout"
@@ -86,7 +153,7 @@
             android:name=".EditProfile"
             android:exported="false"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="stateVisible|adjustResize">
+            android:windowSoftInputMode="adjustNothing">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -103,7 +170,6 @@
             android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTask">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -132,6 +198,20 @@
 
 
         <activity
+            android:name=".DebugPage"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".SplashWelcome"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".EditExperienceActivity"
             android:exported="false">
             <meta-data
@@ -147,13 +227,7 @@
         </activity>
         <activity
             android:name=".FirebaseMainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -200,6 +274,11 @@
                 android:name="android.app.lib_name"
                 android:value="" />
 
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity
             android:name=".CreateTables"
