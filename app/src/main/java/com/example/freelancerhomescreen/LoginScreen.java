@@ -15,9 +15,12 @@ import android.widget.EditText;
 public class LoginScreen extends AppCompatActivity {
     private final String APP_STARTS = "NumberOfAppStarts";
     private final String USER_DETAILS = "UserDetails";
-private final String IdentityID = "IdentityID";
-private final String UserID = "UserID";
-private final String RoleID = "RoleID";
+    private final String IdentityID = "IdentityID";
+    private final String UserID = "UserID";
+    private final String RoleID = "RoleID";
+    SharedPreferences userDetailsPref;
+    SharedPreferences freelancerUserPref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,13 +34,13 @@ private final String RoleID = "RoleID";
         //CreateTables ct = new CreateTables(this);
         if (appStarts == 0) {
             Log.d("About to Insert Data", "App Starts is 0");
-            db.addUser("test", 1, "email@gmail.com", "password",  1);
-            db.addUser("John Smith", 1, "johnsmith@gmail.com", "hashpassword1",  1);
-            db.addUser("Jane Doe", 1, "janedoe@gmail.com", "hashpassword2",  2);
-            db.addUser("Bob Johnson", 1, "bobjohnson@gmail.com", "123",  2);
-            db.addUser("Emily Davis", 2, "emilydavis@gmail.com", "1234567890",  1);
-            db.addUser("Michael Brown", 2, "michaelbrown@gmail.com", "asdfghjkl",  2);
-            db.addUser("Ashley Taylor", 2, "ashleytaylor@gmail.com", "hashpassword6",  3);
+            db.addUser("test", 1, "email@gmail.com", "password", 1);
+            db.addUser("John Smith", 1, "johnsmith@gmail.com", "hashpassword1", 1);
+            db.addUser("Jane Doe", 1, "janedoe@gmail.com", "hashpassword2", 2);
+            db.addUser("Bob Johnson", 1, "bobjohnson@gmail.com", "123", 2);
+            db.addUser("Emily Davis", 2, "emilydavis@gmail.com", "1234567890", 1);
+            db.addUser("Michael Brown", 2, "michaelbrown@gmail.com", "asdfghjkl", 2);
+            db.addUser("Ashley Taylor", 2, "ashleytaylor@gmail.com", "hashpassword6", 3);
 
             db.addEmployer("Test Thing Company", "Programmers, Software Engineers", "A fun tech company", "testing@testCompany.gov.sg", "12345", "T123456789");
             db.addEmployer("Company Too", "Coders, Interns", "Another boring company", "com2@gmail.com", "asdfg", "T0001112");
@@ -117,22 +120,30 @@ private final String RoleID = "RoleID";
                     editor.putInt("user_id", user_id);
 
                     if (role == 1) {
-                        SharedPreferences userDetailsPref = getSharedPreferences("UserDetails", MODE_PRIVATE);
+                        userDetailsPref = getSharedPreferences("UserDetails", MODE_PRIVATE);
                         SharedPreferences.Editor editor2 = userDetailsPref.edit();
+                        Log.d("Identity ID", Integer.toString(u.getIdentityID()));
+                        Log.d("User ID", Integer.toString(u.getUser_id()));
+                        Log.d("RoleID", Integer.toString(u.getRole()));
                         editor2.putString(IdentityID, Integer.toString(u.getIdentityID()));
                         editor2.putString(UserID, Integer.toString(u.getUser_id()));
                         editor2.putString(RoleID, Integer.toString(u.getRole()));
+                        Log.d("", "");
                         startActivity(new Intent(LoginScreen.this, ProfilePage.class));
                         finish();
                         WelcomeScreen.welcomeScreenActivity.finish();
 
                     } else if (role == 2) {
-                        SharedPreferences userDetailsPref = getSharedPreferences("UserDetails", MODE_PRIVATE);
+                        freelancerUserPref = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
+                        Log.d("Identity ID", Integer.toString(u.getIdentityID()));
+                        Log.d("User ID", Integer.toString(u.getUser_id()));
+                        Log.d("RoleID", Integer.toString(u.getRole()));
                         SharedPreferences.Editor editor2 = userDetailsPref.edit();
                         editor2.putString(IdentityID, Integer.toString(u.getIdentityID()));
                         editor2.putString(UserID, Integer.toString(u.getUser_id()));
                         editor2.putString(RoleID, Integer.toString(u.getRole()));
-                        startActivity(new Intent(LoginScreen.this, MainActivity.class));
+
+                        startActivity(new Intent(LoginScreen.this, FreelancerOwnProfile.class));
                         WelcomeScreen.welcomeScreenActivity.finish();
 
                         finish();

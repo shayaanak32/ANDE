@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "FirehireDB";
+    private static final String DATABASE_NAME = "Firehire.db";
     private static final String KEY_USERID = "userid";
     private static final String KEY_NAME = "name";
     private static final String KEY_PRIORITIES = "priorities";
@@ -36,6 +36,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_SKILLS = "skills";
     private static final String TABLE_CERTIFICATIONS = "Certifications";
     private static final String KEY_COMPANYNAME = "company_name";
+    private static final String KEY_CERTID = "cert_id";
+    private static final String KEY_EXPERIENCEID = "experienceID";
 
     private static final String TABLE_USERS = "Users";
     private static final String KEY_ROLE = "role";
@@ -88,10 +90,34 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_EMAIL + " TEXT,"
                 + KEY_PASSWORD + " TEXT,"
                 + KEY_IDENTITY + " INT" + ")";
+         String CREATE_CERTIFICATIONS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_CERTIFICATIONS + "("
+                + KEY_CERTID + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
+                + KEY_NAME + " TEXT NOT NULL,"
+                + KEY_LINK + " TEXT NOT NULL,"
+                + KEY_DATE + " TEXT NOT NULL,"
+                + KEY_SKILLS + " TEXT NOT NULL,"
+                + KEY_DESCRIPTION + " TEXT NOT NULL"
+                + ");";
+
+         String CREATE_EXPERIENCE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_EXPERIENCE + "("
+                + KEY_EXPERIENCEID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + KEY_NAME + " TEXT NOT NULL, "
+                + KEY_startDATE + " TEXT NOT NULL, "
+                + KEY_DATE + " TEXT NOT NULL, "
+                + KEY_DESCRIPTION + " TEXT NOT NULL, "
+                + KEY_COMPANYNAME + " TEXT NOT NULL, "
+                + "freelancerID INTEGER NOT NULL,"
+                + "FOREIGN KEY(freelancerID) REFERENCES Freelancers(freelancerId)"
+                + ");";
+
+
         db.execSQL(CREATE_EMPLOYERS_TABLE);
         db.execSQL(CREATE_FREELANCERS_TABLE);
         db.execSQL(CREATE_PROJECTS_TABLE);
         db.execSQL(CREATE_USERS_TABLE);
+        db.execSQL(CREATE_CERTIFICATIONS_TABLE);
+        db.execSQL(CREATE_EXPERIENCE_TABLE);
+
     }
 
     void openUsers() {
@@ -214,12 +240,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     Freelancer getFreelancer(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Log.d("id", Integer.toString(id));
-        Cursor cursor = db.query(TABLE_FREELANCERS, new String[]{KEY_NAME,
+        Cursor cursor = db.query(TABLE_FREELANCERS, new String[]{ KEY_NAME,
                         KEY_DESCRIPTION}, "freelancerId =?",
                 new String[]{String.valueOf(id)}, null, null, null, null);
         if (cursor != null)
-            cursor.moveToFirst();
-
+            Log.d("Cursor Null Check", "Not null");
+        cursor.moveToFirst();
         Freelancer contact = new Freelancer(cursor.getString(0),
                 cursor.getString(1));
         // return contact
