@@ -7,6 +7,7 @@ public class Users {
     String email;
     String password;
     String description;
+    int identityID;
 
     public Users(String name, int role, String email, String password, String description) {
         this.name = name;
@@ -24,6 +25,14 @@ public class Users {
         this.description = description;
     }
 
+    public Users(int user_id,String name, int role, String email, String password, int identityID) {
+        this.user_id = user_id;
+        this.name = name;
+        this.role = role;
+        this.email = email;
+        this.password = password;
+        this.identityID = identityID;
+    }
 
     public int getUser_id() {
         return user_id;
@@ -67,6 +76,14 @@ public class Users {
 
     public String getDescription() {
         return description;
+    }
+
+    public int getIdentityID() {
+        return identityID;
+    }
+
+    public void setIdentityID(int identityID) {
+        this.identityID = identityID;
     }
 
     public void setDescription(String description) {

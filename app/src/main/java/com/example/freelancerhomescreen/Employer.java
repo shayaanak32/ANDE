@@ -49,13 +49,14 @@ private String profilePic;
         this.empEmail = empEmail;
     }
 
-    public Employer(String companyName, String priorities, String description,int employerID, String empEmail, String empPassword) {
+    public Employer(String companyName, String priorities, String description,int employerID, String empEmail, String empPassword, String profileImg) {
         this.companyName = companyName;
         this.priorities = priorities;
         this.description = description;
         this.employerID = employerID;
         this.empEmail = empEmail;
         this.empPassword = empPassword;
+        this.profileImg = profileImg;
     }
 
     public Employer(String companyName, String priorities, String description,int employerID, String empEmail, String empPassword, String empProfilePic) {

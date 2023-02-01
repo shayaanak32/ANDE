@@ -55,8 +55,17 @@ public class EditCertificationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_certification);
         Bundle getData = getIntent().getExtras();
+        editTextUpdateName = (EditText) findViewById(R.id.editName);
+        endDatePickerUpd = (TextView) findViewById(R.id.completionDatePickerExp);
+        descriptionFieldUpd = (EditText) findViewById(R.id.editdescriptionField);
+        MaterialButton editBtn = (MaterialButton) findViewById(R.id.updateCertificationButton);
+        editLink = (EditText) findViewById(R.id.editLink);
+        recyclerView = (RecyclerView) findViewById(R.id.skillsRecyclerView);
+        MaterialButton addCertSkillBtn = (MaterialButton) findViewById(R.id.addCertSkillBtn);
+        EditText editTextSkillField = (EditText) findViewById(R.id.editTextSkillField);
+        updateCertificationButton = (MaterialButton) findViewById(R.id.updateCertificationButton);
         if (getData.getBoolean("fromCertificationPage")) {
-            Log.d("From Where??","From the Certifications Main Activity Page!!!");
+            Log.d("From Where??", "From the Certifications Main Activity Page!!!");
             name = getData.getString("name");
             link = getData.getString("link");
             endDate = getData.getString("endDate");
@@ -66,12 +75,14 @@ public class EditCertificationActivity extends AppCompatActivity {
 
         }
         fromCalendarViewActivity = getData.getBoolean("fromCalendarViewActivity");
+        Log.d("Coming from CalendarViewActivity", Boolean.toString(getData.getBoolean("fromCalendarViewActivity")));
         if (getData.getBoolean("fromCalendarViewActivity")) {
-            Log.d("About to set the data","Just came back from Calendar View Activity!");
+            Log.d("About to set the data", "Just came back from Calendar View Activity!");
 
             name = getData.getString("name");
             link = getData.getString("link");
             endDate = getData.getString("endDate");
+            Log.d("Date Chosen", endDate);
             description = getData.getString("description");
             skills = getData.getString("skills");
             skillsArrayList = getStringArrayList(skills);
@@ -84,15 +95,6 @@ public class EditCertificationActivity extends AppCompatActivity {
         }
 
 
-        editTextUpdateName = (EditText) findViewById(R.id.editName);
-        endDatePickerUpd = (TextView) findViewById(R.id.completionDatePickerExp);
-        descriptionFieldUpd = (EditText) findViewById(R.id.editdescriptionField);
-        MaterialButton editBtn = (MaterialButton) findViewById(R.id.updateCertificationButton);
-        editLink = (EditText) findViewById(R.id.editLink);
-        recyclerView = (RecyclerView) findViewById(R.id.skillsRecyclerView);
-        MaterialButton addCertSkillBtn = (MaterialButton) findViewById(R.id.addCertSkillBtn);
-        EditText editTextSkillField = (EditText) findViewById(R.id.editTextSkillField);
-        updateCertificationButton = (MaterialButton) findViewById(R.id.updateCertificationButton);
 //        updateExperienceButton = (MaterialButton) findViewById(R.id.updateExperienceButton);
 //        editTextCompany = (EditText) findViewById(R.id.editTextCompany);
         editTextUpdateName.setText(name);
@@ -109,6 +111,24 @@ public class EditCertificationActivity extends AppCompatActivity {
         endDatePickerUpd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("End Date Picker Clicked", "Clicked!");
+                name = editTextUpdateName.getText().toString();
+                endDate = endDatePickerUpd.getText().toString();
+                 description = descriptionFieldUpd.getText().toString();
+                 link = editLink.getText().toString();
+//                String textListSkills = "";
+//                for (int counter = 0; counter < skillsArray.length; counter++) {
+//                    if (counter != skillsArray.length) {
+//                        String nameOfSkill = skillsArray[counter];
+//                        if (counter == skillsArray.length) {
+//                            textListSkills += nameOfSkill;
+//                        } else {
+//                            textListSkills += nameOfSkill + ",";
+//                            counter++;
+//
+//                        }
+//                    }
+//                }
                 Intent i = new Intent(EditCertificationActivity.this, CalendarViewActivity.class);
                 startDateClicked = true;
                 i.putExtra("startDateClicked", startDateClicked);
@@ -128,9 +148,30 @@ public class EditCertificationActivity extends AppCompatActivity {
         editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                editTextUpdateName.setText(name);
+//                endDatePickerUpd.setText(endDate);
+//                descriptionFieldUpd.setText(description);
+//                editLink.setText(link);
                 String certName = editTextUpdateName.getText().toString();
                 String completionDate = endDatePickerUpd.getText().toString();
                 String description = descriptionFieldUpd.getText().toString();
+                String link = editLink.getText().toString();
+
+
+                String textListSkills = "";
+                for (int counter = 0; counter < skillsArray.length; counter++) {
+                    if (counter != skillsArray.length) {
+                        String nameOfSkill = skillsArray[counter];
+                        if (counter == skillsArray.length) {
+                            textListSkills += nameOfSkill;
+                        } else {
+                            textListSkills += nameOfSkill + ",";
+                            counter++;
+
+                        }
+                    }
+                }
+
 //                Log.d("experienceName", experienceName);
 //                Log.d("Name Check", Boolean.toString(experienceName != null && !experienceName.isEmpty()));
 //                Log.d("startDate", startDate);
@@ -178,25 +219,10 @@ public class EditCertificationActivity extends AppCompatActivity {
                 String addedSkill = editTextSkillField.getText().toString();
 
                 RecyclerSkillsItem s = new RecyclerSkillsItem(addedSkill);
-                int insertIndex = skillsArrayList.size();
-                skillsArrayList.add(addedSkill);
+                int insertIndex = 0;
+                skillsArrayList.add(insertIndex,addedSkill);
                 Log.d("Is Adapter Null?", Boolean.toString(adapter == null));
                 adapter.notifyItemInserted(insertIndex);
-//                String textListSkills = "";
-
-//                for (int counter = 0; counter < skillsArray.length;counter++) {
-//                    if (counter != skillsArray.length) {
-//                        String nameOfSkill = skillsArray[counter];
-//                        if (counter == skillsArray.length) {
-//                            textListSkills += nameOfSkill;
-//                        } else {
-//                            textListSkills += nameOfSkill + ",";
-//                            counter++;
-//
-//                        }
-//                    }
-//                }
-//                ct.updateSkills(textListSkills, 1);
 
 
             }
@@ -225,6 +251,8 @@ public class EditCertificationActivity extends AppCompatActivity {
                         }
                     }
                 }
+
+
 
                 if (certName != null && !certName.isEmpty() && completionDate != null && !completionDate.isEmpty() && description != null && !description.isEmpty() && editedLink != null && !editedLink.isEmpty() && textListSkills != null && !textListSkills.isEmpty()) {
                     Log.d("Form Status", "Fields Complete");
@@ -313,20 +341,20 @@ public class EditCertificationActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.d("onResume msg", "The onResume() event");
-        if (fromCalendarViewActivity) {
-//            formData = getSharedPreferences(FORM_DATA, MODE_PRIVATE);
-//            String name = formData.getString("Name", "");
-//            String completionDate = formData.getString("CompletionDate", "");
-//            String link = formData.getString("Link", "");
-//            String description = formData.getString("Description", "");
-//            String skills = formData.getString("Skills", "");
-//            skillsArrayList = getStringArrayList(skills);
-//            Log.d("ArrayList for Skills..", Boolean.toString(skillsArrayList == null));
-            editTextUpdateName.setText(name);
-            endDatePickerUpd.setText(endDate);
-            descriptionFieldUpd.setText(description);
-            editLink.setText(link);
-        }
+//        if (fromCalendarViewActivity) {
+////            formData = getSharedPreferences(FORM_DATA, MODE_PRIVATE);
+////            String name = formData.getString("Name", "");
+////            String completionDate = formData.getString("CompletionDate", "");
+////            String link = formData.getString("Link", "");
+////            String description = formData.getString("Description", "");
+////            String skills = formData.getString("Skills", "");
+////            skillsArrayList = getStringArrayList(skills);
+////            Log.d("ArrayList for Skills..", Boolean.toString(skillsArrayList == null));
+//            editTextUpdateName.setText(name);
+//            endDatePickerUpd.setText(endDate);
+//            descriptionFieldUpd.setText(description);
+//            editLink.setText(link);
+//        }
     }
 
     public ArrayList<String> getStringArrayList(String skills) {

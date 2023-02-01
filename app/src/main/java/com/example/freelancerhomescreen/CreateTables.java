@@ -29,7 +29,7 @@ public class CreateTables extends SQLiteOpenHelper {
     private static final String KEY_startDATE = "start_date";
     private static final String KEY_CERTID = "cert_id";
     private static final String KEY_EXPERIENCEID = "experienceID";
-    private static final String KEY_COMPANYNAME = "company_name";
+    private static final String KEY_COMPANYNAME  = "company_name";
 
     private static final String KEY_DATE = "end_date";
     private static final String KEY_SKILLS = "skills";
@@ -387,7 +387,7 @@ public class CreateTables extends SQLiteOpenHelper {
         return cursor.getCount();
     }
 
-    void addEmployers(Employer employer) {
+    void addContact(Employer employer) {
         SQLiteDatabase db = this.getWritableDatabase();
 
 
@@ -402,6 +402,8 @@ public class CreateTables extends SQLiteOpenHelper {
 
         // Closing database connection
     }
+
+
 
     Employer getEmployer(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
