@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="bannerColor">#767DBB</color>
     <color name="boxColor">#90CFFA</color>
+    <color name="silver">#C0C0C0</color>
 </resources>

@@ -30,6 +30,10 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
     private static final String KEY_DATE = "end_date";
     private static final String KEY_SKILLS = "skills";
 
+    private static final String TABLE_USERS = "Users";
+    private static final String KEY_ROLE = "role";
+
+
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         //3rd argument to be passed is CursorFactory instance
@@ -67,10 +71,25 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
                 + "freelancerID INTEGER NOT NULL,"
                 + "FOREIGN KEY(freelancerID) REFERENCES Freelancers(freelancerId)"
                 + ");";
+        String CREATE_USERS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_USERS + "("
+                + KEY_USERID + " INTEGER PRIMARY KEY,"
+                + KEY_NAME + " TEXT,"
+                + KEY_ROLE + " INT, "
+                + KEY_EMAIL + " TEXT,"
+                + KEY_PASSWORD + " TEXT," +
+                KEY_DESCRIPTION + " TEXT" + ")";
         db.execSQL(CREATE_EMPLOYERS_TABLE);
         db.execSQL(CREATE_FREELANCERS_TABLE);
         db.execSQL(CREATE_PROJECTS_TABLE);
+        db.execSQL(CREATE_USERS_TABLE);
     }
+    void openUsers() {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_USERS;
+        Cursor c = db.rawQuery(query,null);
+}
+
 
     // Upgrading database
     @Override
@@ -79,6 +98,7 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_EMPLOYERS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_FREELANCERS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_PROJECTS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
         // Create tables again
         onCreate(db);
     }
@@ -243,22 +263,39 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         // return contact list
         return projectList;
     }
-//    // Deleting single contact
-//    public void deleteContact(Contact contact) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        db.delete(TABLE_CONTACTS, KEY_ID + " = ?",
-//                new String[] { String.valueOf(contact.getID()) });
-//        db.close();
-//    }
-//
-//    // Getting contacts Count
-//    public int getContactsCount() {
-//        String countQuery = "SELECT  * FROM " + TABLE_CONTACTS;
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        Cursor cursor = db.rawQuery(countQuery, null);
-//        cursor.close();
-//
-//        // return count
-//        return cursor.getCount();
-//    }
+
+    public Users checkUser(String email, String password) {
+        Log.i("Info", "Trying to run query...");
+        String selectQuery = "SELECT * FROM " + TABLE_USERS + " WHERE " + KEY_EMAIL + " = '" + email + "' AND " + KEY_PASSWORD + " = '" + password +"'";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        boolean exists = cursor.moveToFirst();
+        Log.d("Record Exists", Boolean.toString(exists));
+
+
+        Users u = new Users(Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1), Integer.parseInt(cursor.getString(2)), cursor.getString(3),
+                (cursor.getString(4)), cursor.getString(5));
+
+
+        cursor.close();
+        db.close();
+        return u;
+    }
+
+    public void addUser(String uName, int uRole, String uEmail, String uPassword, String uDescription) {
+        ContentValues values = new ContentValues();
+        Log.i("Info", "Setting values...");
+        values.put(KEY_NAME, uName);
+        values.put(KEY_ROLE, uRole);
+        values.put(KEY_EMAIL, uEmail);
+        values.put(KEY_PASSWORD, uPassword);
+        values.put(KEY_DESCRIPTION, uDescription);
+        SQLiteDatabase db = this.getWritableDatabase();
+        // Inserting Row
+        db.insert(TABLE_USERS, null, values);
+        Log.i("Info", "User Added");
+        db.close(); // Closing database connection
+    }
 }
