@@ -3,6 +3,7 @@ package com.example.freelancerhomescreen;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.splashscreen.SplashScreen;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,14 +16,16 @@ public class WelcomeScreen extends AppCompatActivity {
 
     SharedPreferences prefs;
     private final String APP_STARTS = "NumberOfAppStarts";
+    public static Activity welcomeScreenActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         prefs = getSharedPreferences(APP_STARTS, MODE_PRIVATE);
-
+        welcomeScreenActivity = this;
         int appStarts = prefs.getInt("AppStarts", 0);
-
+        Log.d("App starts are equal to ", Integer.toString(appStarts));
         if (appStarts == 0) {
+            Log.d("App starts are equal to ", "0");
             SharedPreferences.Editor editor = prefs.edit();
             editor.putInt("AppStarts", 0);
             editor.commit();
@@ -45,6 +48,7 @@ public class WelcomeScreen extends AppCompatActivity {
 //
 //                db.close();
                 startActivity(new Intent(WelcomeScreen.this, LoginScreen.class));
+
             }
         });
 

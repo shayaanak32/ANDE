@@ -62,13 +62,7 @@ public class SplashWelcome extends AppCompatActivity {
     }
 
     void insertExperienceData() {
-//        String startDate1 = "2020-09-21 10:20:05.123";
-//        String startDate2 = "2020-12-25 10:20:05.123";
-//        String startDate3 = "2019-01-01 10:20:05.123";
-//
-//        String endDate1 = "2021-12-21 10:20:05.123";
-//        String endDate2 = "2022-12-25 10:20:05.123";
-//        String endDate3 = "2019-07-08 10:20:05.123";
+
         String startDate1 = "September 2020";
         String endDate1 = "December 2021";
         String startDate2 = "December 2020";
@@ -84,7 +78,6 @@ public class SplashWelcome extends AppCompatActivity {
 
         Experience e3 = new Experience("Apple Mobile Developer", startDate3, endDate3, "My experience at Apple included" +
                 "me helping out in the Swift Support role, which helped teach me a lot on Mobile Apps, and how to optimise performance", "Apple",3);
-
         ct.addExperience(e1);
         ct.addExperience(e2);
         ct.addExperience(e3);
@@ -94,9 +87,9 @@ public class SplashWelcome extends AppCompatActivity {
         Employer e1 = new Employer("Prince Kharal Tech", "Singapore", "Description1");
         Employer e2 = new Employer("NCS", "Singapore", "Description2");
         Employer e3 = new Employer("A*STAR", "Singapore", "Description3");
-        ct.addEmployers(e1);
-        ct.addEmployers(e2);
-        ct.addEmployers(e3);
+//        ct.addEmployers(e1);
+//        ct.addEmployers(e2);
+//        ct.addEmployers(e3);
     }
 
     void insertFreelancerData() {

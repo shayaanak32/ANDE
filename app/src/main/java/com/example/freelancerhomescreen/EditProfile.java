@@ -51,14 +51,14 @@ public class EditProfile extends AppCompatActivity {
                 showCustomDialog();
             }
         });
-        Employer emp  = db.getContact(1);
+        Employer emp = db.getContact(1);
         // TODO: for the id, reference from sharedPreference instead;
 
-        TextView cName = (TextView)findViewById(R.id.comapnyNameEdit);
-        TextView cAbout = (TextView)findViewById(R.id.companyAboutEdit);
+        TextView cName = (TextView) findViewById(R.id.comapnyNameEdit);
+        TextView cAbout = (TextView) findViewById(R.id.companyAboutEdit);
         Button addSkills = findViewById(R.id.addBtn);
         EditText skillsEdit = findViewById(R.id.company1PrioEdit);
-        listView=(ListView)findViewById(R.id.companyPrioList);
+        listView = (ListView) findViewById(R.id.companyPrioList);
         cName.setText(emp.getCompanyName());
         cAbout.setText(emp.getDescription());
 
@@ -91,9 +91,10 @@ public class EditProfile extends AppCompatActivity {
         BottomNavigationView bv = findViewById(R.id.bottomNavigationView);
         bv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             Intent i;
+
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.profileNav:
                         i = new Intent(EditProfile.this, ProfilePage.class);
                         startActivity(i);
@@ -123,11 +124,11 @@ public class EditProfile extends AppCompatActivity {
                 String cN = compName.getText().toString();
                 EditText compDesc = findViewById(R.id.companyAboutEdit);
                 String cD = compDesc.getText().toString();
-                if(adapter.getCount()>0){
-                    for(int i = 0; i < adapter.getCount()-1; i++){
-                        prioStr+=adapter.getPrio(i)+",";
+                if (adapter.getCount() > 0) {
+                    for (int i = 0; i < adapter.getCount() - 1; i++) {
+                        prioStr += adapter.getPrio(i) + ",";
                     }
-                    prioStr+=adapter.getPrio(adapter.getCount()-1);
+                    prioStr += adapter.getPrio(adapter.getCount() - 1);
                 }
 
                 DatabaseHandler db = new DatabaseHandler(EditProfile.this);
@@ -140,9 +141,9 @@ public class EditProfile extends AppCompatActivity {
         });
 
 
-
     }
-    void showCustomDialog(){
+
+    void showCustomDialog() {
         final Dialog d = new Dialog(this);
         d.requestWindowFeature(Window.FEATURE_NO_TITLE);
         d.setCancelable(true);
