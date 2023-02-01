@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,7 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class UpdateProject extends AppCompatActivity {
+public class EditProject extends AppCompatActivity {
     EditText pName, pStart, pEnd, pLink, skillEdit, pDesc;
     TextView indiSkill;
     ListView skillsList;
@@ -24,8 +25,11 @@ public class UpdateProject extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_project);
+        // get extras from the previous page
+        Intent intent = getIntent();
+        int project_id = intent.getIntExtra("project_id", 0);
         DatabaseHandler db = new DatabaseHandler(this);
-        Projects p1 = db.get1Project(1);
+        Projects p1 = db.get1Project(project_id);
         pName = findViewById(R.id.editProjName);
         pStart = findViewById(R.id.startDatePicker);
         pEnd = findViewById(R.id.endDatePicker);
@@ -86,7 +90,7 @@ public class UpdateProject extends AppCompatActivity {
                 Projects p2 = new Projects(p1.getProjectID(),pN, pSD, pED,pL, skillsP, pD, 1);
                 // TODO: 1/2/2023 get user id from shared Pref
                 db.updateProjects(p2);
-                Intent i = new Intent(UpdateProject.this, ProjectsPage.class);
+                Intent i = new Intent(EditProject.this, ProjectsPage.class);
                 startActivity(i);
                 finish();
             }

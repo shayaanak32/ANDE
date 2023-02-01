@@ -282,6 +282,8 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         return db.update(TABLE_PROJECTS, values, "projectID = ?",
                 new String[]{String.valueOf(p.getProjectID())});
     }
+
+
 //    // Deleting single contact
 //    public void deleteContact(Contact contact) {
 //        SQLiteDatabase db = this.getWritableDatabase();
