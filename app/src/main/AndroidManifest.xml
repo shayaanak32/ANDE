@@ -15,6 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FreelancerHomeScreen"
         tools:targetApi="31" >
+        <activity android:name=".LoginScreen"
+            android:exported="false"></activity>
         <activity
             android:name=".FreelancerEditProfile"
             android:exported="false" >
@@ -67,10 +69,11 @@
         </activity>
         <activity
             android:name=".FreelancerProfile"
-            android:exported="false" >
+            android:exported="true" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+
         </activity>
         <activity
             android:name=".AddProject"
@@ -152,7 +155,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true"
+            android:exported="false"
             android:launchMode="singleTask" >
             <meta-data
                 android:name="android.app.lib_name"
@@ -181,17 +184,14 @@
         </activity>
         <activity
             android:name=".DebugPage"
-            android:exported="true" >
+            android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".SplashWelcome"
-            android:exported="true" >
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
+        <activity android:name=".WelcomeScreen"
+            android:exported="false">
+
         </activity>
         <activity
             android:name=".EditExperienceActivity"
