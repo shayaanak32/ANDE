@@ -74,7 +74,7 @@ public class EditProfile extends AppCompatActivity {
 
                 // Notify the adapter of the change
                 adapter.notifyDataSetChanged();
-                Log.d("this works?no way", adapter.getCount()+"");
+
             }
         });
 
