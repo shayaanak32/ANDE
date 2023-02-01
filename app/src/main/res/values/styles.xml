@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.SplashTheme" parent="Theme.SplashScreen">
+        <!--set the splash screen bg, animated icon (if have), and animated duration(optional)-->
+        <item name="windowSplashScreenBackground">@color/periwinkle</item>
+        <!--        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_image</item>-->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_logo</item>
+        <item name="windowSplashScreenAnimationDuration">2000</item> <!--required-->
+        <!--        <item name="android:windowSplashScreenBrandingImage">@drawable/splash_image</item>-->
+        <!--set theme for activity that directly follows your splash screen-->
+        <item name="postSplashScreenTheme">@style/Theme.FreelancerHomeScreen</item> <!--required-->
+    </style>
+</resources>
