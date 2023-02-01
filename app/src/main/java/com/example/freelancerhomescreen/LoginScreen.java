@@ -26,15 +26,20 @@ public class LoginScreen extends AppCompatActivity {
         SharedPreferences.Editor editor = prefs.edit();
 
         if(appStarts == 0) {
+            db.addEmployer("Test Thing Company", "Programmers, Software Engineers", "A fun tech company", "testing@testCompany.gov.sg", "12345", "T123456789");
+            db.addEmployer("Company Too", "Coders, Interns", "Another boring company", "com2@gmail.com", "asdfg", "T0001112");
 
-            db.addUser("test", 1, "email@gmail.com", "password", "test");
-            db.addUser("John Smith", 1, "johnsmith@gmail.com", "hashpassword1", "Description1");
-            db.addUser("Jane Doe", 2, "janedoe@gmail.com", "hashpassword2", "Description2");
-            db.addUser("Bob Johnson", 2, "bobjohnson@gmail.com", "hashpassword3", "Description3");
-            db.addUser("Emily Davis", 1, "emilydavis@gmail.com", "hashpassword4", "Description4");
-            db.addUser("Michael Brown", 2, "michaelbrown@gmail.com", "hashpassword5", "Description5");
-            db.addUser("Ashley Taylor", 1, "ashleytaylor@gmail.com", "hashpassword6", "Description6");
-//            SharedPreferences.Editor editor = prefs.edit();
+            db.addFreelancer("Emily Davis", "emilydavis@gmail.com", "123", "Computing and stuff", "Java, C++, NodeJS");
+            db.addFreelancer("Michael Brown", "michaelbrown@gmail.com", "asdfghjkl", "More Computing and More Computing", "Java, NodeJS");
+            db.addFreelancer("Ashley Taylor", "ashleytaylor@gmail.com", "hashpassword6", "I love tech", "Python");
+
+            db.addUser("test", 1, "email@gmail.com", "password",  1);
+            db.addUser("John Smith", 1, "johnsmith@gmail.com", "hashpassword1",  1);
+            db.addUser("Jane Doe", 1, "janedoe@gmail.com", "hashpassword2",  2);
+            db.addUser("Bob Johnson", 1, "bobjohnson@gmail.com", "123",  2);
+            db.addUser("Emily Davis", 2, "emilydavis@gmail.com", "1234567890",  1);
+            db.addUser("Michael Brown", 2, "michaelbrown@gmail.com", "asdfghjkl",  2);
+            db.addUser("Ashley Taylor", 2, "ashleytaylor@gmail.com", "hashpassword6",  3);
             editor.putInt("AppStarts",1);
             editor.commit();
         }
@@ -58,9 +63,6 @@ public class LoginScreen extends AppCompatActivity {
                 Users u = dbHandler.checkUser(email, password);
                 boolean check = !(u == null);
                 if (check) {
-//        prefs = getSharedPreferences(APP_STARTS, MODE_PRIVATE);
-//        SharedPreferences.Editor editor = prefs.edit();
-//        editor.putInt("AppStarts",0);
                     int role = u.getRole();
                     int user_id = u.getUser_id();
                     Log.d("user role?", role + "");
