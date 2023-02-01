@@ -149,46 +149,22 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         // return contact
         return contact;
     }
-//    public void addFreelancers(Freelancer freelancer) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//
-//        ContentValues values = new ContentValues();
-//        values.put(KEY_NAME, freelancer.getName()); // Contact Name
-//        values.put(KEY_DESCRIPTION, freelancer.getDescription()); // Contact Phone
-//        values.put(KEY_EMAIL, freelancer.getEmail());
-//        values.put(KEY_PASSWORD, freelancer.getHashPassword());
-//        values.put(KEY_YOUR_SKILLS, freelancer.getSkills());
-//
-//        // Contact Phone
-//
-//        // Inserting Row
-//        db.insert(TABLE_FREELANCERS, null, values);
-//        //2nd argument is String containing nullColumnHack
-//
-//        // Closing database connection
-//    }
     // code to get the single contact
     Freelancer getFreelancer(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-
+        Log.d("contents", id+"");
         Cursor cursor = db.query(TABLE_FREELANCERS, new String[] { KEY_NAME,
                         KEY_DESCRIPTION },  "freelancerId =?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
-        Freelancer contact = new Freelancer(cursor.getString(0) ,
-                cursor.getString(1));
-        // return contact
+        Freelancer contact = new Freelancer(cursor.getString(0),cursor.getString(1));
         return contact;
     }
-//    public void addFreelancers(Freelancer freelancer) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//    }
 
     public void addFreelancer(String name,  String email, String password, String description, String skills, String profilePic) {
         ContentValues values = new ContentValues();
-        Log.i("Info", "Setting values...");
         values.put(KEY_NAME, name);
         values.put(KEY_EMAIL, email);
         values.put(KEY_PASSWORD, password);
