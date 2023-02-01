@@ -33,8 +33,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class EditProfile extends AppCompatActivity {
     ListView listView;
     TextView textView;
-    private static final int PICK_IMAGE_REQUEST = 1;
-    private static final int CROP_IMAGE_REQUEST = 2;
     private static final String TAG = "EditProfile";
 
     @Override
@@ -76,6 +74,7 @@ public class EditProfile extends AppCompatActivity {
                 // Notify the adapter of the change
                 adapter.notifyDataSetChanged();
 
+                Toast.makeText(getApplicationContext(), "Removed", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -152,43 +151,5 @@ public class EditProfile extends AppCompatActivity {
         ImageView camera = (ImageView) findViewById(R.id.editPhotoClickable);
 
     }
-//    @Override
-//    public void onClick(View view) {
-//        Log.d("We in","hi");
-//        Intent intent = new Intent();
-//        intent.setType("image/*");
-//        intent.setAction(Intent.ACTION_GET_CONTENT);
-//        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
-//    }
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-//            Uri uri = data.getData();
-//            startCropActivity(uri);
-//        } else if (requestCode == CROP_IMAGE_REQUEST) {
-//            if (resultCode == RESULT_OK) {
-//                Uri croppedUri = data.getData();
-//                // Use the croppedUri as needed
-//            }
-//        }
-//    }
-//
-//    private void startCropActivity(Uri uri) {
-//        try {
-//            Intent cropIntent = new Intent("com.android.camera.action.CROP");
-//            cropIntent.setDataAndType(uri, "image/*");
-//            cropIntent.putExtra("crop", "true");
-//            cropIntent.putExtra("aspectX", 1);
-//            cropIntent.putExtra("aspectY", 1);
-//            cropIntent.putExtra("outputX", 256);
-//            cropIntent.putExtra("outputY", 256);
-//            cropIntent.putExtra("return-data", true);
-//            startActivityForResult(cropIntent, CROP_IMAGE_REQUEST);
-//        } catch (ActivityNotFoundException anfe) {
-//            // Handle the error
-//        }
-//    }
 
 }

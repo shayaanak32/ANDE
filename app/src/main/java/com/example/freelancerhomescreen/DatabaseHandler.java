@@ -1,4 +1,6 @@
 package com.example.freelancerhomescreen;
+import static android.database.DatabaseUtils.dumpCursor;
+import static android.database.DatabaseUtils.dumpCursorToString;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -204,14 +206,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // return contact
         return contact;
     }
+                new String[] { String.valueOf(id) }, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
 
+        Freelancer contact = new Freelancer(cursor.getString(0) ,
+                cursor.getString(1));
+        // return contact
+        return contact;
+    }
     public void addFreelancers(Freelancer freelancer) {
         SQLiteDatabase db = this.getWritableDatabase();
-
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, freelancer.getName()); // Contact Name
         values.put(KEY_DESCRIPTION, freelancer.getDescription()); // Contact Phone
-        values.put(KEY_EMAIL, freelancer.getEmail());
         values.put(KEY_PASSWORD, freelancer.getHashPassword());
         values.put(KEY_YOUR_SKILLS, freelancer.getSkills());
 
@@ -260,12 +268,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
+        String temp = dumpCursorToString(cursor);
+        Log.d(TAG, temp);
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
                 Employer contact = new Employer();
+                contact.setEmployerID(cursor.getInt(0));
                 contact.setEmpEmail(cursor.getString(1));
                 contact.setCompanyName(cursor.getString(3));
+                contact.setPriorities(cursor.getString(5));
                 contact.setDescription(cursor.getString(4));
                 // Adding contact to list
                 contactList.add(contact);
@@ -287,6 +299,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // updating row
         return db.update(TABLE_EMPLOYERS, values, KEY_USERID + " = ?",
                 new String[]{String.valueOf(employer.getEmployerID())});
+    }
+    public int updateFreelancer(Freelancer freelancer) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME, freelancer.getName());
+        values.put(KEY_DESCRIPTION, freelancer.getDescription());
+        // updating row
+        return db.update(TABLE_FREELANCERS, values,  "freelancerId = ?",
+                new String[] { String.valueOf(freelancer.getId()) });
     }
 
     Projects get1Project(int projId) {
@@ -410,17 +431,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 new String[]{String.valueOf(p.getProjectID())});
     }
 
+
     void addCertifications(Certification certification) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, certification.getName()); // Contact Name
-        values.put(KEY_DESCRIPTION, certification.getDescription()); // Contact Phone
         values.put(KEY_LINK, certification.getLink());
         values.put(KEY_SKILLS, certification.getSkills());
         values.put(KEY_DATE, certification.getEndDate());
 
-        // Contact Phone
         // Inserting Row
         db.insert(TABLE_CERTIFICATIONS, null, values);
         String selectQuery = "SELECT * FROM Certifications";
@@ -446,6 +466,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Log.i("Info", "User Added");
         db.close(); // Closing database connection
     }
+
 
 
 }

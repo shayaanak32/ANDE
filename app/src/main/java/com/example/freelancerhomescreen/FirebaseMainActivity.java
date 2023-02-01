@@ -22,7 +22,7 @@ public class FirebaseMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_freelancer_profile);
         //basicReadWrite();
         BottomNavigationView bv = findViewById(R.id.bottomNavigationView);
         bv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -59,9 +59,7 @@ public class FirebaseMainActivity extends AppCompatActivity {
 //        LinearLayout experienceLinearLayout = (LinearLayout) findViewById(R.id.experienceLinearLayout);
 //        LinearLayout projectsLinearLayout = (LinearLayout) findViewById(R.id.projectsLinearLayout);
 //        LinearLayout skillsLinearLayout = (LinearLayout) findViewById(R.id.settingsLinearLayout);
-
-
-
+//        Button skillsBtn = (Button) findViewById(R.id.skillsButton);
         experienceCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,10 +89,7 @@ public class FirebaseMainActivity extends AppCompatActivity {
 //                Certification c2 = new Certification("IBM Professional Data Science Certification", "https://www.coursera.org/professional-certificates/ibm-data-science", endDate2, "Python,Java", "Description2");
 //                Certification c3 = new Certification("DataCamp Certified Data Professional", "https://www.coursera.org/professional-certificates/ibm-data-science", endDate3, "Java", "Description3");
 //                Certification c4 = new Certification("Google Cloud Certified Data Scientist", "https://www.coursera.org/professional-certificates/ibm-data-science", endDate4, "Java", "Description4");
-//                ct.addCertifications(c1);
-//                ct.addCertifications(c2);
-//                ct.addCertifications(c3);
-//                ct.addCertifications(c4);
+
                 Log.d("Project Card Clicked", "Clicked");
 
                 ct.openProjects();
@@ -166,16 +161,18 @@ public class FirebaseMainActivity extends AppCompatActivity {
         });
 
 
+//        skillsBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+
     }
 
 
 //    public void basicReadWrite() {
 //        // [START write_message]
-//        // Write a message to the database
 //        FirebaseDatabase database = FirebaseDatabase.getInstance();
 //        DatabaseReference myRef = database.getReference("message");
 //
-//        myRef.setValue("Hello, World!");
 //        // [END write_message]
 //
 //        // [START read_message]
