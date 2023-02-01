@@ -34,7 +34,7 @@
             android:fontFamily="@font/montserrat"
             android:gravity="center"
             android:padding="15dp"
-            android:text="Profile"
+            android:text="My Profile"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:textSize="30sp" />
@@ -129,183 +129,188 @@
             android:textFontWeight="@integer/material_motion_duration_long_1" />
 
 
-        <GridLayout
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <androidx.cardview.widget.CardView
+            android:onClick="onClick"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:columnCount="2">
+            android:layout_height="150dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="12dp"
+            app:cardBackgroundColor="@color/boxColor"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            android:id="@+id/certificationsCard"
+            android:clickable="true"
+            >
 
-            <androidx.cardview.widget.CardView
+            <LinearLayout
+                android:id="@+id/certificationsLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
 
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="12dp"
-                app:cardBackgroundColor="@color/boxColor"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                android:id="@+id/certificationsCard"
-                android:clickable="true"
                 >
 
-                <LinearLayout
-                    android:id="@+id/certificationsLinearLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical"
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:src="@drawable/certifications_picture">
 
-                    >
+                </ImageView>
 
-                    <ImageView
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:src="@drawable/certifications_picture">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Certifications">
 
-                    </ImageView>
+                </TextView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat"
-                        android:text="Certifications">
+            </LinearLayout>
 
-                    </TextView>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:onClick="onClick"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="12dp"
+            app:cardBackgroundColor="@color/boxColor"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            android:id="@+id/experienceCard"
+            android:clickable="true">
 
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="12dp"
-                app:cardBackgroundColor="@color/boxColor"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                android:id="@+id/skillsCard"
-                android:clickable="true"
-                android:onClick="onClick"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:id="@+id/experienceLinearLayout"
                 >
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:id="@+id/settingsLinearLayout"
-                    >
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:src="@drawable/experience_picture">
 
-                    <ImageView
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:src="@drawable/settings_picture">
+                </ImageView>
 
-                    </ImageView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Experience">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat"
-                        android:text="Skills">
-
-                    </TextView>
-
-                </LinearLayout>
+                </TextView>
 
 
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="12dp"
-                app:cardBackgroundColor="@color/boxColor"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                android:id="@+id/experienceCard"
-                android:clickable="true">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:id="@+id/experienceLinearLayout"
-                    >
-
-                    <ImageView
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:src="@drawable/experience_picture">
-
-                    </ImageView>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat"
-                        android:text="Experience">
-
-                    </TextView>
+            </LinearLayout>
 
 
-                </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+       <androidx.cardview.widget.CardView
+           android:onClick="onClick"
+           android:layout_width="match_parent"
+           android:layout_height="150dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="12dp"
+            app:cardBackgroundColor="@color/boxColor"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            android:id="@+id/skillsCard"
+            android:clickable="true"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:id="@+id/settingsLinearLayout"
+                >
+
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:src="@drawable/settings_picture">
+
+                </ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Skills">
+
+                </TextView>
+
+            </LinearLayout>
 
 
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="12dp"
-                app:cardBackgroundColor="@color/boxColor"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                android:id="@+id/projectsCard"
-                android:clickable="true">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:id="@+id/projectsLinearLayout">
-
-                    <ImageView
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:src="@drawable/projects_picture">
-
-                    </ImageView>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat"
-                        android:text="Projects"></TextView>
+        </androidx.cardview.widget.CardView>
 
 
-                </LinearLayout>
+        <androidx.cardview.widget.CardView
+            android:onClick="onClick"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="12dp"
+            app:cardBackgroundColor="@color/boxColor"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            android:id="@+id/projectsCard"
+            android:clickable="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:id="@+id/projectsLinearLayout">
+
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:src="@drawable/projects_picture">
+
+                </ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Projects"></TextView>
 
 
-            </androidx.cardview.widget.CardView>
+            </LinearLayout>
 
 
-        </GridLayout>
-
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</LinearLayout>
 
 
 

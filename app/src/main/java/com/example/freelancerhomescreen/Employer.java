@@ -10,7 +10,7 @@ private String description;
 private String empEmail;
 private String empPassword;
     private String uen;
-private String profileImg;
+private String profilePic;
 
 
     public Employer(String companyName, String description, String priorities) {
@@ -57,6 +57,16 @@ private String profileImg;
         this.empEmail = empEmail;
         this.empPassword = empPassword;
         this.profileImg = profileImg;
+    }
+
+    public Employer(String companyName, String priorities, String description,int employerID, String empEmail, String empPassword, String empProfilePic) {
+        this.companyName = companyName;
+        this.priorities = priorities;
+        this.description = description;
+        this.employerID = employerID;
+        this.empEmail = empEmail;
+        this.empPassword = empPassword;
+        this.profilePic = empProfilePic;
     }
 
     public Employer() {
@@ -108,6 +118,14 @@ private String profileImg;
 
     public void setEmpPassword(String empPassword) {
         this.empPassword = empPassword;
+    }
+
+    public String getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
     }
 
     public String[] getBrokenPriorities(String p){

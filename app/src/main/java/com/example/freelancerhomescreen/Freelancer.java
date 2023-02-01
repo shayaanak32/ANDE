@@ -12,6 +12,7 @@ public class Freelancer {
     private int id;
     private String skills;
     private String[] individualSkill;
+    private String profilePic;
 
     public Freelancer(int id, String name, String description){
         this.id = id;
@@ -42,6 +43,16 @@ public class Freelancer {
         this.hashPassword = hashPassword;
         this.description = description;
         this.listOfSkills = listOfSkills;
+    }
+
+    public Freelancer(int id, String name, String email, String hashPassword, String description,String listOfSkills, String pfp) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.hashPassword = hashPassword;
+        this.description = description;
+        this.listOfSkills = listOfSkills;
+        this.profilePic = pfp;
     }
 
     public String getListOfSkills() {

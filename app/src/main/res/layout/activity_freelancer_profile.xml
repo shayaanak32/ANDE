@@ -132,13 +132,15 @@ tools:context=".MainActivity">
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="300dp"
+        android:id="@+id/grid"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
+        android:clickable="true"
         android:columnCount="2">
 
         <androidx.cardview.widget.CardView
-
+            android:onClick="onClick"
             android:layout_width="wrap_content"
             android:layout_height="100dp"
             android:layout_rowWeight="1"
@@ -148,7 +150,6 @@ tools:context=".MainActivity">
             app:cardCornerRadius="12dp"
             app:cardElevation="2dp"
             android:id="@+id/certificationsCard"
-            android:clickable="true"
             >
 
             <LinearLayout
@@ -232,6 +233,7 @@ tools:context=".MainActivity">
             app:cardBackgroundColor="@color/boxColor"
             app:cardCornerRadius="12dp"
             app:cardElevation="2dp"
+            android:onClick="onClick"
             android:id="@+id/experienceCard"
             android:clickable="true">
 
@@ -272,6 +274,7 @@ tools:context=".MainActivity">
             android:layout_columnWeight="1"
             android:layout_margin="12dp"
             app:cardBackgroundColor="@color/boxColor"
+            android:onClick="onClick"
             app:cardCornerRadius="12dp"
             app:cardElevation="2dp"
             android:id="@+id/projectsCard"
