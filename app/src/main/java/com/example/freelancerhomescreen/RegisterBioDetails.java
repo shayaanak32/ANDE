@@ -8,17 +8,20 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class RegisterEmployer extends AppCompatActivity implements View.OnClickListener {
+public class RegisterBioDetails extends AppCompatActivity implements View.OnClickListener {
 
-    EditText emailInput, nameInput;
+    EditText bioInput;
+    String name, email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_employer);
+        setContentView(R.layout.activity_register_bio_details);
 
-        emailInput = findViewById(R.id.emailInput);
-        nameInput = findViewById(R.id.nameInput);
+        bioInput = findViewById(R.id.bioInput);
+
+        email=getIntent().getExtras().getString("email");
+        name=getIntent().getExtras().getString("name");
     }
 
     @Override
@@ -26,14 +29,15 @@ public class RegisterEmployer extends AppCompatActivity implements View.OnClickL
         Intent i;
         switch(view.getId()){
             case R.id.nextBtn:
-                if(String.valueOf(emailInput.getText()).isEmpty() || String.valueOf(nameInput.getText()).isEmpty()){
+                if(String.valueOf(bioInput.getText()).isEmpty()){
                     Toast.makeText(this, "Fill in all info", Toast.LENGTH_SHORT).show();
                 }else{
-                    i = new Intent(this, RegisterCompanyDetails.class);
-                    String email = String.valueOf(emailInput.getText());
-                    String name = String.valueOf(nameInput.getText());
+                    i = new Intent(this, Register.class);
+                    String bio = String.valueOf(bioInput.getText());
+                    i.putExtra("status", "freelancer");
                     i.putExtra("email", email);
                     i.putExtra("name", name);
+                    i.putExtra("bio", bio);
                     startActivity(i);
                 }
                 break;

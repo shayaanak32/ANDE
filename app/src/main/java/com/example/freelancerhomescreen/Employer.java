@@ -109,6 +109,11 @@ private String empPassword;
         this.empPassword = empPassword;
     }
 
+    public String[] getBrokenPriorities(String p){
+        String[] indPrio = p.split(",");
+        return  indPrio;
+    }
+
     public String getUen() {
         return uen;
     }

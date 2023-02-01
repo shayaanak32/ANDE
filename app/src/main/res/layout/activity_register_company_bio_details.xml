@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterEmployer"
+    tools:context=".RegisterCompanyBioDetails"
     android:orientation="vertical">
 
     <TextView
-        android:text="Register"
+        android:text="Bio details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -33,36 +33,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Step 1: Enter your company email"
-                android:textSize="24sp"
-                android:layout_marginHorizontal="10dp"
-                android:textColor="#1B128A"
-                android:textStyle="bold"/>
-            
-            <EditText
-                android:id="@+id/emailInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Company Email"
-                android:textSize="28sp"
-                android:textColorHint="#675FC8"
-                android:layout_marginHorizontal="20dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Step 2: Enter company name"
+                android:text="Step 5: Enter information about your company"
                 android:textSize="24sp"
                 android:layout_marginHorizontal="10dp"
                 android:textColor="#1B128A"
                 android:textStyle="bold"/>
 
             <EditText
-                android:id="@+id/nameInput"
+                android:id="@+id/infoInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Company Name"
+                android:hint="Information"
                 android:textSize="28sp"
                 android:textColorHint="#675FC8"
                 android:layout_marginHorizontal="20dp"
@@ -84,7 +65,7 @@
         android:layout_gravity="center"
         android:textStyle="bold"
         android:backgroundTint="#747DBD"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="241dp"
         android:onClick="onClick"/>
 
 </LinearLayout>

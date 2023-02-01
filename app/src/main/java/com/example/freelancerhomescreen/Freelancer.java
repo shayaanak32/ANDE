@@ -13,6 +13,10 @@ public class Freelancer {
     private String skills;
     private String[] individualSkill;
 
+    public Freelancer(String name, String description){
+        this.name=name;
+        this.description = description;
+    }
     public Freelancer(String name, String email, String hashPassword, String description,String listOfSkills) {
         this.name = name;
         this.email = email;
