@@ -246,6 +246,15 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         return db.update(TABLE_EMPLOYERS, values, KEY_USERID + " = ?",
                 new String[] { String.valueOf(employer.getEmployerID()) });
     }
+    public int updateFreelancer(Freelancer freelancer) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME, freelancer.getName());
+        values.put(KEY_DESCRIPTION, freelancer.getDescription());
+        // updating row
+        return db.update(TABLE_FREELANCERS, values,  "freelancerId = ?",
+                new String[] { String.valueOf(freelancer.getId()) });
+    }
 
     Projects get1Project(int projId){
         SQLiteDatabase db = this.getReadableDatabase();
