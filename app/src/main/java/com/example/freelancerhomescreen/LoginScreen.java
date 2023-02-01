@@ -26,12 +26,12 @@ public class LoginScreen extends AppCompatActivity {
         SharedPreferences.Editor editor = prefs.edit();
 
         if(appStarts == 0) {
-            db.addEmployer("Test Thing Company", "Programmers, Software Engineers", "A fun tech company", "testing@testCompany.gov.sg", "12345", "T123456789");
-            db.addEmployer("Company Too", "Coders, Interns", "Another boring company", "com2@gmail.com", "asdfg", "T0001112");
+            db.addEmployer("Test Thing Company", "Programmers, Software Engineers", "A fun tech company", "testing@testCompany.gov.sg", "12345", "T123456789", "pfp1");
+            db.addEmployer("Company Too", "Coders, Interns", "Another boring company", "com2@gmail.com", "asdfg", "T0001112", "pfp2");
 
-            db.addFreelancer("Emily Davis", "emilydavis@gmail.com", "123", "Computing and stuff", "Java, C++, NodeJS");
-            db.addFreelancer("Michael Brown", "michaelbrown@gmail.com", "asdfghjkl", "More Computing and More Computing", "Java, NodeJS");
-            db.addFreelancer("Ashley Taylor", "ashleytaylor@gmail.com", "hashpassword6", "I love tech", "Python");
+            db.addFreelancer("Emily Davis", "emilydavis@gmail.com", "1234567890", "Computing and stuff", "Java, C++, NodeJS", "pfp3");
+            db.addFreelancer("Michael Brown", "michaelbrown@gmail.com", "asdfghjkl", "More Computing and More Computing", "Java, NodeJS", "pfp4");
+            db.addFreelancer("Ashley Taylor", "ashleytaylor@gmail.com", "hashpassword6", "I love tech", "Python", "pfp5");
 
             db.addUser("test", 1, "email@gmail.com", "password",  1);
             db.addUser("John Smith", 1, "johnsmith@gmail.com", "hashpassword1",  1);
@@ -72,7 +72,7 @@ public class LoginScreen extends AppCompatActivity {
                     if (role == 1) {
                         startActivity(new Intent(LoginScreen.this, ProfilePage.class));
                     } else if (role == 2) {
-                        startActivity(new Intent(LoginScreen.this, MainActivity.class));
+                        startActivity(new Intent(LoginScreen.this, FreelancerProfile.class));
 
                     }
                 } else {
