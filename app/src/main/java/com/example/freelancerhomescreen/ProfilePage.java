@@ -68,7 +68,7 @@ public class ProfilePage extends AppCompatActivity {
             }
         });
         Employer emp = db.getContact(1);
-        // to make the thing dynamic
+        //todo: get id from sharedPrefs
         TextView cName = (TextView)findViewById(R.id.companyName);
         TextView cAbout = (TextView)findViewById(R.id.aboutOrgInput);
         cName.setText(emp.getCompanyName());
