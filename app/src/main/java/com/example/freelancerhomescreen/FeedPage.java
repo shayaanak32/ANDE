@@ -26,11 +26,23 @@ public class FeedPage extends AppCompatActivity {
         DatabaseHandler db = new DatabaseHandler(this);
         setContentView(R.layout.activity_feed_page);
         setUIRef();
-        ArrayList<Freelancer> fl = db.getAllFreelancer();
-        for(Freelancer f : fl){
-            freelancers.add(new Recycleritem(f.getName(), f.getIndividualSkill(f.getSkills()), f.getDescription()));
-
+        //todo: retrieve user role from shared preference
+        int userRole = 2;
+        switch(userRole){
+            case 1:
+                ArrayList<Freelancer> fl = db.getAllFreelancer();
+                for(Freelancer f : fl){
+                    freelancers.add(new Recycleritem(f.getId(),f.getName(), f.getIndividualSkill(f.getSkills()), f.getDescription()));
+                }
+                break;
+            case 2:
+                ArrayList<Employer> emp = db.getAllEmployers();
+                for(Employer f : emp){
+                    freelancers.add(new Recycleritem(f.getEmployerID(), f.getCompanyName(), f.getBrokenPriorities(f.getPriorities()), f.getDescription()));
+                }
+                break;
         }
+
         BottomNavigationView bv = findViewById(R.id.bottomNavigationView);
         bv.setSelectedItemId(R.id.feedNav);
         bv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -76,10 +88,27 @@ public class FeedPage extends AppCompatActivity {
             @Override
             public void onItemClicked(Recycleritem country)
             {
-                Toast.makeText(FeedPage.this, country.getName(), Toast.LENGTH_SHORT).show();
+                //todo: retrieve user role from shared preference
+                int userRole = 2;
+                Intent i;
+                int profileID = country.getId();
+                Log.d("poooooooo", profileID+"");
+                switch(userRole){
+                    case 1:
+                        i = new Intent(getApplicationContext(), FreelancerProfile.class);
+                        i.putExtra("profileid", profileID);
+                        startActivity(i);
+                        break;
+                    case 2:
+                        i = new Intent(getApplicationContext(), EmployerProfile.class);
+                        i.putExtra("profileid", profileID);
+                        startActivity(i);
+                        break;
+
+                }
+
             }
         });
-    Log.d("test","oi" );
         //Set adapter to RecyclerView
         fRecyclerView.setAdapter(myRecyclerViewAdapter);
     }

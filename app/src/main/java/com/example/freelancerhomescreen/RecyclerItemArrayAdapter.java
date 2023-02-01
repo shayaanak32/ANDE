@@ -83,11 +83,24 @@ public class RecyclerItemArrayAdapter extends RecyclerView.Adapter<RecyclerItemA
         freelancerAbout.setText(userArrayList.get(position).getAbout());
         //Set Freelancer Name
         String[] skillList= userArrayList.get(position).getPrios();
-        skill1.setText(skillList[0]);
-        //Set Freelancer Name
-        skill2.setText(skillList[1]);
-        //Set Freelancer Name
-        skill3.setText(skillList[2]);
+        switch(skillList.length){
+            case 1:
+                skill1.setText(skillList[0]);
+                break;
+            case 2:
+                skill1.setText(skillList[0]);
+                //Set Freelancer Name
+                skill2.setText(skillList[1]);
+                break;
+            case 3:
+                skill1.setText(skillList[0]);
+                //Set Freelancer Name
+                skill2.setText(skillList[1]);
+                //Set Freelancer Name
+                skill3.setText(skillList[2]);
+                break;
+        }
+
         freelancerPfp.setImageResource(R.drawable.profile_pic);
 
     }

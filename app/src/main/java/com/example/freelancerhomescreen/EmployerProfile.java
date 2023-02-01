@@ -21,7 +21,7 @@ import java.util.Arrays;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ProfilePage extends AppCompatActivity {
+public class EmployerProfile extends AppCompatActivity {
     ListView listView;
     TextView textView;
 
@@ -30,36 +30,31 @@ public class ProfilePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_page);
+        setContentView(R.layout.activity_employer_profile);
         CircleImageView pfp = findViewById(R.id.profile_image);
-        Button b = findViewById(R.id.editProfileBtn);
+        Intent intent = getIntent();
+        int profileID = intent.getIntExtra("profileid",0);
+        Log.d("11111111111111", profileID+"");
         BottomNavigationView bv =findViewById(R.id.bottomNavigationView);
         DatabaseHandler db = new DatabaseHandler(this);
         bv.setSelectedItemId(R.id.profileNav);
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(ProfilePage.this, EditProfile.class);
-                startActivity(i);
-            }
-        });
         bv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             Intent i;
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.profileNav:
-                         i = new Intent(ProfilePage.this, ProfilePage.class);
+                        i = new Intent(getApplicationContext(), ProfilePage.class);
                         startActivity(i);
                         finish();
                         return true;
                     case R.id.feedNav:
-                         i = new Intent(ProfilePage.this, FeedPage.class);
+                        i = new Intent(getApplicationContext(), FeedPage.class);
                         startActivity(i);
                         finish();
                         return true;
                     case R.id.settingsNav:
-                         i = new Intent(ProfilePage.this, SettingsPage.class);
+                        i = new Intent(getApplicationContext(), SettingsPage.class);
                         startActivity(i);
                         finish();
                         return true;
@@ -67,8 +62,8 @@ public class ProfilePage extends AppCompatActivity {
                 return false;
             }
         });
-        Employer emp = db.getContact(1);
-        //todo: get id from sharedPrefs
+        Employer emp = db.getContact(profileID);
+        // to make the thing dynamic
         TextView cName = (TextView)findViewById(R.id.companyName);
         TextView cAbout = (TextView)findViewById(R.id.aboutOrgInput);
         cName.setText(emp.getCompanyName());
@@ -89,28 +84,5 @@ public class ProfilePage extends AppCompatActivity {
             textView.setText("Nothing yet");
             textView.setTextSize(20);
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        CircleImageView pfp = findViewById(R.id.profile_image);
-        Button b = findViewById(R.id.editProfileBtn);
-        BottomNavigationView bv =findViewById(R.id.bottomNavigationView);
-        DatabaseHandler db = new DatabaseHandler(this);
-        Employer emp = db.getContact(1);
-        // to make the thing dynamic
-        TextView cName = (TextView)findViewById(R.id.companyName);
-        TextView cAbout = (TextView)findViewById(R.id.aboutOrgInput);
-        cName.setText(emp.getCompanyName());
-        cAbout.setText(emp.getDescription());
-        pfp.setImageResource(R.drawable.profile_pic);
-        listView=(ListView)findViewById(R.id.orgPriosInput);
-        textView=(TextView)findViewById(R.id.textViewProg);
-        String prioStr = emp.getPriorities();
-        ArrayList<String> listItem = new ArrayList<String>(Arrays.asList(prioStr.split(",")));
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, listItem);
-        listView.setAdapter(adapter);
     }
 }

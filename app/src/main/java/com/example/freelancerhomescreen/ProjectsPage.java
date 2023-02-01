@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class ProjectsPage extends AppCompatActivity {
     ListView listView;
-    TextView projName;
+    TextView addNP;
     ArrayList<Projects> listItem;
     private final String TAG = "ProjectsPage";
 
@@ -24,7 +24,15 @@ public class ProjectsPage extends AppCompatActivity {
         setContentView(R.layout.activity_projects);
         DatabaseHandler db = new DatabaseHandler(this);
         listView = (ListView) findViewById(R.id.ProjectListView);
+        addNP = findViewById(R.id.addNewProject);
+        addNP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         listItem = db.getAllProjects(1);
+        //todo get userid from sharedPrefs
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
