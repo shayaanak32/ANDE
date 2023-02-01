@@ -36,6 +36,7 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
     private static final String TABLE_USERS = "Users";
     private static final String KEY_ROLE = "role";
     private static final String KEY_IDENTITY = "identity_id";
+    private static final String KEY_PFP = "profile_pic";
 
     private static final String TAG = "DatabaseHandler";
 
@@ -55,7 +56,8 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
                 + KEY_NAME + " TEXT NOT NULL,"
                 + KEY_DESCRIPTION + " TEXT NOT NULL,"
                 + KEY_PRIORITIES + " TEXT DEFAULT \"start,\" NOT NULL, "
-                + KEY_UEN + " TEXT NOT NULL"
+                + KEY_UEN + " TEXT NOT NULL, "
+                + KEY_PFP + " TEXT"
                 + ");";
         String CREATE_FREELANCERS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_FREELANCERS + "("
                 + "freelancerId INTEGER PRIMARY KEY AUTOINCREMENT ,"
@@ -63,7 +65,8 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
                 + KEY_EMAIL + " TEXT NOT NULL,"
                 + KEY_PASSWORD + " TEXT NOT NULL,"
                 + KEY_DESCRIPTION + " TEXT NOT NULL, "
-                + KEY_YOUR_SKILLS + " TEXT NOT NULL"
+                + KEY_YOUR_SKILLS + " TEXT NOT NULL, "
+                + KEY_PFP + " TEXT"
                 + ");";
         String CREATE_PROJECTS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_PROJECTS + "("
                 + KEY_PROJECTID+" INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -179,10 +182,11 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         // return contact
         return contact;
     }
-    public void addFreelancers(Freelancer freelancer) {
-        SQLiteDatabase db = this.getWritableDatabase();
+//    public void addFreelancers(Freelancer freelancer) {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//    }
 
-    public void addFreelancer(String name,  String email, String password, String description, String skills) {
+    public void addFreelancer(String name,  String email, String password, String description, String skills, String profilePic) {
         ContentValues values = new ContentValues();
         Log.i("Info", "Setting values...");
         values.put(KEY_NAME, name);
@@ -190,6 +194,7 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         values.put(KEY_PASSWORD, password);
         values.put(KEY_DESCRIPTION, description);
         values.put(KEY_YOUR_SKILLS, skills);
+        values.put(KEY_PFP, profilePic);
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
         db.insert(TABLE_FREELANCERS, null, values);
@@ -223,7 +228,7 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         return freelancerList;
     }
 
-    public void addEmployer(String companyName, String priorities, String description, String empEmail, String empPassword, String uen) {
+    public void addEmployer(String companyName, String priorities, String description, String empEmail, String empPassword, String uen, String profilePic) {
         ContentValues values = new ContentValues();
         Log.i("Info", "Setting values...");
         values.put(KEY_EMAIL, empEmail);
@@ -232,6 +237,7 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         values.put(KEY_DESCRIPTION, description);
         values.put(KEY_PRIORITIES, priorities);
         values.put(KEY_UEN, uen);
+        values.put(KEY_PFP, profilePic);
         Log.d("Inputting values:", empEmail + empPassword + companyName + description + priorities + uen);
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
@@ -341,12 +347,18 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         boolean exists = cursor.moveToFirst();
-        Log.d("Record Exists", Boolean.toString(exists));
+        Users u;
+
+        if (cursor.getCount() != 0) {
+            Log.d("Record Exists", Boolean.toString(exists));
 
 
-        Users u = new Users(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), Integer.parseInt(cursor.getString(2)), cursor.getString(3),
-                (cursor.getString(4)), cursor.getString(5));
+            u = new Users(Integer.parseInt(cursor.getString(0)),
+                    cursor.getString(1), Integer.parseInt(cursor.getString(2)), cursor.getString(3),
+                    (cursor.getString(4)), cursor.getString(5));
+        } else {
+            u = null;
+        }
 
 
         cursor.close();
