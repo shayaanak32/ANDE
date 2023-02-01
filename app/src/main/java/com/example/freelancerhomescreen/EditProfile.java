@@ -35,12 +35,13 @@ public class EditProfile extends AppCompatActivity {
     TextView textView;
     private static final int PICK_IMAGE_REQUEST = 1;
     private static final int CROP_IMAGE_REQUEST = 2;
-//    String[] listItem;
+    private static final String TAG = "EditProfile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+
         DatabaseHandler db = new DatabaseHandler(this);
         CircleImageView pfp = findViewById(R.id.profile_image);
         pfp.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +75,7 @@ public class EditProfile extends AppCompatActivity {
 
                 // Notify the adapter of the change
                 adapter.notifyDataSetChanged();
-                Log.d("this works?no way", adapter.getCount()+"");
+
             }
         });
 
