@@ -1,4 +1,7 @@
 package com.example.freelancerhomescreen;
+import static android.database.DatabaseUtils.dumpCursor;
+import static android.database.DatabaseUtils.dumpCursorToString;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -123,6 +126,21 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         // return contact
         return contact;
     }
+    // code to get the single contact
+    Freelancer getFreelancer(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_FREELANCERS, new String[] { KEY_NAME,
+                        KEY_DESCRIPTION },  "freelancerId =?",
+                new String[] { String.valueOf(id) }, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        Freelancer contact = new Freelancer(cursor.getString(0) ,
+                cursor.getString(1));
+        // return contact
+        return contact;
+    }
     public void addFreelancers(Freelancer freelancer) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -177,12 +195,16 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
+        String temp = dumpCursorToString(cursor);
+        Log.d(TAG, temp);
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
                 Employer contact = new Employer();
+                contact.setEmployerID(cursor.getInt(0));
                 contact.setEmpEmail(cursor.getString(1));
                 contact.setCompanyName(cursor.getString(3));
+                contact.setPriorities(cursor.getString(5));
                 contact.setDescription(cursor.getString(4));
                 // Adding contact to list
                 contactList.add(contact);
@@ -282,24 +304,4 @@ public class DatabaseHandler  extends SQLiteOpenHelper {
         return db.update(TABLE_PROJECTS, values, "projectID = ?",
                 new String[]{String.valueOf(p.getProjectID())});
     }
-
-
-//    // Deleting single contact
-//    public void deleteContact(Contact contact) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        db.delete(TABLE_CONTACTS, KEY_ID + " = ?",
-//                new String[] { String.valueOf(contact.getID()) });
-//        db.close();
-//    }
-//
-//    // Getting contacts Count
-//    public int getContactsCount() {
-//        String countQuery = "SELECT  * FROM " + TABLE_CONTACTS;
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        Cursor cursor = db.rawQuery(countQuery, null);
-//        cursor.close();
-//
-//        // return count
-//        return cursor.getCount();
-//    }
 }

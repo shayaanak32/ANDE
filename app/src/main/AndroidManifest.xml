@@ -16,13 +16,53 @@
         android:theme="@style/Theme.FreelancerHomeScreen"
         tools:targetApi="31">
         <activity
+            android:name=".Register"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".RegisterCompanyBioDetails"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterBioDetails"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterCompanyDetails"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterFreelancer"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterEmployer"
+            android:exported="false" />
+        <activity
+            android:name=".EmployerProfile"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".FreelancerProfile"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".AddProject"
             android:exported="false"
             android:windowSoftInputMode="adjustNothing">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
         </activity>
         <activity
             android:name=".ProjectsListView"
@@ -38,8 +78,6 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
-
         </activity>
         <activity
             android:name=".SinglePostLayout"
@@ -197,28 +235,19 @@
         </activity>
         <activity
             android:name=".ProjectsPage"
-            android:exported="true">
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".CreateTables"
-            android:exported="true">
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

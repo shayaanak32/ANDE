@@ -23,7 +23,7 @@ public class FirebaseMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_freelancer_profile);
         //basicReadWrite();
         BottomNavigationView bv = findViewById(R.id.bottomNavigationView);
         bv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -60,7 +60,7 @@ public class FirebaseMainActivity extends AppCompatActivity {
 //        LinearLayout experienceLinearLayout = (LinearLayout) findViewById(R.id.experienceLinearLayout);
 //        LinearLayout projectsLinearLayout = (LinearLayout) findViewById(R.id.projectsLinearLayout);
 //        LinearLayout skillsLinearLayout = (LinearLayout) findViewById(R.id.settingsLinearLayout);
-        Button skillsBtn = (Button) findViewById(R.id.skillsButton);
+//        Button skillsBtn = (Button) findViewById(R.id.skillsButton);
         experienceCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -164,15 +164,15 @@ public class FirebaseMainActivity extends AppCompatActivity {
             }
         });
 
-        skillsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("Skills Card Clicked", "Clicked");
-                ct.openSkills();
-                Intent i = new Intent(FirebaseMainActivity.this, SkillsPage.class);
-                startActivity(i);
-            }
-        });
+//        skillsBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.d("Skills Card Clicked", "Clicked");
+//                ct.openSkills();
+//                Intent i = new Intent(FirebaseMainActivity.this, SkillsPage.class);
+//                startActivity(i);
+//            }
+//        });
     }
 
 
