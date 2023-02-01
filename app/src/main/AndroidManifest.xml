@@ -16,6 +16,15 @@
         android:theme="@style/Theme.FreelancerHomeScreen"
         tools:targetApi="31">
         <activity
+            android:name=".AddProject"
+            android:exported="false"
+            android:windowSoftInputMode="adjustNothing">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+
+        </activity>
+        <activity
             android:name=".ProjectsListView"
             android:exported="false">
             <meta-data
@@ -23,17 +32,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".UpdateProject"
-            android:windowSoftInputMode="adjustNothing"
-            android:exported="true">
+            android:name=".EditProject"
+            android:exported="false"
+            android:windowSoftInputMode="adjustNothing">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity
             android:name=".SinglePostLayout"
@@ -191,12 +197,15 @@
         </activity>
         <activity
             android:name=".ProjectsPage"
-            android:exported="false">
+            android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".CreateTables"
