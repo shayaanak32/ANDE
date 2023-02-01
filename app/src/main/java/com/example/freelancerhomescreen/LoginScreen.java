@@ -31,17 +31,17 @@ private final String RoleID = "RoleID";
         //CreateTables ct = new CreateTables(this);
         if (appStarts == 0) {
             Log.d("About to Insert Data", "App Starts is 0");
-            db.addUser("test", 1, "email@gmail.com", "password", "test", 1);
-            db.addUser("John Smith", 1, "johnsmith@gmail.com", "hashpassword1", "Description1", 1);
-            db.addUser("Jane Doe", 1, "janedoe@gmail.com", "hashpassword2", "Description2", 2);
-            db.addUser("Bob Johnson", 1, "bobjohnson@gmail.com", "123", "Description3", 2);
-            db.addUser("Emily Davis", 2, "emilydavis@gmail.com", "1234567890", "Description4", 1);
-            db.addUser("Michael Brown", 2, "michaelbrown@gmail.com", "asdfghjkl", "Description5", 2);
-            db.addUser("Ashley Taylor", 2, "ashleytaylor@gmail.com", "hashpassword6", "Description6", 3);
+            db.addUser("test", 1, "email@gmail.com", "password",  1);
+            db.addUser("John Smith", 1, "johnsmith@gmail.com", "hashpassword1",  1);
+            db.addUser("Jane Doe", 1, "janedoe@gmail.com", "hashpassword2",  2);
+            db.addUser("Bob Johnson", 1, "bobjohnson@gmail.com", "123",  2);
+            db.addUser("Emily Davis", 2, "emilydavis@gmail.com", "1234567890",  1);
+            db.addUser("Michael Brown", 2, "michaelbrown@gmail.com", "asdfghjkl",  2);
+            db.addUser("Ashley Taylor", 2, "ashleytaylor@gmail.com", "hashpassword6",  3);
 
-            db.addEmployers("Test Thing Company", "Programmers, Software Engineers", "A fun tech company", "testing@testCompany.gov.sg", "12345", "T123456789");
-            db.addEmployers("Company Too", "Coders, Interns", "Another boring company", "com2@gmail.com", "asdfg", "T0001112");
-            db.addEmployers("Company 3", "Coders, Internvvs", "Another bland company", "com3@gmail.com", "asdfrffg", "T3001112");
+            db.addEmployer("Test Thing Company", "Programmers, Software Engineers", "A fun tech company", "testing@testCompany.gov.sg", "12345", "T123456789");
+            db.addEmployer("Company Too", "Coders, Interns", "Another boring company", "com2@gmail.com", "asdfg", "T0001112");
+            db.addEmployer("Company 3", "Coders, Internvvs", "Another bland company", "com3@gmail.com", "asdfrffg", "T3001112");
 
             db.addFreelancer("Emily Davis", "emilydavis@gmail.com", "123", "Computing and stuff", "Java, C++, NodeJS");
             db.addFreelancer("Michael Brown", "michaelbrown@gmail.com", "asdfghjkl", "More Computing and More Computing", "Java, NodeJS");
