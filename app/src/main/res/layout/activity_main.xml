@@ -218,7 +218,6 @@
                 app:cardElevation="2dp"
                 android:id="@+id/skillsCard"
                 android:clickable="true"
-                android:onClick="onClick"
                 >
 
                 <LinearLayout
@@ -333,19 +332,7 @@
 
         </GridLayout>
 
-        <Button
-            android:id="@+id/skillsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Skills"
-          />
 
-        <Button
-            android:id="@+id/experienceBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button"
-            />
 
 
     </LinearLayout>

@@ -80,6 +80,7 @@ public class CertificationAdapter extends RecyclerView.Adapter<CertificationAdap
             endDate = itemView.findViewById(R.id.dateOfCompletion);
 //            description = itemView.findViewById(R.id.description);
             editBtn = itemView.findViewById(R.id.certEditBtn);
+
             editBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

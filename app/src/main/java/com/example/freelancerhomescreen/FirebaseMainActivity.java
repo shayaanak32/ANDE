@@ -3,7 +3,6 @@ package com.example.freelancerhomescreen;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -65,7 +64,9 @@ public class FirebaseMainActivity extends AppCompatActivity {
 //        LinearLayout experienceLinearLayout = (LinearLayout) findViewById(R.id.experienceLinearLayout);
 //        LinearLayout projectsLinearLayout = (LinearLayout) findViewById(R.id.projectsLinearLayout);
 //        LinearLayout skillsLinearLayout = (LinearLayout) findViewById(R.id.settingsLinearLayout);
-        Button skillsBtn = (Button) findViewById(R.id.skillsButton);
+
+
+
         experienceCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -169,15 +170,7 @@ public class FirebaseMainActivity extends AppCompatActivity {
             }
         });
 
-        skillsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("Skills Card Clicked", "Clicked");
-                ct.openSkills();
-                Intent i = new Intent(FirebaseMainActivity.this, SkillsPage.class);
-                startActivity(i);
-            }
-        });
+
     }
 
 
