@@ -109,9 +109,6 @@ private final String RoleID = "RoleID";
                 Users u = dbHandler.checkUser(email, password);
                 boolean check = !(u == null);
                 if (check) {
-//        prefs = getSharedPreferences(APP_STARTS, MODE_PRIVATE);
-//        SharedPreferences.Editor editor = prefs.edit();
-//        editor.putInt("AppStarts",0);
                     int role = u.getRole();
                     int user_id = u.getUser_id();
                     int identityId;

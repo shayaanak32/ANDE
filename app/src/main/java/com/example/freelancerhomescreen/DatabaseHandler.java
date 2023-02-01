@@ -41,6 +41,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String TABLE_USERS = "Users";
     private static final String KEY_ROLE = "role";
     private static final String KEY_COMPANYNAME = "company_name";
+    private static final String KEY_IDENTITY = "identity_id";
 
     private static final String TAG = "DatabaseHandler";
 
@@ -206,6 +207,30 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // return contact
         return contact;
     }
+//    public void addFreelancers(Freelancer freelancer) {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//
+//        ContentValues values = new ContentValues();
+//        values.put(KEY_NAME, freelancer.getName()); // Contact Name
+//        values.put(KEY_DESCRIPTION, freelancer.getDescription()); // Contact Phone
+//        values.put(KEY_EMAIL, freelancer.getEmail());
+//        values.put(KEY_PASSWORD, freelancer.getHashPassword());
+//        values.put(KEY_YOUR_SKILLS, freelancer.getSkills());
+//
+//        // Contact Phone
+//
+//        // Inserting Row
+//        db.insert(TABLE_FREELANCERS, null, values);
+//        //2nd argument is String containing nullColumnHack
+//
+//        // Closing database connection
+//    }
+    // code to get the single contact
+    Freelancer getFreelancer(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_FREELANCERS, new String[] { KEY_NAME,
+                        KEY_DESCRIPTION },  "freelancerId =?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
@@ -217,19 +242,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
     public void addFreelancers(Freelancer freelancer) {
         SQLiteDatabase db = this.getWritableDatabase();
+
+    public void addFreelancer(String name,  String email, String password, String description, String skills) {
         ContentValues values = new ContentValues();
-        values.put(KEY_NAME, freelancer.getName()); // Contact Name
-        values.put(KEY_DESCRIPTION, freelancer.getDescription()); // Contact Phone
-        values.put(KEY_PASSWORD, freelancer.getHashPassword());
-        values.put(KEY_YOUR_SKILLS, freelancer.getSkills());
-
-        // Contact Phone
-
+        Log.i("Info", "Setting values...");
+        values.put(KEY_NAME, name);
+        values.put(KEY_EMAIL, email);
+        values.put(KEY_PASSWORD, password);
+        values.put(KEY_DESCRIPTION, description);
+        values.put(KEY_YOUR_SKILLS, skills);
+        SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
         db.insert(TABLE_FREELANCERS, null, values);
-        //2nd argument is String containing nullColumnHack
-
-        // Closing database connection
+        Log.i("Info", "User Added");
+        db.close(); // Closing database connection
     }
 
     public ArrayList<Freelancer> getAllFreelancer() {
@@ -259,9 +285,26 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return freelancerList;
     }
 
-    //    // code to get all contacts in a list view
-    public ArrayList<Employer> getAllEmployers() {
-        ArrayList<Employer> contactList = new ArrayList<Employer>();
+    public void addEmployer(String companyName, String priorities, String description, String empEmail, String empPassword, String uen) {
+        ContentValues values = new ContentValues();
+        Log.i("Info", "Setting values...");
+        values.put(KEY_EMAIL, empEmail);
+        values.put(KEY_PASSWORD, empPassword);
+        values.put(KEY_NAME, companyName);
+        values.put(KEY_DESCRIPTION, description);
+        values.put(KEY_PRIORITIES, priorities);
+        values.put(KEY_UEN, uen);
+        Log.d("Inputting values:", empEmail + empPassword + companyName + description + priorities + uen);
+        SQLiteDatabase db = this.getWritableDatabase();
+        // Inserting Row
+        db.insert(TABLE_EMPLOYERS, null, values);
+        Log.i("Info", "User Added");
+        db.close(); // Closing database connection
+    }
+
+//    // code to get all contacts in a list view
+    public ArrayList <Employer> getAllEmployers() {
+        ArrayList <Employer> contactList = new ArrayList<Employer>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_EMPLOYERS;
 
@@ -380,7 +423,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return u;
     }
 
-    public void addUser(String uName, int uRole, String uEmail, String uPassword, String uDescription, int uIdentity) {
+    public void addUser(String uName, int uRole, String uEmail, String uPassword, int uIdentity) {
         ContentValues values = new ContentValues();
         Log.i("Info", "Setting values...");
         values.put(KEY_NAME, uName);
@@ -388,6 +431,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_EMAIL, uEmail);
         values.put(KEY_PASSWORD, uPassword);
         //values.put(KEY_DESCRIPTION, uDescription);
+//        values.put(KEY_DESCRIPTION, uDescription);
         values.put(KEY_IDENTITY, uIdentity);
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
