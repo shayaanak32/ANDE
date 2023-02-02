@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OtherSkillsPage extends AppCompatActivity {
-
+    private String TAG ="skillName";
     //public List<RecyclerSkillsItem> skillsList;
     public RecyclerView recyclerView;
     //ArrayList<RecyclerSkillsItem> items = new ArrayList<RecyclerSkillsItem>();
@@ -45,7 +45,7 @@ public class OtherSkillsPage extends AppCompatActivity {
         adapter = new SkillsAdapter(mSkills);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         //Set Layout Manager to RecyclerView
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         recyclerView.setAdapter(adapter);
     }
 
@@ -56,9 +56,12 @@ public class OtherSkillsPage extends AppCompatActivity {
         Freelancer f = db.getFreelancers(profileID);
         boolean isNull = (f == null);
         String[] skillsList = f.getIndividualSkill(f.getSkills());
-        if(skillsList.length>1){
+        Log.d(TAG, "bindContactData: "+skillsList.length);
+        if(skillsList.length>=1){
             for (int i =0;i<skillsList.length;i++) {
+
                 String name = skillsList[i];
+                Log.d("skillName",name);
                 mSkills.add(new RecyclerSkillsItem(name));
             }
         }

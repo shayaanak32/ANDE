@@ -13,6 +13,7 @@
         android:layout_marginHorizontal="10dp"
         android:background="@drawable/light_col_card"
         android:orientation="vertical"
+        android:id="@+id/indivExp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
