@@ -4,13 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 public class RegisterBioDetails extends AppCompatActivity implements View.OnClickListener {
 
-    EditText bioInput;
+    EditText bioInput, pwInput;
     String name, email;
 
     @Override
@@ -19,7 +20,7 @@ public class RegisterBioDetails extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_register_bio_details);
 
         bioInput = findViewById(R.id.bioInput);
-
+        pwInput = findViewById(R.id.userPwInput);
         email=getIntent().getExtras().getString("email");
         name=getIntent().getExtras().getString("name");
     }
@@ -29,16 +30,20 @@ public class RegisterBioDetails extends AppCompatActivity implements View.OnClic
         Intent i;
         switch(view.getId()){
             case R.id.nextBtn:
-                if(String.valueOf(bioInput.getText()).isEmpty()){
+                if(String.valueOf(bioInput.getText()).isEmpty()||String.valueOf(pwInput.getText()).isEmpty()){
                     Toast.makeText(this, "Fill in all info", Toast.LENGTH_SHORT).show();
                 }else{
-                    i = new Intent(this, Register.class);
                     String bio = String.valueOf(bioInput.getText());
-                    i.putExtra("status", "freelancer");
-                    i.putExtra("email", email);
-                    i.putExtra("name", name);
-                    i.putExtra("bio", bio);
+                    String pw =String.valueOf(pwInput.getText());
+                    DatabaseHandler db = new DatabaseHandler(this);
+                    db.addFreelancer(name,email, pw, bio, "","");
+                    int id = db.getFreelancerUserIdByEmail(email);
+                    Log.d("popopopopopo11111",id+"");
+                    db.addUser(name,2,email,pw,id);
+                    Toast.makeText(this, "Successful Registration", Toast.LENGTH_SHORT).show();
+                    i = new Intent(this, LoginScreen.class);
                     startActivity(i);
+                    finish();
                 }
                 break;
         }

@@ -72,7 +72,7 @@ public class FreelancerOwnProfile extends AppCompatActivity implements View.OnCl
         switch(view.getId()){
             case R.id.certificationsCard:
                 i = new Intent(getApplicationContext(),CertificationPage.class);
-
+                i.putExtra("profileid", userId);
                 break;
             case R.id.skillsCard:
                 i = new Intent(getApplicationContext(),SkillsPage.class);
@@ -82,12 +82,12 @@ public class FreelancerOwnProfile extends AppCompatActivity implements View.OnCl
             case R.id.experienceCard:
                 i = new Intent(getApplicationContext(),ExperienceMainActivity.class);
 //                startActivity(i);
-
+                i.putExtra("profileid", userId);
                 break;
             case R.id.projectsCard:
                 i = new Intent(getApplicationContext(),ProjectsPage.class);
 //                startActivity(i);
-
+                i.putExtra("profileid", userId);
                 break;
         }
         startActivity(i);

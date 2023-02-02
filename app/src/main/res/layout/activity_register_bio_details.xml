@@ -48,6 +48,25 @@
                 android:textColorHint="#675FC8"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginBottom="25dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Step 4: Enter your password"
+                android:textSize="24sp"
+                android:layout_marginHorizontal="10dp"
+                android:textColor="#1B128A"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/userPwInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:textSize="28sp"
+                android:textColorHint="#675FC8"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="25dp"/>
 
         </LinearLayout>
 
@@ -65,7 +84,7 @@
         android:layout_gravity="center"
         android:textStyle="bold"
         android:backgroundTint="#747DBD"
-        android:layout_marginTop="259dp"
+        android:layout_marginTop="159dp"
         android:onClick="onClick"/>
 
 </LinearLayout>
