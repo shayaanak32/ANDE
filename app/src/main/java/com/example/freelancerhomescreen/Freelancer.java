@@ -12,7 +12,8 @@ public class Freelancer {
     private int id;
     private String skills;
     private String[] individualSkill;
-    private String profilePic;
+    private String profileImg;
+
 
     public Freelancer(int id, String name, String description){
         this.id = id;
@@ -24,7 +25,7 @@ public class Freelancer {
         this.name = name;
         this.description = description;
         this.skills = skills;
-        this.profilePic = profilePic;
+        this.profileImg = profilePic;
     }
     public Freelancer(String name, String description){
         this.name=name;
@@ -58,7 +59,7 @@ public class Freelancer {
         this.hashPassword = hashPassword;
         this.description = description;
         this.listOfSkills = listOfSkills;
-        this.profilePic = pfp;
+        this.profileImg = pfp;
     }
 
     public String getListOfSkills() {
@@ -124,5 +125,12 @@ public class Freelancer {
 
     public String getSkills(){
         return skills;
+    }
+    public String getProfileImg() {
+        return profileImg;
+    }
+
+    public void setProfileImg(String profileImg) {
+        this.profileImg = profileImg;
     }
 }
