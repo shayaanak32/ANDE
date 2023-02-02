@@ -20,6 +20,12 @@ public class Freelancer {
         this.description = description;
     }
 
+    public Freelancer(String name, String description,String skills, String profilePic){
+        this.name = name;
+        this.description = description;
+        this.skills = skills;
+        this.profilePic = profilePic;
+    }
     public Freelancer(String name, String description){
         this.name=name;
         this.description = description;
@@ -105,7 +111,6 @@ public class Freelancer {
     }
 
     public String[] getIndividualSkill(String skills) {
-        Log.d("of freelancer",skills);
         individualSkill = skills.split(",");
         for(int i =0; i<individualSkill.length;i++){
             Log.d("skill of freelancer", individualSkill[i]);

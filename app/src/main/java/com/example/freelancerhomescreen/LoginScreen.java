@@ -112,8 +112,8 @@ public class LoginScreen extends AppCompatActivity {
             public void onClick(View v) {
 //                String email = emailInput.getText().toString();
 //                String password = passwordInput.getText().toString();
-                String email = "emilydavis@gmail.com";
-                String password = "1234567890";
+                String email = "com2@gmail.com";
+                String password = "asdfg";
                 Log.d("email", email);
                 Log.d("password", password);
                 Users u = dbHandler.checkUser(email, password);

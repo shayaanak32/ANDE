@@ -22,6 +22,7 @@ public class OtherSkillsPage extends AppCompatActivity {
     //ArrayList<RecyclerSkillsItem> items = new ArrayList<RecyclerSkillsItem>();
     SkillsAdapter adapter;
     CreateTables ct = new CreateTables(this);
+    DatabaseHandler db = new DatabaseHandler(this);
     public ArrayList<RecyclerSkillsItem> mSkills = new ArrayList<RecyclerSkillsItem>();
     // in this page get the ID from the shared preferences!!
     int id = 1;
@@ -32,41 +33,6 @@ public class OtherSkillsPage extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_other_skills_page);
-        MaterialButton addSkill = (MaterialButton) findViewById(R.id.addSkillBtn);
-        EditText addSkillField = (EditText) findViewById(R.id.editTextSkill);
-        Log.d("is addSkill btn null?", Boolean.toString((addSkill == null)));
-        Log.d("is addSkillField null?", Boolean.toString((addSkillField == null)));
-
-
-        addSkill.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String addedSkill = addSkillField.getText().toString();
-
-                RecyclerSkillsItem s = new RecyclerSkillsItem(addedSkill);
-                int insertIndex = mSkills.size() - 1;
-                mSkills.add(insertIndex, s);
-                adapter.notifyItemInserted(insertIndex);
-                String textListSkills = "";
-                int counter = 0;
-                for (RecyclerSkillsItem rsi : mSkills) {
-                    if (counter != mSkills.size()) {
-                        String nameOfSkill = rsi.getName();
-                        if (counter == mSkills.size() - 1) {
-                            textListSkills += nameOfSkill;
-                        } else {
-                            textListSkills += nameOfSkill + ",";
-                            counter++;
-
-                        }
-                    }
-                }
-                ct.updateSkills(textListSkills, 1);
-
-
-            }
-        });
-
 
         // store recycler view in a variable
         recyclerView = (RecyclerView) findViewById(R.id.skillsRecyclerView);
@@ -85,14 +51,17 @@ public class OtherSkillsPage extends AppCompatActivity {
 
 
     private void bindContactData() {
-        ArrayList<Skills> skillsList = ct.getSkills(1);
-        boolean isNull = (skillsList == null);
-        Log.d("Null Check from Database", Boolean.toString(isNull));
-        for (Skills cn : skillsList) {
-            String name = cn.getName();
-            Log.d("Names ", name);
-
-            mSkills.add(new RecyclerSkillsItem(name));
+        Intent intent = getIntent();
+        int profileID = intent.getIntExtra("profileid",0);
+        Freelancer f = db.getFreelancers(profileID);
+        boolean isNull = (f == null);
+        String[] skillsList = f.getIndividualSkill(f.getSkills());
+        if(skillsList.length>1){
+            for (int i =0;i<skillsList.length;i++) {
+                String name = skillsList[i];
+                mSkills.add(new RecyclerSkillsItem(name));
+            }
         }
+
     }
 }

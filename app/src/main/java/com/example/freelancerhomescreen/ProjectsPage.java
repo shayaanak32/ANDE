@@ -28,7 +28,8 @@ public class ProjectsPage extends AppCompatActivity {
         addNP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent i = new Intent(getApplicationContext(), AddProject.class);
+                startActivity(i);
             }
         });
         listItem = db.getAllProjects(1);

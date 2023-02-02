@@ -89,4 +89,17 @@ public class Users {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "Users{" +
+                "user_id=" + user_id +
+                ", name='" + name + '\'' +
+                ", role=" + role +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", description='" + description + '\'' +
+                ", identityID=" + identityID +
+                '}';
+    }
 }

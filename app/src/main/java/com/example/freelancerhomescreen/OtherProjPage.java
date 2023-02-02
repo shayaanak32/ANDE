@@ -24,14 +24,9 @@ public class OtherProjPage extends AppCompatActivity {
         setContentView(R.layout.activity_other_proj_page);
         DatabaseHandler db = new DatabaseHandler(this);
         listView = (ListView) findViewById(R.id.ProjectListView);
-        addNP = findViewById(R.id.addNewProject);
-        addNP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-        listItem = db.getAllProjects(1);
+        Intent intent = getIntent();
+        int profileID = intent.getIntExtra("profileid",0);
+        listItem = db.getAllProjects(profileID);
         //todo get userid from sharedPrefs
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -1,6 +1,7 @@
 package com.example.freelancerhomescreen;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,6 +31,7 @@ public class ExperienceMainActivity extends AppCompatActivity implements Experie
         recyclerView = (RecyclerView) findViewById(R.id.experiences);
         bindContactData();
         setAdapter();
+
     }
 
     private void setAdapter() {
