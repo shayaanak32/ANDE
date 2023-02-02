@@ -17,8 +17,8 @@ import java.util.ArrayList;
 public class LoginScreen extends AppCompatActivity {
     private final String APP_STARTS = "NumberOfAppStarts";
     private final String USER_DETAILS = "UserDetails";
-    private final String IdentityID = "IdentityID";
-    private final String UserID = "UserID";
+    private final String IdentityID = "Identity ID";
+    private final String UserID = "User ID";
     private final String RoleID = "RoleID";
     SharedPreferences userDetailsPref;
     SharedPreferences freelancerUserPref;
@@ -110,14 +110,16 @@ public class LoginScreen extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = emailInput.getText().toString();
-                String password = passwordInput.getText().toString();
-//                String email = "com2@gmail.com";
-//                String password = "asdfg";
+//                String email = emailInput.getText().toString();
+//                String password = passwordInput.getText().toString();
+                String email = "emilydavis@gmail.com";
+                String password = "1234567890";
                 Log.d("email", email);
                 Log.d("password", password);
                 Users u = dbHandler.checkUser(email, password);
                 boolean check = !(u == null);
+                Log.d(TAG, u.toString());
+                Log.d(TAG,"PPPPPPP"+u.getIdentityID());
                 Log.d(TAG, "PUTANG INA MO");
                 Log.d(TAG, check + "");
                 if (check) {
@@ -150,11 +152,13 @@ public class LoginScreen extends AppCompatActivity {
                         WelcomeScreen.welcomeScreenActivity.finish();
 
                     } else if (role == 2) {
+                        Log.d(TAG,"here");
+                        Log.d(TAG, u.getIdentityID()+"");
                         freelancerUserPref = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
                         Log.d("Identity ID", Integer.toString(u.getIdentityID()));
                         Log.d("User ID", Integer.toString(u.getUser_id()));
                         Log.d("RoleID", Integer.toString(u.getRole()));
-                        SharedPreferences.Editor editor2 = userDetailsPref.edit();
+                        SharedPreferences.Editor editor2 = freelancerUserPref.edit();
                         editor2.putString(IdentityID, Integer.toString(u.getIdentityID()));
                         editor2.putString(UserID, Integer.toString(u.getUser_id()));
                         editor2.putString(RoleID, Integer.toString(u.getRole()));
