@@ -35,13 +35,13 @@ public class FeedPage extends AppCompatActivity {
             case 1:
                 ArrayList<Freelancer> fl = db.getAllFreelancer();
                 for(Freelancer f : fl){
-                    freelancers.add(new Recycleritem(f.getId(),f.getName(), f.getIndividualSkill(f.getSkills()), f.getDescription()));
+                    freelancers.add(new Recycleritem(f.getId(),f.getName(), f.getIndividualSkill(f.getSkills()), f.getDescription(), f.getProfileImg()));
                 }
                 break;
             case 2:
                 ArrayList<Employer> emp = db.getAllEmployers();
                 for(Employer f : emp){
-                    freelancers.add(new Recycleritem(f.getEmployerID(), f.getCompanyName(), f.getBrokenPriorities(f.getPriorities()), f.getDescription()));
+                    freelancers.add(new Recycleritem(f.getEmployerID(), f.getCompanyName(), f.getBrokenPriorities(f.getPriorities()), f.getDescription(),f.getProfileImg()));
                 }
                 break;
         }

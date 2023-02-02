@@ -35,7 +35,7 @@ public class OtherProjPage extends AppCompatActivity {
                 Log.d(TAG, project_id+"");
 
                 // set extra, so when opening new page can get project id data
-                Intent intent = new Intent(getApplicationContext(), EditProject.class);
+                Intent intent = new Intent(getApplicationContext(), ViewProject.class);
                 intent.putExtra("project_id", project_id);
 
                 startActivity(intent);
