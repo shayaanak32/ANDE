@@ -93,8 +93,11 @@ public class CalendarViewActivity extends AppCompatActivity implements CalendarA
         Bundle getData = getIntent().getExtras();
         boolean startDateClicked;
         boolean endDateClicked;
+        boolean fromAddExperience;
         boolean fromEditCertifications;
         boolean fromEditExperience;
+        boolean fromAddCertification;
+        boolean fromEditProject;
         if (!dayText.equals("")) {
             String selectedMonthYear = monthYearFromDate(selectedDate);
 //            String message = "Selected Date " + dayText + " " + monthYearFromDate(selectedDate);
@@ -104,35 +107,50 @@ public class CalendarViewActivity extends AppCompatActivity implements CalendarA
                 endDateClicked = getData.getBoolean("endDateClicked");
                 fromEditCertifications = getData.getBoolean("editCertifications");
                 fromEditExperience = getData.getBoolean("fromEditExperience");
-
+                fromAddCertification = getData.getBoolean("fromAddCertification");
+                fromEditProject = getData.getBoolean("fromEditProject");
+                fromAddExperience = getData.getBoolean("fromAddExperience");
                 Log.d("From Edit Certifications", Boolean.toString(fromEditCertifications));
 
                 if (startDateClicked) {
-                    Intent i = new Intent(CalendarViewActivity.this, AddExperience.class);
-                    Log.d("selectedMonthYear", selectedMonthYear);
-                    i.putExtra("startDateChosen", selectedMonthYear);
-                    i.putExtra("startDateClicked", startDateClicked);
-                    i.putExtra("name",getData.getString("name"));
-                    i.putExtra("link",getData.getString("link"));
-                    i.putExtra("endDate",getData.getString("endDate"));
-                    i.putExtra("description",getData.getString("description"));
-                    i.putExtra("skills",getData.getString("skills"));
-                    i.putExtra("fromCalendarViewActivity",true);
+                    if(fromAddExperience){
+                        Intent i = new Intent(CalendarViewActivity.this, AddExperience.class);
+                        Log.d("selectedMonthYear", selectedMonthYear);
+                        i.putExtra("startDateChosen", selectedMonthYear);
+                        i.putExtra("startDateClicked", startDateClicked);
+                        i.putExtra("name", getData.getString("name"));
+                        i.putExtra("link", getData.getString("link"));
+                        i.putExtra("endDate", getData.getString("endDate"));
+                        i.putExtra("description", getData.getString("description"));
+                        i.putExtra("skills", getData.getString("skills"));
+                        i.putExtra("fromCalendarViewActivity", true);
 
-                    startActivity(i);
+                        startActivity(i);
+                    }
 
-
-                    if (fromEditCertifications) {
-                        Log.d("Calendar View Activity -->","Intent has Come from EditCertifications (select date)");
+                    if (fromAddCertification) {
+                        Log.d("Calendar View Activity -->", "Intent has Come from EditCertifications (select date)");
                         Intent i2 = new Intent(CalendarViewActivity.this, EditCertificationActivity.class);
                         i2.putExtra("startDateChosen", selectedMonthYear);
                         i2.putExtra("startDateClicked", startDateClicked);
-                        i2.putExtra("name",getData.getString("name"));
-                        i2.putExtra("link",getData.getString("link"));
-                        i2.putExtra("endDate",getData.getString("endDate"));
-                        i2.putExtra("description",getData.getString("description"));
-                        i2.putExtra("skills",getData.getString("skills"));
-                        i2.putExtra("fromCalendarViewActivity",true);
+                        i2.putExtra("name", getData.getString("name"));
+                        i2.putExtra("link", getData.getString("link"));
+                        i2.putExtra("completionDate", getData.getString("endDate"));
+                        i2.putExtra("description", getData.getString("description"));
+                        i2.putExtra("skills", getData.getString("skills"));
+                        i2.putExtra("fromCalendarViewActivity", true);
+                    }
+                    if (fromEditCertifications) {
+                        Log.d("Calendar View Activity -->", "Intent has Come from EditCertifications (select date)");
+                        Intent i2 = new Intent(CalendarViewActivity.this, EditCertificationActivity.class);
+                        i2.putExtra("startDateChosen", selectedMonthYear);
+                        i2.putExtra("startDateClicked", startDateClicked);
+                        i2.putExtra("name", getData.getString("name"));
+                        i2.putExtra("link", getData.getString("link"));
+                        i2.putExtra("endDate", getData.getString("endDate"));
+                        i2.putExtra("description", getData.getString("description"));
+                        i2.putExtra("skills", getData.getString("skills"));
+                        i2.putExtra("fromCalendarViewActivity", true);
 //                        i.putExtra("name", name);
 //                        i.putExtra("link", link);
 //                        i.putExtra("endDate", endDate);
@@ -150,15 +168,33 @@ public class CalendarViewActivity extends AppCompatActivity implements CalendarA
                         i3.putExtra("startDateClicked", startDateClicked);
                         startActivity(i3);
                     }
+                    if (fromEditProject) {
+                        Log.d("Calendar View Activity--","From Edit Project");
+                        Intent i3 = new Intent(CalendarViewActivity.this, EditProject.class);
+                        i3.putExtra("pN", getData.getString("pN"));
+                        i3.putExtra("pSD", getData.getString("pSD"));
+                        i3.putExtra("pD", getData.getString("pD"));
+                        i3.putExtra("pED", getData.getString("pED"));
+                        i3.putExtra("pL", getData.getString("pL"));
+                        startActivity(i3);
+
+                    }
 
                 }
                 if (endDateClicked) {
-                    Intent i = new Intent(CalendarViewActivity.this, AddExperience.class);
-                    i.putExtra("endDateChosen", selectedMonthYear);
-                    i.putExtra("endDateClicked", endDateClicked);
-
-                    startActivity(i);
-
+//                    Intent i = new Intent(CalendarViewActivity.this, AddExperience.class);
+//                    i.putExtra("endDateChosen", selectedMonthYear);
+//                    i.putExtra("endDateClicked", endDateClicked);
+//
+//                    startActivity(i);
+                    if (fromEditProject) {
+                        Intent i = new Intent(CalendarViewActivity.this, AddCertification.class);
+                        i.putExtra("pN", getData.getString("pN"));
+                        i.putExtra("pSD", getData.getString("pSD"));
+                        i.putExtra("pD", getData.getString("pD"));
+                        i.putExtra("pED", getData.getString("pED"));
+                        i.putExtra("pL", getData.getString("pL"));
+                    }
                 }
             }
 

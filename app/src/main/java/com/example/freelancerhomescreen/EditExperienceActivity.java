@@ -90,16 +90,6 @@ public class EditExperienceActivity extends AppCompatActivity {
                 String startDate = startDatePickerUpd.getText().toString();
                 String endDate = endDatePickerUpd.getText().toString();
                 String description = descriptionFieldUpd.getText().toString();
-//                Log.d("experienceName", experienceName);
-//                Log.d("Name Check", Boolean.toString(experienceName != null && !experienceName.isEmpty()));
-//                Log.d("startDate", startDate);
-//                Log.d("Start Date Check", Boolean.toString(startDate != null && !startDate.isEmpty()));
-//                Log.d("endDate", endDate);
-//                Log.d("End Date Check", Boolean.toString(endDate != null && !endDate.isEmpty()));
-//                Log.d("companyName", companyName);
-//                Log.d("Company Name Check", Boolean.toString(companyName != null && !companyName.isEmpty()));
-//                Log.d("description", description);
-//                Log.d("Description Check", Boolean.toString(description != null && !description.isEmpty()));
 
 
                 if (experienceName != null && !experienceName.isEmpty() && startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty() && companyName != null && !companyName.isEmpty() && description != null && !description.isEmpty()) {

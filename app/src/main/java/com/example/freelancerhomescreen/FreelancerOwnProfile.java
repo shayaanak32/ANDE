@@ -25,13 +25,13 @@ public class FreelancerOwnProfile extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.activity_freelancer_own_profile);
         int profileID = 1;
         //todo: get from sharedPrefs
-        prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
-        int identity_id = prefs.getInt(IdentityID, 0);
-        int user_id = prefs.getInt(UserID, 0);
-        int role_id = prefs.getInt(RoleID, 0);
-        Log.d("FreelancerOwnProfile: identity_id", Integer.toString(identity_id));
-        Log.d("FreelancerOwnProfile: user_id", Integer.toString(user_id));
-        Log.d("FreelancerOwnProfile: role_id", Integer.toString(role_id));
+//        prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
+//        String identity_id = prefs.getString(IdentityID, "");
+//        String user_id = prefs.getString(UserID, "");
+//        String role_id = prefs.getString(RoleID, "");
+//        Log.d("FreelancerOwnProfile: identity_id", identity_id);
+//        Log.d("FreelancerOwnProfile: user_id", (user_id));
+//        Log.d("FreelancerOwnProfile: role_id", role_id);
 
         DatabaseHandler db = new DatabaseHandler(this);
         Freelancer fl = db.getFreelancer(profileID);
@@ -60,8 +60,8 @@ public class FreelancerOwnProfile extends AppCompatActivity implements View.OnCl
         //todo: get from sharedPrefs
         DatabaseHandler db = new DatabaseHandler(this);
         prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
-        int identity_id = prefs.getInt(IdentityID, 0);
-        Freelancer fl = db.getFreelancer(identity_id);
+        int userId = Integer.parseInt(prefs.getString("Identity ID","-1"));
+        Freelancer fl = db.getFreelancer(userId);
         freelancerName = findViewById(R.id.name);
         freelancerDescription = findViewById(R.id.desc);
         editBtn = findViewById(R.id.editFreelancer);

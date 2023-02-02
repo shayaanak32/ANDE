@@ -33,6 +33,7 @@ public class AddExperience extends AppCompatActivity {
     EditText editTextCompany;
     EditText descriptionField;
     MaterialButton addExperienceBtn;
+    boolean fromAddExperience;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,27 +48,16 @@ public class AddExperience extends AppCompatActivity {
         descriptionField = (EditText) findViewById(R.id.descriptionField);
         addExperienceBtn = (MaterialButton) findViewById(R.id.addExperienceButton);
 
-        if (savedInstanceState != null) {
-            Log.d("Saved Instance State is not null!","About to restore the data!");
-            String experienceName = savedInstanceState.getString("experience_name", "");
-            String startDate = savedInstanceState.getString("start_name", "");
-            String endDate = savedInstanceState.getString("end_name", "");
-            String companyName = savedInstanceState.getString("company_name", "");
-            String description = savedInstanceState.getString("description", "");
-            editTextExpName.setText(experienceName);
-            startDateField.setText(startDate);
-            endDateField.setText(endDate);
-            editTextCompany.setText(companyName);
-            descriptionField.setText(description);
 
-        }
         CreateTables ct = new CreateTables(this);
         startDateField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(AddExperience.this, CalendarViewActivity.class);
                 startDateClicked = true;
+
                 i.putExtra("startDateClicked", startDateClicked);
+                i.putExtra("fromAddExperience",true);
                 startActivity(i);
 
             }
@@ -108,7 +98,7 @@ public class AddExperience extends AppCompatActivity {
                 if (experienceName != null && !experienceName.isEmpty() && startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty() && companyName != null && !companyName.isEmpty() && description != null && !description.isEmpty()) {
                     Log.d("Form Status", "Fields Complete");
 
-                    Experience e = new Experience(experienceName, startDate, endDate, companyName, description,1);
+                    Experience e = new Experience(experienceName, startDate, endDate, companyName, description, 1);
                     ct.addExperience(e);
                     Intent i = new Intent(AddExperience.this, ExperienceMainActivity.class);
 

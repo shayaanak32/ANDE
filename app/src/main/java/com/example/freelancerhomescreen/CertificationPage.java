@@ -17,6 +17,7 @@ import java.util.List;
 
 public class CertificationPage extends AppCompatActivity implements CertificationRecyclerAdapterInterface {
 DatabaseHandler db = new DatabaseHandler(this);
+//MaterialButton addCertificationBtn;
 SharedPreferences prefs;
     private final String IdentityID = "IdentityID";
     private final String UserID = "UserID";
@@ -26,14 +27,25 @@ SharedPreferences prefs;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_certification_page);
         recyclerView = (RecyclerView) findViewById(R.id.currentCertifications);
+       MaterialButton addCertificationBtn = (MaterialButton) findViewById(R.id.addingCertificationsButton);
+        addCertificationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(CertificationPage.this, AddCertification.class);
+                startActivity(i);
+
+            }
+        });
         bindContactData();
         setAdapter();
+
+
     }
 
     public List<Certification> contactsList;
     public RecyclerView recyclerView;
-    CreateTables ct = new CreateTables(this);
     public ArrayList<CertificationRecyclerItem> mCertifications = new ArrayList<>();
+
 
 
     private void setAdapter() {
@@ -64,7 +76,6 @@ SharedPreferences prefs;
             mCertifications.add(new CertificationRecyclerItem(name, link, endDate, skills, description));
             index++;
         }
-
 
     }
 
