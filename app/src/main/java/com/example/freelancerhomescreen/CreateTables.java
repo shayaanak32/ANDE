@@ -652,17 +652,7 @@ public class CreateTables extends SQLiteOpenHelper {
         return skillList;
     }
 
-    // code to update the single contact
-    public int updateSkills(String skills, int id) {
-        SQLiteDatabase db = this.getWritableDatabase();
 
-        ContentValues values = new ContentValues();
-        values.put("skills", skills);
-
-        // updating row
-        return db.update(TABLE_FREELANCERS, values, "freelancerId = ?",
-                new String[]{String.valueOf(id)});
-    }
 
     // Deleting single contact
     public void deleteSkills(Skills skills) {

@@ -22,6 +22,7 @@ public class SkillsPage extends AppCompatActivity {
     //ArrayList<RecyclerSkillsItem> items = new ArrayList<RecyclerSkillsItem>();
     SkillsAdapter adapter;
     CreateTables ct = new CreateTables(this);
+    DatabaseHandler db = new DatabaseHandler(this);
     public ArrayList<RecyclerSkillsItem> mSkills = new ArrayList<RecyclerSkillsItem>();
     // in this page get the ID from the shared preferences!!
     int id = 1;
@@ -42,7 +43,7 @@ public class SkillsPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String addedSkill = addSkillField.getText().toString();
-
+                addSkillField.setText("");
                 RecyclerSkillsItem s = new RecyclerSkillsItem(addedSkill);
                 int insertIndex = mSkills.size() - 1;
                 mSkills.add(insertIndex, s);
@@ -61,7 +62,7 @@ public class SkillsPage extends AppCompatActivity {
                         }
                     }
                 }
-                ct.updateSkills(textListSkills, 1);
+                db.updateSkills(textListSkills, 1);
 
 
             }
@@ -77,7 +78,7 @@ public class SkillsPage extends AppCompatActivity {
     private void setAdapter() {
 
         adapter = new SkillsAdapter(mSkills);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(SkillsPage.this, RecyclerView.VERTICAL, false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         //Set Layout Manager to RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         recyclerView.setAdapter(adapter);
@@ -85,14 +86,19 @@ public class SkillsPage extends AppCompatActivity {
 
 
     private void bindContactData() {
-        ArrayList<Skills> skillsList = ct.getSkills(1);
-        boolean isNull = (skillsList == null);
-        Log.d("Null Check from Database", Boolean.toString(isNull));
-        for (Skills cn : skillsList) {
-            String name = cn.getName();
-            Log.d("Names ", name);
-
-            mSkills.add(new RecyclerSkillsItem(name));
+        Intent intent = getIntent();
+        int profileID = intent.getIntExtra("profileid",0);
+        Log.d("OIOIOI",profileID+"");
+        Freelancer f = db.getFreelancers(profileID);
+        boolean isNull = (f == null);
+        Log.d("POPOPOOPO", f.getSkills());
+        String[] skillsList = f.getIndividualSkill(f.getSkills());
+        if(skillsList.length>1){
+            for (int i =0;i<skillsList.length;i++) {
+                String name = skillsList[i];
+                mSkills.add(new RecyclerSkillsItem(name));
+            }
         }
+
     }
 }

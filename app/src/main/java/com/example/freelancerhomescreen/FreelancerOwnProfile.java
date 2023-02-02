@@ -3,6 +3,7 @@ package com.example.freelancerhomescreen;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,10 +19,12 @@ public class FreelancerOwnProfile extends AppCompatActivity implements View.OnCl
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_freelancer_own_profile);
-        int profileID = 1;
+        SharedPreferences prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
+        int userId = Integer.parseInt(prefs.getString("Identity ID","-1"));
+        Log.d("contents own profile", userId+"");
         //todo: get from sharedPrefs
         DatabaseHandler db = new DatabaseHandler(this);
-        Freelancer fl = db.getFreelancer(profileID);
+        Freelancer fl = db.getFreelancer(userId);
         freelancerName = findViewById(R.id.name);
         freelancerDescription = findViewById(R.id.desc);
         editBtn = findViewById(R.id.editFreelancer);
@@ -41,10 +44,11 @@ public class FreelancerOwnProfile extends AppCompatActivity implements View.OnCl
     @Override
     protected void onResume() {
         super.onResume();
-        int profileID = 1;
-        //todo: get from sharedPrefs
+        SharedPreferences prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
+        int userId = Integer.parseInt(prefs.getString("Identity ID","-1"));
+
         DatabaseHandler db = new DatabaseHandler(this);
-        Freelancer fl = db.getFreelancer(profileID);
+        Freelancer fl = db.getFreelancer(userId);
         freelancerName = findViewById(R.id.name);
         freelancerDescription = findViewById(R.id.desc);
         editBtn = findViewById(R.id.editFreelancer);
@@ -62,29 +66,31 @@ public class FreelancerOwnProfile extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View view) {
-        Intent i;
+        SharedPreferences prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
+        int userId = Integer.parseInt(prefs.getString("Identity ID","-1"));
+        Intent i = new Intent(getApplicationContext(), FreelancerOwnProfile.class);
         switch(view.getId()){
             case R.id.certificationsCard:
                 i = new Intent(getApplicationContext(),CertificationPage.class);
-                startActivity(i);
 
                 break;
             case R.id.skillsCard:
                 i = new Intent(getApplicationContext(),SkillsPage.class);
-                startActivity(i);
-
+//                startActivity(i);
+                i.putExtra("profileid", userId);
                 break;
             case R.id.experienceCard:
                 i = new Intent(getApplicationContext(),ExperienceMainActivity.class);
-                startActivity(i);
+//                startActivity(i);
 
                 break;
             case R.id.projectsCard:
                 i = new Intent(getApplicationContext(),ProjectsPage.class);
-                startActivity(i);
+//                startActivity(i);
 
                 break;
         }
+        startActivity(i);
 
     }
 

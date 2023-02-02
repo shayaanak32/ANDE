@@ -23,7 +23,7 @@ public class FreelancerProfile extends AppCompatActivity implements View.OnClick
 
     private final String TAG = "FreelancerProfile";
     TextView freelancerName, freelancerDescription;
-    GridLayout grid;
+    CardView skills, proj, exp, certs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,36 +39,67 @@ public class FreelancerProfile extends AppCompatActivity implements View.OnClick
         freelancerDescription = findViewById(R.id.desc);
         freelancerName.setText(fl.getName());
         freelancerDescription.setText(fl.getDescription());
-        grid = findViewById(R.id.grid);
-        grid.getColumnCount();
-        grid.getChildAt(0);
+        skills = findViewById(R.id.skillsCard);
+        certs = findViewById(R.id.certificationsCard);
+        proj = findViewById(R.id.projectsCard);
+        exp = findViewById(R.id.experienceCard);
+        skills.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), OtherSkillsPage.class);
+                i.putExtra("profileid", profileID);
+                startActivity(i);
+            }
+        });
+        certs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), OtherCertPage.class);
+                i.putExtra("profileid", profileID);
+                startActivity(i);
+            }
+        });
+        proj.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), OtherProjPage.class);
+                i.putExtra("profileid", profileID);
+                startActivity(i);
+            }
+        });
+        exp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), OtherExpPage.class);
+                i.putExtra("profileid", profileID);
+                startActivity(i);
+            }
+        });
     }
 
     @Override
     public void onClick(View view) {
-        Log.d("Status ", view.getId()+" !!!");
-        Log.d("Status ", R.id.certificationsCard+" !!!");
-        Log.d("Status ", R.id.skillsCard+" !!!");
-        Log.d("Status ", R.id.experienceCard+" !!!");
-        Log.d("Status ", R.id.projectsCard+" !!!");
         Intent i= new Intent(this, FreelancerProfile.class);
-        Log.d(TAG, "something got clicked!");
+        Intent intent = getIntent();
+        int profileID = intent.getIntExtra("profileid",0);
         switch (view.getId()) {
             case R.id.certificationsCard:
-                i = new Intent(this, OtherCertPage.class);
+                i.putExtra("profileid", profileID);
 //                startActivity(i);
-                Log.d(TAG, "onClick: certificationsCard");
                 break;
             case R.id.skillsCard:
                 i = new Intent(this, OtherSkillsPage.class);
+                i.putExtra("profileid", profileID);
 //                startActivity(i);
                 break;
             case R.id.experienceCard:
                 i = new Intent(this, OtherExpPage.class);
+                i.putExtra("profileid", profileID);
 //                startActivity(i);
                 break;
             case R.id.projectsCard:
                 i = new Intent(this, OtherProjPage.class);
+                i.putExtra("profileid", profileID);
 //                startActivity(i);
                 break;
 

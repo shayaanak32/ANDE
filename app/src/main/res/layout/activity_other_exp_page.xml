@@ -36,8 +36,9 @@
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:background="@drawable/dark_col_card"
@@ -55,24 +56,10 @@
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/montserrat"
                     android:gravity="center"
-                    android:text="Current Experiences"
+                    android:text="Experiences"
                     android:textColor="@color/white"
                     android:textSize="20dp"></TextView>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/addExperienceBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:textSize="10dp"
-                    app:icon="@drawable/add"
-                    app:iconGravity="textStart"
-                    app:iconPadding="3dp"
-                    tools:text="ADD">
-
-                </com.google.android.material.button.MaterialButton>
             </LinearLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/experiences"
