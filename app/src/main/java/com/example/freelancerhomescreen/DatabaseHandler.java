@@ -226,10 +226,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // code to get the single contact
     Freelancer getFreelancer(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Log.d("contents", id + "");
-        Cursor cursor = db.query(TABLE_FREELANCERS, new String[]{KEY_NAME,
-                        KEY_DESCRIPTION}, "freelancerId =?",
-                new String[]{String.valueOf(id)}, null, null, null, null);
+        Log.d("contents DB", id+"");
+        Cursor cursor = db.query(TABLE_FREELANCERS, new String[] { KEY_NAME,
+                        KEY_DESCRIPTION },  "freelancerId =?",
+                new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
@@ -412,8 +412,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             Log.d("0", cursor.getString(5));
 
             u = new Users(Integer.parseInt(cursor.getString(0)),
-                    cursor.getString(1), Integer.parseInt(cursor.getString(2)), cursor.getString(3),
-                    (cursor.getString(4)), Integer.parseInt(cursor.getString(5)));
+                        cursor.getString(1),
+                        Integer.parseInt(cursor.getString(2)),
+                        cursor.getString(3),
+                        cursor.getString(4),
+                        Integer.parseInt(cursor.getString(5)));
         } else {
             u = null;
         }
@@ -497,5 +500,58 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // updating row
         return db.update(TABLE_PROJECTS, values, "projectID = ?",
                 new String[]{String.valueOf(p.getProjectID())});
+    }
+
+    public List<Certification> getAllCertifications() {
+        List<Certification> contactList = new ArrayList<Certification>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_CERTIFICATIONS;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Certification contact = new Certification();
+                contact.setID(Integer.parseInt(cursor.getString(0)));
+                contact.setName(cursor.getString(1));
+                contact.setLink(cursor.getString(2));
+                contact.setEndDate(cursor.getString(3));
+                contact.setSkills(cursor.getString(4));
+                contact.setDescription(cursor.getString(5));
+                // Adding contact to list
+                contactList.add(contact);
+            } while (cursor.moveToNext());
+        }
+
+        // return contact list
+        return contactList;
+    }
+
+    public List<Experience> getAllExperience(int id) {
+        List<Experience> contactList = new ArrayList<Experience>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_EXPERIENCE+ "WHERE freelancerID = "+id;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Experience e = new Experience();
+                e.setName((cursor.getString(1)));
+                e.setStartDate(cursor.getString(2));
+                e.setEndDate(cursor.getString(3));
+                e.setDescription(cursor.getString(4));
+                e.setCompany(cursor.getString(5));
+                // Adding contact to list
+                contactList.add(e);
+            } while (cursor.moveToNext());
+        }
+
+        // return contact list
+        return contactList;
     }
 }

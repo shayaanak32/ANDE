@@ -19,9 +19,9 @@ import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
 
-public class FreelancerProfile extends AppCompatActivity {
+public class FreelancerProfile extends AppCompatActivity implements View.OnClickListener{
 
-    private final String TAG = "MainActivity";
+    private final String TAG = "FreelancerProfile";
     TextView freelancerName, freelancerDescription;
     GridLayout grid;
 
@@ -35,7 +35,6 @@ public class FreelancerProfile extends AppCompatActivity {
         int profileID = intent.getIntExtra("profileid",0);
 
         Freelancer fl = db.getFreelancer(profileID);
-        Log.d("OIOIOIIOIOIOIOIOIO", fl.getName());
         freelancerName = findViewById(R.id.name);
         freelancerDescription = findViewById(R.id.desc);
         freelancerName.setText(fl.getName());
@@ -45,47 +44,38 @@ public class FreelancerProfile extends AppCompatActivity {
         grid.getChildAt(0);
     }
 
-//    @Override
-//    public void onClick(View view) {
-//
-//        Log.d(TAG, "onClick: putang ina mo");
-////        switch (view.getId()) {
-////            case R.id.showDataButton:
-////                Log.d("Status ", "Inside onClick !!!");
-////                //sd.displayDB();
-////            case R.id.certificationsLinearLayout:
-////                //db.createTable();
-//////        try {
-////                String endDate1 = "2021-12-21 10:20:05.123";
-////                String endDate2 = "2022-12-25 10:20:05.123";
-////                String endDate3 = "2019-07-08 10:20:05.123";
-////                String endDate4 = "2022-08-01 10:20:05.123";
-////                Log.d("About to Create!!","Not Created");
-////
-//////            SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-//////            Date d1 = format.parse(endDate1);
-//////            Date d2 = format.parse(endDate2);
-//////            Date d3 = format.parse(endDate3);
-//////            Date d4 = format.parse(endDate4);
-////
-////
-////                Certification c1 = new Certification("OCP 11 Java Programmer","https://www.aws.training/certification",endDate1,"Java,JavaScript", "Description1");
-////                Certification c2 = new Certification("IBM Professional Data Science Certification","https://www.coursera.org/professional-certificates/ibm-data-science",endDate2,"Python,Java", "Description2");
-////                Certification c3 = new Certification("DataCamp Certified Data Professional","https://www.coursera.org/professional-certificates/ibm-data-science",endDate3,"Java", "Description3");
-////                Certification c4 = new Certification("Google Cloud Certified Data Scientist","https://www.coursera.org/professional-certificates/ibm-data-science",endDate4,"Java", "Description4");
-////                ct.addCertifications(c1);
-////                ct.addCertifications(c2);
-////                ct.addCertifications(c3);
-////                ct.addCertifications(c4);
-////                //ct.showTableData();
-////                Intent i = new Intent(this, CertificationPage.class);
-////                startActivity(i);
-////
-////        }
-//
-//    }
+    @Override
+    public void onClick(View view) {
+        Log.d("Status ", view.getId()+" !!!");
+        Log.d("Status ", R.id.certificationsCard+" !!!");
+        Log.d("Status ", R.id.skillsCard+" !!!");
+        Log.d("Status ", R.id.experienceCard+" !!!");
+        Log.d("Status ", R.id.projectsCard+" !!!");
+        Intent i= new Intent(this, FreelancerProfile.class);
+        Log.d(TAG, "something got clicked!");
+        switch (view.getId()) {
+            case R.id.certificationsCard:
+                i = new Intent(this, OtherCertPage.class);
+//                startActivity(i);
+                Log.d(TAG, "onClick: certificationsCard");
+                break;
+            case R.id.skillsCard:
+                i = new Intent(this, OtherSkillsPage.class);
+//                startActivity(i);
+                break;
+            case R.id.experienceCard:
+                i = new Intent(this, OtherExpPage.class);
+//                startActivity(i);
+                break;
+            case R.id.projectsCard:
+                i = new Intent(this, OtherProjPage.class);
+//                startActivity(i);
+                break;
+
+        }
+        startActivity(i);
 //
 
-
+    }
 
 }
