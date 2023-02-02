@@ -92,16 +92,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_EMAIL + " TEXT,"
                 + KEY_PASSWORD + " TEXT,"
                 + KEY_IDENTITY + " INT" + ")";
-         String CREATE_CERTIFICATIONS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_CERTIFICATIONS + "("
-                + KEY_CERTID + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
+        String CREATE_CERTIFICATIONS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_CERTIFICATIONS + "("
+                + KEY_CERTID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + KEY_NAME + " TEXT NOT NULL,"
                 + KEY_LINK + " TEXT NOT NULL,"
                 + KEY_DATE + " TEXT NOT NULL,"
                 + KEY_SKILLS + " TEXT NOT NULL,"
-                + KEY_DESCRIPTION + " TEXT NOT NULL"
+                + KEY_DESCRIPTION + " TEXT NOT NULL,"
+                + "freelancerID INTEGER NOT NULL,"
+                + "FOREIGN KEY(freelancerID) REFERENCES Freelancers(freelancerId)"
                 + ");";
 
-         String CREATE_EXPERIENCE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_EXPERIENCE + "("
+        String CREATE_EXPERIENCE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_EXPERIENCE + "("
                 + KEY_EXPERIENCEID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + KEY_NAME + " TEXT NOT NULL, "
                 + KEY_startDATE + " TEXT NOT NULL, "
@@ -144,14 +146,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     void addCertifications(Certification certification) {
         SQLiteDatabase db = this.getWritableDatabase();
-
+        Log.d(TAG, "addCertifications: RUNNING");
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, certification.getName()); // Contact Name
         values.put(KEY_DESCRIPTION, certification.getDescription()); // Contact Phone
         values.put(KEY_LINK, certification.getLink());
         values.put(KEY_SKILLS, certification.getSkills());
         values.put(KEY_DATE, certification.getEndDate());
-
+        Log.d(TAG, certification.getFreelancerID() + "");
+        values.put("freelancerID", certification.getFreelancerID());
         // Contact Phone
         // Inserting Row
         db.insert(TABLE_CERTIFICATIONS, null, values);
@@ -179,6 +182,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         //2nd argument is String containing nullColumnHack
 
         // Closing database connection
+    }
+    public int updateExperience(Experience contact) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME, contact.getName());
+        values.put(KEY_startDATE, contact.getStartDate());
+        values.put(KEY_DATE, contact.getEndDate());
+        values.put(KEY_DESCRIPTION, contact.getDescription());
+        values.put(KEY_COMPANYNAME, contact.getCompany());
+        // updating row
+        return db.update(TABLE_EXPERIENCE, values, "experienceID = ?",
+                new String[]{String.valueOf(contact.getExperienceID())});
     }
 
     // code to add the new contact
@@ -219,6 +235,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // return contact
         return contact;
     }
+
     // code to get the single contact
     Freelancer getFreelancer(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -229,7 +246,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.moveToFirst();
 
-        Freelancer contact = new Freelancer(cursor.getString(0),cursor.getString(1));
+        Freelancer contact = new Freelancer(cursor.getString(0), cursor.getString(1));
         return contact;
     }
     Freelancer getFreelancers(int id) {
@@ -247,7 +264,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return f;
     }
 
-    public void addFreelancer(String name,  String email, String password, String description, String skills, String profilePic) {
+    public void addFreelancer(String name, String email, String password, String description, String skills, String profilePic) {
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, name);
         values.put(KEY_EMAIL, email);
@@ -414,6 +431,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if (cursor.getCount() != 0) {
             Log.d("Record Exists", Boolean.toString(exists));
 
+            Log.d("0", cursor.getString(0));
+            Log.d("0", cursor.getString(1));
+            Log.d("0", cursor.getString(2));
+            Log.d("0", cursor.getString(3));
+            Log.d("0", cursor.getString(4));
+            Log.d("0", cursor.getString(5));
 
             u = new Users(Integer.parseInt(cursor.getString(0)),
                         cursor.getString(1),
@@ -429,6 +452,30 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return u;
+    }
+
+    ArrayList<Certification> getCertification(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<Certification> certificationArrayList = new ArrayList<Certification>();
+        Cursor cursor = db.query(TABLE_CERTIFICATIONS, new String[]{KEY_CERTID,
+                        KEY_NAME, KEY_LINK, KEY_DATE, KEY_SKILLS, KEY_DESCRIPTION},  "freelancerID=?",
+                new String[]{String.valueOf(id)}, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Certification contact = new Certification();
+                contact.setID(Integer.parseInt(cursor.getString(0)));
+                contact.setName(cursor.getString(1));
+                contact.setLink(cursor.getString(2));
+                contact.setEndDate(cursor.getString(3));
+                contact.setSkills(cursor.getString(4));
+                contact.setDescription(cursor.getString(5));
+                // Adding contact to list
+                certificationArrayList.add(contact);
+            } while (cursor.moveToNext());
+        }
+        return certificationArrayList;
+
     }
 
     public void addUser(String uName, int uRole, String uEmail, String uPassword, int uIdentity) {

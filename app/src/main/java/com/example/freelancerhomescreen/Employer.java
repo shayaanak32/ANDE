@@ -61,6 +61,14 @@ private String profileImg;
         this.profileImg = profileImg;
     }
 
+    public Employer(String companyName, String priorities, String description,int employerID, String empEmail, String empPassword) {
+        this.companyName = companyName;
+        this.priorities = priorities;
+        this.description = description;
+        this.employerID = employerID;
+        this.empEmail = empEmail;
+        this.empPassword = empPassword;
+    }
 
     public Employer() {
 

@@ -609,7 +609,7 @@ public class CreateTables extends SQLiteOpenHelper {
     ArrayList<Skills> getSkills(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<Skills> arrayListOfSkills = new ArrayList<Skills>();
-        Cursor cursor = db.query(TABLE_FREELANCERS, new String[]{"skills"
+        Cursor cursor = db.query(TABLE_FREELANCERS, new String[]{"freelancerSkills"
                 }, "freelancerId" + "=?",
                 new String[]{String.valueOf(id)}, null, null, null, null);
         if (cursor != null) {

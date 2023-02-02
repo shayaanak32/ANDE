@@ -33,6 +33,7 @@ public class AddExperience extends AppCompatActivity {
     EditText editTextCompany;
     EditText descriptionField;
     MaterialButton addExperienceBtn;
+    boolean fromAddExperience;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,27 +48,16 @@ public class AddExperience extends AppCompatActivity {
         descriptionField = (EditText) findViewById(R.id.descriptionField);
         addExperienceBtn = (MaterialButton) findViewById(R.id.addExperienceButton);
 
-        if (savedInstanceState != null) {
-            Log.d("Saved Instance State is not null!","About to restore the data!");
-            String experienceName = savedInstanceState.getString("experience_name", "");
-            String startDate = savedInstanceState.getString("start_name", "");
-            String endDate = savedInstanceState.getString("end_name", "");
-            String companyName = savedInstanceState.getString("company_name", "");
-            String description = savedInstanceState.getString("description", "");
-            editTextExpName.setText(experienceName);
-            startDateField.setText(startDate);
-            endDateField.setText(endDate);
-            editTextCompany.setText(companyName);
-            descriptionField.setText(description);
 
-        }
         CreateTables ct = new CreateTables(this);
         startDateField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(AddExperience.this, CalendarViewActivity.class);
                 startDateClicked = true;
+
                 i.putExtra("startDateClicked", startDateClicked);
+                i.putExtra("fromAddExperience",true);
                 startActivity(i);
 
             }
@@ -92,6 +82,7 @@ public class AddExperience extends AppCompatActivity {
                 String startDate = startDateField.getText().toString();
                 String endDate = endDateField.getText().toString();
                 String companyName = editTextCompany.getText().toString();
+                Log.d("Company Name",companyName);
                 String description = descriptionField.getText().toString();
 //                Log.d("experienceName", experienceName);
 //                Log.d("Name Check", Boolean.toString(experienceName != null && !experienceName.isEmpty()));
@@ -106,10 +97,10 @@ public class AddExperience extends AppCompatActivity {
 
 
                 if (experienceName != null && !experienceName.isEmpty() && startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty() && companyName != null && !companyName.isEmpty() && description != null && !description.isEmpty()) {
-                    Log.d("Form Status", "Fields Complete");
 
-                    Experience e = new Experience(experienceName, startDate, endDate, companyName, description,1);
+                    Experience e = new Experience(experienceName, startDate, endDate, companyName, description, 1);
                     ct.addExperience(e);
+                    Log.d("Form Status", "Fields Complete");
                     Intent i = new Intent(AddExperience.this, ExperienceMainActivity.class);
 
                 } else {
