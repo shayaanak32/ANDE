@@ -136,7 +136,6 @@ tools:context=".MainActivity">
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
-        android:clickable="true"
         android:columnCount="2">
 
         <androidx.cardview.widget.CardView
@@ -191,7 +190,6 @@ tools:context=".MainActivity">
             app:cardCornerRadius="12dp"
             app:cardElevation="2dp"
             android:id="@+id/skillsCard"
-            android:clickable="true"
             android:onClick="onClick"
             >
 
@@ -235,7 +233,7 @@ tools:context=".MainActivity">
             app:cardElevation="2dp"
             android:onClick="onClick"
             android:id="@+id/experienceCard"
-            android:clickable="true">
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -278,7 +276,7 @@ tools:context=".MainActivity">
             app:cardCornerRadius="12dp"
             app:cardElevation="2dp"
             android:id="@+id/projectsCard"
-            android:clickable="true">
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
