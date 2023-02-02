@@ -56,7 +56,7 @@ public class EditExperienceActivity extends AppCompatActivity {
         descriptionFieldUpd.setText(description);
         editTextCompany.setText(companyName);
 
-        CreateTables ct = new CreateTables(this);
+        DatabaseHandler ct = new DatabaseHandler(this);
 
         startDatePickerUpd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +76,12 @@ public class EditExperienceActivity extends AppCompatActivity {
 
                 Intent i = new Intent(EditExperienceActivity.this, CalendarViewActivity.class);
                 endDateClicked = true;
+                String experienceName = editTextUpdateName.getText().toString();
+                String startDate = startDatePickerUpd.getText().toString();
+                String endDate = endDatePickerUpd.getText().toString();
+                String description = descriptionFieldUpd.getText().toString();
                 i.putExtra("endDateClicked", endDateClicked);
+                i.putExtra("","");
                 startActivity(i);
 
             }
@@ -86,6 +91,8 @@ public class EditExperienceActivity extends AppCompatActivity {
         updateExperienceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("I am being clicked", "Clicked!");
+
                 String experienceName = editTextUpdateName.getText().toString();
                 String startDate = startDatePickerUpd.getText().toString();
                 String endDate = endDatePickerUpd.getText().toString();

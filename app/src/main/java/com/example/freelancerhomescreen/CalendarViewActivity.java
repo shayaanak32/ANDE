@@ -113,7 +113,7 @@ public class CalendarViewActivity extends AppCompatActivity implements CalendarA
                 Log.d("From Edit Certifications", Boolean.toString(fromEditCertifications));
 
                 if (startDateClicked) {
-                    if(fromAddExperience){
+                    if (fromAddExperience) {
                         Intent i = new Intent(CalendarViewActivity.this, AddExperience.class);
                         Log.d("selectedMonthYear", selectedMonthYear);
                         i.putExtra("startDateChosen", selectedMonthYear);
@@ -130,15 +130,15 @@ public class CalendarViewActivity extends AppCompatActivity implements CalendarA
 
                     if (fromAddCertification) {
                         Log.d("Calendar View Activity -->", "Intent has Come from EditCertifications (select date)");
-                        Intent i2 = new Intent(CalendarViewActivity.this, EditCertificationActivity.class);
+                        Intent i2 = new Intent(CalendarViewActivity.this, AddCertification.class);
                         i2.putExtra("startDateChosen", selectedMonthYear);
                         i2.putExtra("startDateClicked", startDateClicked);
                         i2.putExtra("name", getData.getString("name"));
                         i2.putExtra("link", getData.getString("link"));
-                        i2.putExtra("completionDate", getData.getString("endDate"));
                         i2.putExtra("description", getData.getString("description"));
-                        i2.putExtra("skills", getData.getString("skills"));
+                        //i2.putExtra("skills", getData.getString("skills"));
                         i2.putExtra("fromCalendarViewActivity", true);
+                        startActivity(i2);
                     }
                     if (fromEditCertifications) {
                         Log.d("Calendar View Activity -->", "Intent has Come from EditCertifications (select date)");
@@ -169,7 +169,7 @@ public class CalendarViewActivity extends AppCompatActivity implements CalendarA
                         startActivity(i3);
                     }
                     if (fromEditProject) {
-                        Log.d("Calendar View Activity--","From Edit Project");
+                        Log.d("Calendar View Activity--", "From Edit Project");
                         Intent i3 = new Intent(CalendarViewActivity.this, EditProject.class);
                         i3.putExtra("pN", getData.getString("pN"));
                         i3.putExtra("pSD", getData.getString("pSD"));

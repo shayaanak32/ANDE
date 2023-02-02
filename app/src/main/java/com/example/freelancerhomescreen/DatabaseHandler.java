@@ -183,6 +183,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         // Closing database connection
     }
+    public int updateExperience(Experience contact) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME, contact.getName());
+        values.put(KEY_startDATE, contact.getStartDate());
+        values.put(KEY_DATE, contact.getEndDate());
+        values.put(KEY_DESCRIPTION, contact.getDescription());
+        values.put(KEY_COMPANYNAME, contact.getCompany());
+        // updating row
+        return db.update(TABLE_EXPERIENCE, values, "experienceID = ?",
+                new String[]{String.valueOf(contact.getExperienceID())});
+    }
 
     // code to add the new contact
     public void addContact(Employer contact) {

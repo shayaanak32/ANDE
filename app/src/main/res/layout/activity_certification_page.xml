@@ -57,8 +57,8 @@
                     android:textColor="@color/white"
                     android:textSize="20dp"></TextView>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/addExperienceBtn"
+                <Button
+                    android:id="@+id/goToAddExp"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_marginLeft="15dp"
@@ -70,7 +70,7 @@
                     app:iconPadding="3dp"
                     tools:text="ADD">
 
-                </com.google.android.material.button.MaterialButton>
+                </Button>
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -86,119 +86,7 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="390dp"
-            android:layout_height="222dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/dark_col_card"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="@font/montserrat"
-                android:text="Add Certifications"
-                android:textColor="@color/white"
-                android:textSize="20dp">
-
-            </TextView>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:fontFamily="@font/montserrat"
-                    android:text="Certification Name"
-                    android:textColor="@color/white"
-                    android:textSize="15dp">
-
-                </TextView>
-
-                <EditText
-                    android:id="@+id/editTextTextPersonName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="" />
 
 
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:fontFamily="@font/montserrat"
-                    android:text="Company Name"
-                    android:textColor="@color/white"
-                    android:textSize="15dp">
-
-                </TextView>
-
-                <androidx.appcompat.widget.SearchView
-                    android:id="@+id/searchView"
-                    android:layout_width="164dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/search_view_bg"
-                    app:queryHint="Search Here">
-
-                </androidx.appcompat.widget.SearchView>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:fontFamily="@font/montserrat"
-                    android:text="Link"
-                    android:textColor="@color/white"
-                    android:textSize="15dp">
-
-                </TextView>
-
-                <EditText
-                    android:id="@+id/editTextTextPersonName2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="" />
-
-
-            </LinearLayout>
-
-        </LinearLayout>
-        
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

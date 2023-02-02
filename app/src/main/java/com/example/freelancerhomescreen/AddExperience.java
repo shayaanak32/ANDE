@@ -82,6 +82,7 @@ public class AddExperience extends AppCompatActivity {
                 String startDate = startDateField.getText().toString();
                 String endDate = endDateField.getText().toString();
                 String companyName = editTextCompany.getText().toString();
+                Log.d("Company Name",companyName);
                 String description = descriptionField.getText().toString();
 //                Log.d("experienceName", experienceName);
 //                Log.d("Name Check", Boolean.toString(experienceName != null && !experienceName.isEmpty()));
@@ -96,10 +97,10 @@ public class AddExperience extends AppCompatActivity {
 
 
                 if (experienceName != null && !experienceName.isEmpty() && startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty() && companyName != null && !companyName.isEmpty() && description != null && !description.isEmpty()) {
-                    Log.d("Form Status", "Fields Complete");
 
                     Experience e = new Experience(experienceName, startDate, endDate, companyName, description, 1);
                     ct.addExperience(e);
+                    Log.d("Form Status", "Fields Complete");
                     Intent i = new Intent(AddExperience.this, ExperienceMainActivity.class);
 
                 } else {

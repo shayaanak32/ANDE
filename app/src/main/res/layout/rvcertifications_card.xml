@@ -45,6 +45,7 @@
                 app:icon="@drawable/cross_icon"
                 app:iconGravity="textEnd"
                 app:iconPadding="3dp">
+            </com.google.android.material.button.MaterialButton>
 
         </LinearLayout>
 

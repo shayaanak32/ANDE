@@ -37,6 +37,7 @@ public class LoginScreen extends AppCompatActivity {
         Log.d("OPened?",appStarts+"");
         DatabaseHandler db = new DatabaseHandler(this);
         SharedPreferences.Editor editor = prefs.edit();
+
         if (appStarts == 0) {
             Log.d("About to Insert Data", "App Starts is 0");
             db.addUser("test", 1, "email@gmail.com", "password", 1);
