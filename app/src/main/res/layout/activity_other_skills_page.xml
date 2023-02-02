@@ -56,7 +56,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:fontFamily="@font/montserrat"
-                    android:text="Your Current Skills"
+                    android:text="Skills"
                     android:textColor="@color/white"
                     android:textSize="20dp"></TextView>
 
@@ -66,7 +66,7 @@
                     android:id="@+id/skillsRecyclerView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
 
 
                     />
@@ -158,148 +158,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/dark_col_card"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:fontFamily="@font/montserrat"
-                    android:text="Add Skills"
-                    android:textColor="@color/white"
-                    android:textSize="20dp"></TextView>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:fontFamily="@font/montserrat"
-                        android:text="Add Skill"
-                        android:textColor="@color/black"
-                        android:textSize="15dp">
-
-                    </TextView>
-
-                    <EditText
-                        android:id="@+id/editTextSkill"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/field_background"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:onClick="onClick"
-                        android:text="" />
-
-
-                </LinearLayout>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/addSkillBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_gravity="right"
-                    android:layout_marginLeft="20dp"
-                    android:textSize="10dp"
-                    app:icon="@drawable/add"
-                    app:iconGravity="textEnd"
-                    app:iconPadding="3dp"
-                    tools:text="Add">
-
-                </com.google.android.material.button.MaterialButton>
-
-
-
-                <!--                <LinearLayout-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:orientation="horizontal">-->
-
-                <!--                    <TextView-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginRight="10dp"-->
-                <!--                        android:background="@drawable/colored_circles"-->
-                <!--                        android:fontFamily="@font/montserrat"-->
-                <!--                        android:gravity="center"-->
-                <!--                        android:text="Java"-->
-                <!--                        android:textColor="@color/black"-->
-                <!--                        android:textSize="20dp">-->
-
-
-                <!--                    </TextView>-->
-
-                <!--                    <TextView-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginRight="10dp"-->
-                <!--                        android:background="@drawable/colored_circles"-->
-                <!--                        android:fontFamily="@font/montserrat"-->
-                <!--                        android:gravity="center"-->
-                <!--                        android:text="C#"-->
-                <!--                        android:textColor="@color/black"-->
-                <!--                        android:textSize="20dp">-->
-
-                <!--                        &lt;!&ndash;                        <com.google.android.material.button.MaterialButton&ndash;&gt;-->
-                <!--                        &lt;!&ndash;                            android:layout_width="8dp"&ndash;&gt;-->
-                <!--                        &lt;!&ndash;                            android:layout_height="20dp"&ndash;&gt;-->
-                <!--                        &lt;!&ndash;                            android:layout_marginLeft="10dp"&ndash;&gt;-->
-                <!--                        &lt;!&ndash;                            app:icon="@drawable/cross_icon"&ndash;&gt;-->
-                <!--                        &lt;!&ndash;                            app:iconGravity="textEnd"&ndash;&gt;-->
-                <!--                        &lt;!&ndash;                            app:iconPadding="3dp">&ndash;&gt;-->
-
-                <!--                        &lt;!&ndash;                        </com.google.android.material.button.MaterialButton>&ndash;&gt;-->
-
-
-                <!--                    </TextView>-->
-
-
-                <!--                    <TextView-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-
-                <!--                        android:background="@drawable/colored_circles"-->
-                <!--                        android:fontFamily="@font/montserrat"-->
-                <!--                        android:gravity="center"-->
-                <!--                        android:text="JavaScript"-->
-                <!--                        android:textColor="@color/black"-->
-                <!--                        android:textSize="20dp"></TextView>-->
-
-                <!--                </LinearLayout>-->
-
-                <!--                <androidx.appcompat.widget.SearchView-->
-                <!--                    android:id="@+id/searchView"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_margin="8dp"-->
-                <!--                    android:background="@drawable/search_view_bg"-->
-                <!--                    app:queryHint="Search Here">-->
-
-                <!--                </androidx.appcompat.widget.SearchView>-->
-
-
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Button" />
 
         </LinearLayout>
     </LinearLayout>

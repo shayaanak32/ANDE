@@ -72,6 +72,7 @@ public class CertificationAdapter extends RecyclerView.Adapter<CertificationAdap
         private TextView certificationTitle;
         private TextView description;
         private MaterialButton editBtn;
+        private MaterialButton viewLinkBtn;
 
         public MyViewHolder(@NonNull View itemView, CertificationRecyclerAdapterInterface crai) {
 
@@ -80,6 +81,7 @@ public class CertificationAdapter extends RecyclerView.Adapter<CertificationAdap
             endDate = itemView.findViewById(R.id.dateOfCompletion);
 //            description = itemView.findViewById(R.id.description);
             editBtn = itemView.findViewById(R.id.certEditBtn);
+            viewLinkBtn = itemView.findViewById(R.id.viewLinkBtn);
 
             editBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -90,6 +92,17 @@ public class CertificationAdapter extends RecyclerView.Adapter<CertificationAdap
                         if(position != RecyclerView.NO_POSITION){
                             crai.onItemClick(position);
                         }
+                    }
+                }
+            });
+
+            viewLinkBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION){
+                        crai.goToLink(position);
+
                     }
 
                 }

@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,8 +28,7 @@ public class OtherCertPage extends AppCompatActivity implements CertificationRec
 
     public List<Certification> contactsList;
     public RecyclerView recyclerView;
-    InsertExperienceData db = new InsertExperienceData();
-    CreateTables ct = new CreateTables(this);
+    DatabaseHandler db = new DatabaseHandler(this);
     public ArrayList<CertificationRecyclerItem> mCertifications = new ArrayList<>();
 
 
@@ -43,7 +43,7 @@ public class OtherCertPage extends AppCompatActivity implements CertificationRec
 
 
     private void bindContactData() {
-        List<Certification> certificationList = ct.getAllCertifications();
+        List<Certification> certificationList = db.getAllCertifications();
         int index = 0;
         for (Certification e : certificationList) {
             String name = e.getName();
@@ -64,6 +64,7 @@ public class OtherCertPage extends AppCompatActivity implements CertificationRec
 
     @Override
     public void onItemClick(int position) {
+        Log.d("skills in recycler item", mCertifications.get(position).getSkills());
         Intent intent = new Intent(this, EditCertificationActivity.class);
         boolean fromCertificationPage = true;
         intent.putExtra("name", mCertifications.get(position).getName());
@@ -72,8 +73,15 @@ public class OtherCertPage extends AppCompatActivity implements CertificationRec
         intent.putExtra("description", mCertifications.get(position).getDescription());
         intent.putExtra("skills", mCertifications.get(position).getSkills());
         intent.putExtra("fromCertificationPage",fromCertificationPage);
-        Log.d("skills in recycler item", mCertifications.get(position).getSkills());
         startActivity(intent);
 
+    }
+
+    @Override
+    public void goToLink(int position) {
+        Log.d("position", Integer.toString(position));
+        String url = mCertifications.get(position).getLink();
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(browserIntent);
     }
 }

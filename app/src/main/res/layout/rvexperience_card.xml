@@ -3,14 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_marginBottom="40dp"
+    android:layout_height="wrap_content">
 
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
         android:background="@drawable/light_col_card"
         android:orientation="vertical"
+        android:id="@+id/indivExp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -53,6 +56,7 @@
                 android:layout_marginLeft="60dp"
                 android:fontFamily="@font/montserrat"
                 android:text=""
+                android:layout_marginRight="10dp"
                 android:textSize="12dp">
 
             </TextView>
@@ -71,27 +75,11 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:gravity="bottom">
-
-
-
-
-
-            <TextView
-                android:id="@+id/seeMoreTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat"
-                android:gravity="center"
-                android:text="See More"
-                android:textColor="@color/black"
-                android:textSize="12dp"></TextView>
-
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/editBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="80dp"
                 android:gravity="center"

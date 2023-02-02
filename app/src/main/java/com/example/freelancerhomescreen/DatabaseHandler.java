@@ -236,6 +236,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Freelancer contact = new Freelancer(cursor.getString(0), cursor.getString(1));
         return contact;
     }
+    Freelancer getFreelancers(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_FREELANCERS, new String[]{
+                        KEY_NAME, KEY_DESCRIPTION, KEY_YOUR_SKILLS, KEY_PFP}, "freelancerId=?",
+                new String[]{String.valueOf(id)}, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        Freelancer f = new Freelancer(cursor.getString(0),
+                cursor.getString(1), cursor.getString(2), cursor.getString(3));
+        // return contact
+        return f;
+    }
 
     public void addFreelancer(String name, String email, String password, String description, String skills, String profilePic) {
         ContentValues values = new ContentValues();
@@ -532,7 +546,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public List<Experience> getAllExperience(int id) {
         List<Experience> contactList = new ArrayList<Experience>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_EXPERIENCE+ "WHERE freelancerID = "+id;
+        String selectQuery = "SELECT  * FROM " + TABLE_EXPERIENCE+ " WHERE freelancerID = "+id;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -553,5 +567,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         // return contact list
         return contactList;
+    }
+    // code to update the single contact
+    public int updateSkills(String skills, int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("freelancerSkills", skills);
+
+        // updating row
+        return db.update(TABLE_FREELANCERS, values, "freelancerId = ?",
+                new String[]{String.valueOf(id)});
     }
 }

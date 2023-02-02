@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -93,5 +94,13 @@ SharedPreferences prefs;
         Log.d("skills in recycler item", mCertifications.get(position).getSkills());
         startActivity(intent);
 
+    }
+
+    @Override
+    public void goToLink(int position) {
+        Log.d("position", Integer.toString(position));
+        String url = mCertifications.get(position).getLink();
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(browserIntent);
     }
 }

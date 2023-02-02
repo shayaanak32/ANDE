@@ -33,8 +33,6 @@ public class ExperienceRecyclerAdapter extends RecyclerView.Adapter<ExperienceRe
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.rvexperience_card, parent, false);
         //Create View Holder
         final MyViewHolder myViewHolder = new MyViewHolder(itemView,ervi);
-        Log.d("STATUS", "View Holder created");
-
         return myViewHolder;
     }
 

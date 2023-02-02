@@ -18,12 +18,13 @@ public class OtherExpPage extends AppCompatActivity implements ExperienceReycler
 
     public List<Experience> contactsList;
     public RecyclerView recyclerView;
-    InsertExperienceData db = new InsertExperienceData();
-    CreateTables ct = new CreateTables(this);
+    DatabaseHandler db = new DatabaseHandler(this);
     public ArrayList<ExperienceRecyclerItem> mExperiences = new ArrayList<>();
+    private final String TAG = "OtherExpPage";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate: hi");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_other_exp_page);
         // store recycler view in a variable
@@ -43,7 +44,9 @@ public class OtherExpPage extends AppCompatActivity implements ExperienceReycler
 
 
     private void bindContactData() {
-        List<Experience> experienceList = ct.getAllExperience();
+        Intent intent = getIntent();
+        int profileID = intent.getIntExtra("profileid",0);
+        List<Experience> experienceList = db.getAllExperience(profileID);
         int index = 0;
         for (Experience e : experienceList) {
             String name = e.getName();
@@ -58,23 +61,12 @@ public class OtherExpPage extends AppCompatActivity implements ExperienceReycler
             mExperiences.add(new ExperienceRecyclerItem(name, startDate, endDate, description,companyName));
             index++;
         }
-// id for add button: addExperienceBtn
-        MaterialButton addExperienceBtn = (MaterialButton) findViewById(R.id.addExperienceBtn);
-
-        addExperienceBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), AddExperience.class);
-                startActivity(i);
-
-            }
-
-        });
 
     }
 
     @Override
     public void onItemClick(int position) {
+        Log.d(TAG, "onItemClick: ");
         Intent intent = new Intent(this, EditExperienceActivity.class);
 
         intent.putExtra("name", mExperiences.get(position).getName());
@@ -83,6 +75,7 @@ public class OtherExpPage extends AppCompatActivity implements ExperienceReycler
         intent.putExtra("description", mExperiences.get(position).getDescription());
         intent.putExtra("companyName",mExperiences.get(position).getCompanyName());
         startActivity(intent);
+
 
 // on hold
     }

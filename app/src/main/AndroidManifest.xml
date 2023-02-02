@@ -16,6 +16,13 @@
         android:theme="@style/Theme.FreelancerHomeScreen"
         tools:targetApi="31">
         <activity
+            android:name=".ViewProject"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".OtherProjPage"
             android:exported="false">
             <meta-data
@@ -31,6 +38,13 @@
         </activity>
         <activity
             android:name=".OtherSkillsPage"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".OtherCertPage"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
