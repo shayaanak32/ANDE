@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -19,6 +20,8 @@ import java.util.ArrayList;
 public class FeedPage extends AppCompatActivity {
     private RecyclerView fRecyclerView;
     private ArrayList<Recycleritem> freelancers = new ArrayList<>();
+    SharedPreferences prefs;
+    private final String TAG = "FeedPage";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +29,8 @@ public class FeedPage extends AppCompatActivity {
         DatabaseHandler db = new DatabaseHandler(this);
         setContentView(R.layout.activity_feed_page);
         setUIRef();
-        //todo: retrieve user role from shared preference
-        int userRole = 2;
+        prefs = getSharedPreferences("UserDetails", MODE_PRIVATE);
+        int userRole = Integer.parseInt(prefs.getString("RoleID","-1"));
         switch(userRole){
             case 1:
                 ArrayList<Freelancer> fl = db.getAllFreelancer();
@@ -46,6 +49,7 @@ public class FeedPage extends AppCompatActivity {
         BottomNavigationView bv = findViewById(R.id.bottomNavigationView);
         bv.setSelectedItemId(R.id.feedNav);
         bv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+
             Intent i;
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -74,6 +78,8 @@ public class FeedPage extends AppCompatActivity {
     }
     private void setUIRef()
     {
+        prefs = getSharedPreferences("UserDetails", MODE_PRIVATE);
+        int userRole = Integer.parseInt(prefs.getString("RoleID","-1"));
         //Reference of RecyclerView
         fRecyclerView = findViewById(R.id.freelancerList);
         //Linear Layout Manager
@@ -89,7 +95,6 @@ public class FeedPage extends AppCompatActivity {
             public void onItemClicked(Recycleritem country)
             {
                 //todo: retrieve user role from shared preference
-                int userRole = 2;
                 Intent i;
                 int profileID = country.getId();
                 Log.d("poooooooo", profileID+"");
