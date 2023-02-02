@@ -32,13 +32,11 @@ public class LoginScreen extends AppCompatActivity {
         //SplashWelcome sw = new SplashWelcome();
 
         SharedPreferences prefs = getSharedPreferences(APP_STARTS, MODE_PRIVATE);
+        userDetailsPref = getSharedPreferences("UserDetails", MODE_PRIVATE);
         int appStarts = prefs.getInt("AppStarts", 0);
         Log.d("OPened?",appStarts+"");
         DatabaseHandler db = new DatabaseHandler(this);
         SharedPreferences.Editor editor = prefs.edit();
-
-//        appStarts = 0;
-        //CreateTables ct = new CreateTables(this);
         if (appStarts == 0) {
             Log.d("About to Insert Data", "App Starts is 0");
             db.addUser("test", 1, "email@gmail.com", "password", 4);
@@ -99,7 +97,6 @@ public class LoginScreen extends AppCompatActivity {
             editor.putInt("AppStarts", 1);
             editor.commit();
         }
-
         db.openUsers();
         EditText emailInput = (EditText) findViewById(R.id.email_input_login);
         EditText passwordInput = (EditText) findViewById(R.id.password_input_login);
@@ -113,10 +110,10 @@ public class LoginScreen extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                String email = emailInput.getText().toString();
-//                String password = passwordInput.getText().toString();
-                String email = "com2@gmail.com";
-                String password = "asdfg";
+                String email = emailInput.getText().toString();
+                String password = passwordInput.getText().toString();
+//                String email = "com2@gmail.com";
+//                String password = "asdfg";
                 Log.d("email", email);
                 Log.d("password", password);
                 Users u = dbHandler.checkUser(email, password);
@@ -131,10 +128,13 @@ public class LoginScreen extends AppCompatActivity {
                     editor.putInt("role", role);
                     editor.putInt("user_id", user_id);
                     editor.commit();
-
+                    Log.d("role", Integer.toString(role));
+                    Log.d("email", u.getEmail());
+                    Log.d("password", u.getPassword());
+                    Log.d("user_id", Integer.toString(u.getUser_id()));
                     if (role == 1) {
                         Log.d(TAG, "onClick: PUTANG INA MO 2");
-                        userDetailsPref = getSharedPreferences("UserDetails", MODE_PRIVATE);
+                        //userDetailsPref = getSharedPreferences("UserDetails", MODE_PRIVATE);
                         SharedPreferences.Editor editor2 = userDetailsPref.edit();
 
                         Log.d("Identity ID", Integer.toString(u.getIdentityID()));

@@ -202,7 +202,8 @@
         </activity>
         <activity
             android:name=".WelcomeScreen"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
