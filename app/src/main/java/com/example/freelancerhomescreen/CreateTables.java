@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CreateTables extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String TABLE_CERTIFICATIONS = "Certifications";
     private static final String TABLE_FREELANCERS = "Freelancers";
     private static final String TABLE_EMPLOYERS = "Employers";

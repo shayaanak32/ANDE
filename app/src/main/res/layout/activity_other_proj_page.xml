@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Projects">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/pagetitle"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="Projects"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/addNewProject"
+            android:background="@drawable/pagetitle"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="70dp"
+            android:text="Add New Project"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            />
+        <ListView
+            android:layout_width="407dp"
+            android:layout_height="615dp"
+            android:id="@+id/ProjectListView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingBottom="45dp"
+
+            android:paddingHorizontal="20dp"
+            app:layout_constraintVertical_bias="1.0" />
+
+    </LinearLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/bannerColor"
+        android:id="@+id/bottomNavigationView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
+</androidx.constraintlayout.widget.ConstraintLayout>
