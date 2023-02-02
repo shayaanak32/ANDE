@@ -26,7 +26,7 @@ public class DebugPage extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.profileNav:
 
-                        i = new Intent(DebugPage.this, FirebaseMainActivity.class);
+                        //i = new Intent(DebugPage.this, FirebaseMainActivity.class);
                         startActivity(i);
                         finish();
                         return true;

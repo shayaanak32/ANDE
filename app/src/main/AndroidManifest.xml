@@ -183,10 +183,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".WelcomeScreen"
-            android:exported="false">
 
-        </activity>
         <activity
             android:name=".EditExperienceActivity"
             android:exported="false">
@@ -201,13 +198,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".FirebaseMainActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+
         <activity
             android:name=".CertificationPage"
             android:exported="false">
@@ -271,33 +262,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".LoginScreen"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".WelcomeScreen"
-            android:exported="true"
-            android:theme="@style/Theme.SplashTheme">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".LoginScreen"
-            android:exported="false" >
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+
     </application>
 
 </manifest>

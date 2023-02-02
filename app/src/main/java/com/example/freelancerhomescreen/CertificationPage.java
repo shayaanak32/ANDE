@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,7 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CertificationPage extends AppCompatActivity implements CertificationRecyclerAdapterInterface {
-
+DatabaseHandler db = new DatabaseHandler(this);
+SharedPreferences prefs;
+    private final String IdentityID = "IdentityID";
+    private final String UserID = "UserID";
+    private final String RoleID = "RoleID";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +32,6 @@ public class CertificationPage extends AppCompatActivity implements Certificatio
 
     public List<Certification> contactsList;
     public RecyclerView recyclerView;
-    InsertExperienceData db = new InsertExperienceData();
     CreateTables ct = new CreateTables(this);
     public ArrayList<CertificationRecyclerItem> mCertifications = new ArrayList<>();
 
@@ -43,7 +47,10 @@ public class CertificationPage extends AppCompatActivity implements Certificatio
 
 
     private void bindContactData() {
-        List<Certification> certificationList = ct.getAllCertifications();
+        DatabaseHandler db = new DatabaseHandler(this);
+        prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
+        int identity_id = prefs.getInt(IdentityID, 0);
+        List<Certification> certificationList = db.getCertification(identity_id);
         int index = 0;
         for (Certification e : certificationList) {
             String name = e.getName();

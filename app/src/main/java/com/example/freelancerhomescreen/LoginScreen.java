@@ -31,6 +31,8 @@ public class LoginScreen extends AppCompatActivity {
         int appStarts = prefs.getInt("AppStarts", 0);
         DatabaseHandler db = new DatabaseHandler(this);
         SharedPreferences.Editor editor = prefs.edit();
+
+//        appStarts = 0;
         //CreateTables ct = new CreateTables(this);
         if (appStarts == 0) {
             Log.d("About to Insert Data", "App Starts is 0");
@@ -42,9 +44,9 @@ public class LoginScreen extends AppCompatActivity {
             db.addUser("Michael Brown", 2, "michaelbrown@gmail.com", "asdfghjkl", 2);
             db.addUser("Ashley Taylor", 2, "ashleytaylor@gmail.com", "hashpassword6", 3);
 
-            db.addEmployer("Test Thing Company", "Programmers, Software Engineers", "A fun tech company", "testing@testCompany.gov.sg", "12345", "T123456789");
-            db.addEmployer("Company Too", "Coders, Interns", "Another boring company", "com2@gmail.com", "asdfg", "T0001112");
-            db.addEmployer("Company 3", "Coders, Internvvs", "Another bland company", "com3@gmail.com", "asdfrffg", "T3001112");
+            db.addEmployer("Test Thing Company", "Programmers, Software Engineers", "A fun tech company", "testing@testCompany.gov.sg", "12345", "T123456789", "");
+            db.addEmployer("Company Too", "Coders, Interns", "Another boring company", "com2@gmail.com", "asdfg", "T0001112", "");
+            db.addEmployer("Company 3", "Coders, Internvvs", "Another bland company", "com3@gmail.com", "asdfrffg", "T3001112", "");
 
             db.addFreelancer("Emily Davis", "emilydavis@gmail.com", "1234567890", "Computing and stuff", "Java, C++, NodeJS", "pfp3");
             db.addFreelancer("Michael Brown", "michaelbrown@gmail.com", "asdfghjkl", "More Computing and More Computing", "Java, NodeJS", "pfp4");
@@ -58,10 +60,10 @@ public class LoginScreen extends AppCompatActivity {
             db.addProjects(p3);
 
 
-            Certification c1 = new Certification("OCP 11 Java Programmer", "https://www.aws.training/certification", "Januray 2020", "Java,JavaScript", "Description1");
-            Certification c2 = new Certification("IBM Professional Data Science Certification", "https://www.coursera.org/professional-certificates/ibm-data-science", "August 2021", "Python,Java", "Description2");
-            Certification c3 = new Certification("DataCamp Certified Data Professional", "https://www.coursera.org/professional-certificates/ibm-data-science", "January 2022", "Java", "Description3");
-            Certification c4 = new Certification("Google Cloud Certified Data Scientist", "https://www.coursera.org/professional-certificates/ibm-data-science", "May 2022", "Java", "Description4");
+            Certification c1 = new Certification("OCP 11 Java Programmer", "https://www.aws.training/certification", "Januray 2020", "Java,JavaScript", "Description1",1);
+            Certification c2 = new Certification("IBM Professional Data Science Certification", "https://www.coursera.org/professional-certificates/ibm-data-science", "August 2021", "Python,Java", "Description2",2);
+            Certification c3 = new Certification("DataCamp Certified Data Professional", "https://www.coursera.org/professional-certificates/ibm-data-science", "January 2022", "Java", "Description3",3);
+            Certification c4 = new Certification("Google Cloud Certified Data Scientist", "https://www.coursera.org/professional-certificates/ibm-data-science", "May 2022", "Java", "Description4",1);
             db.addCertifications(c1);
             db.addCertifications(c2);
             db.addCertifications(c3);
@@ -92,6 +94,7 @@ public class LoginScreen extends AppCompatActivity {
             editor.putInt("AppStarts", 1);
             editor.commit();
         }
+
         db.openUsers();
         EditText emailInput = (EditText) findViewById(R.id.email_input_login);
         EditText passwordInput = (EditText) findViewById(R.id.password_input_login);
@@ -125,9 +128,11 @@ public class LoginScreen extends AppCompatActivity {
                         Log.d("Identity ID", Integer.toString(u.getIdentityID()));
                         Log.d("User ID", Integer.toString(u.getUser_id()));
                         Log.d("RoleID", Integer.toString(u.getRole()));
-                        editor2.putString(IdentityID, Integer.toString(u.getIdentityID()));
-                        editor2.putString(UserID, Integer.toString(u.getUser_id()));
-                        editor2.putString(RoleID, Integer.toString(u.getRole()));
+                        editor2.putInt(IdentityID, (u.getIdentityID()));
+                        editor2.putInt(UserID, (u.getUser_id()));
+                        editor2.putInt(RoleID, (u.getRole()));
+                        editor2.commit();
+
                         Log.d("", "");
                         startActivity(new Intent(LoginScreen.this, ProfilePage.class));
                         finish();
@@ -138,11 +143,11 @@ public class LoginScreen extends AppCompatActivity {
                         Log.d("Identity ID", Integer.toString(u.getIdentityID()));
                         Log.d("User ID", Integer.toString(u.getUser_id()));
                         Log.d("RoleID", Integer.toString(u.getRole()));
-                        SharedPreferences.Editor editor2 = userDetailsPref.edit();
-                        editor2.putString(IdentityID, Integer.toString(u.getIdentityID()));
-                        editor2.putString(UserID, Integer.toString(u.getUser_id()));
-                        editor2.putString(RoleID, Integer.toString(u.getRole()));
-
+                        SharedPreferences.Editor editor2 = freelancerUserPref.edit();
+                        editor2.putInt(IdentityID, u.getIdentityID());
+                        editor2.putInt(UserID, (u.getUser_id()));
+                        editor2.putInt(RoleID, (u.getRole()));
+                        editor2.commit();
                         startActivity(new Intent(LoginScreen.this, FreelancerOwnProfile.class));
                         WelcomeScreen.welcomeScreenActivity.finish();
 
