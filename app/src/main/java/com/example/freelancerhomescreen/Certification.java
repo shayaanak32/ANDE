@@ -8,14 +8,16 @@ public class Certification {
     private String skills;
     private String description;
     private int certID;
+    private int freelancerID;
 
-    public Certification(String name, String link, String endDate, String skills, String description) {
+    public Certification(String name, String link, String endDate, String skills, String description,int freelancerID) {
 
         this.name = name;
         this.link = link;
         this.endDate = endDate;
         this.skills = skills;
         this.description = description;
+        this.freelancerID = freelancerID;
     }
     public Certification() {
 
@@ -54,6 +56,13 @@ public class Certification {
         this.link = link;
     }
 
+    public int getFreelancerID() {
+        return freelancerID;
+    }
+
+    public void setFreelancerID(int freelancerID) {
+        this.freelancerID = freelancerID;
+    }
 
     public String getEndDate() {
         return endDate;

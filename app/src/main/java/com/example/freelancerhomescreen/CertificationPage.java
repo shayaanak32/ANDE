@@ -5,10 +5,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 import com.google.android.material.button.MaterialButton;
 
@@ -16,21 +18,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CertificationPage extends AppCompatActivity implements CertificationRecyclerAdapterInterface {
-
+    DatabaseHandler db = new DatabaseHandler(this);
+    //MaterialButton addCertificationBtn;
+    SharedPreferences prefs;
+    private final String IdentityID = "Identity ID";
+    private final String UserID = "UserID";
+    private final String RoleID = "RoleID";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_certification_page);
         recyclerView = (RecyclerView) findViewById(R.id.currentCertifications);
+        Button addCertificationBtn = (Button) findViewById(R.id.goToAddExp);
+        addCertificationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(CertificationPage.this, AddCertification.class);
+                i.putExtra("fromCalendarViewActivity",true);
+                startActivity(i);
+
+            }
+        });
         bindContactData();
         setAdapter();
+
+
     }
 
     public List<Certification> contactsList;
     public RecyclerView recyclerView;
-    InsertExperienceData db = new InsertExperienceData();
-    CreateTables ct = new CreateTables(this);
     public ArrayList<CertificationRecyclerItem> mCertifications = new ArrayList<>();
+
 
 
     private void setAdapter() {
@@ -44,7 +63,10 @@ public class CertificationPage extends AppCompatActivity implements Certificatio
 
 
     private void bindContactData() {
-        List<Certification> certificationList = ct.getAllCertifications();
+        DatabaseHandler db = new DatabaseHandler(this);
+        prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
+        int identity_id = prefs.getInt("IdentityID", 0);
+        List<Certification> certificationList = db.getCertification(1);
         int index = 0;
         for (Certification e : certificationList) {
             String name = e.getName();
@@ -58,7 +80,6 @@ public class CertificationPage extends AppCompatActivity implements Certificatio
             mCertifications.add(new CertificationRecyclerItem(name, link, endDate, skills, description));
             index++;
         }
-
 
     }
 

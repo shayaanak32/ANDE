@@ -37,9 +37,10 @@ public class LoginScreen extends AppCompatActivity {
         Log.d("OPened?",appStarts+"");
         DatabaseHandler db = new DatabaseHandler(this);
         SharedPreferences.Editor editor = prefs.edit();
+
         if (appStarts == 0) {
             Log.d("About to Insert Data", "App Starts is 0");
-            db.addUser("test", 1, "email@gmail.com", "password", 4);
+            db.addUser("test", 1, "email@gmail.com", "password", 1);
             db.addUser("Test Thing Company", 1, "testing@testCompany.gov.sg", "12345", 1);
             db.addUser("Company Too", 1, "com2@gmail.com", "asdfg", 2);
             db.addUser("Company 3", 1, "com3@gmail.com", "asdfrffg", 3);
@@ -63,10 +64,10 @@ public class LoginScreen extends AppCompatActivity {
             db.addProjects(p3);
 
 
-            Certification c1 = new Certification("OCP 11 Java Programmer", "https://www.aws.training/certification", "Januray 2020", "Java,JavaScript", "Description1");
-            Certification c2 = new Certification("IBM Professional Data Science Certification", "https://www.coursera.org/professional-certificates/ibm-data-science", "August 2021", "Python,Java", "Description2");
-            Certification c3 = new Certification("DataCamp Certified Data Professional", "https://www.coursera.org/professional-certificates/ibm-data-science", "January 2022", "Java", "Description3");
-            Certification c4 = new Certification("Google Cloud Certified Data Scientist", "https://www.coursera.org/professional-certificates/ibm-data-science", "May 2022", "Java", "Description4");
+            Certification c1 = new Certification("OCP 11 Java Programmer", "https://www.aws.training/certification", "Januray 2020", "Java,JavaScript", "Description1",1);
+            Certification c2 = new Certification("IBM Professional Data Science Certification", "https://www.coursera.org/professional-certificates/ibm-data-science", "August 2021", "Python,Java", "Description2",2);
+            Certification c3 = new Certification("DataCamp Certified Data Professional", "https://www.coursera.org/professional-certificates/ibm-data-science", "January 2022", "Java", "Description3",3);
+            Certification c4 = new Certification("Google Cloud Certified Data Scientist", "https://www.coursera.org/professional-certificates/ibm-data-science", "May 2022", "Java", "Description4",1);
             db.addCertifications(c1);
             db.addCertifications(c2);
             db.addCertifications(c3);

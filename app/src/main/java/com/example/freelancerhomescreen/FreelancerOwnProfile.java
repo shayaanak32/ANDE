@@ -13,6 +13,10 @@ public class FreelancerOwnProfile extends AppCompatActivity implements View.OnCl
 
     private final String TAG = "MainActivity";
     TextView freelancerName, freelancerDescription, editBtn;
+    SharedPreferences prefs;
+    private final String IdentityID = "IdentityID";
+    private final String UserID = "UserID";
+    private final String RoleID = "RoleID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +27,14 @@ public class FreelancerOwnProfile extends AppCompatActivity implements View.OnCl
         int userId = Integer.parseInt(prefs.getString("Identity ID","-1"));
         Log.d("contents own profile", userId+"");
         //todo: get from sharedPrefs
+//        prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
+//        String identity_id = prefs.getString(IdentityID, "");
+//        String user_id = prefs.getString(UserID, "");
+//        String role_id = prefs.getString(RoleID, "");
+//        Log.d("FreelancerOwnProfile: identity_id", identity_id);
+//        Log.d("FreelancerOwnProfile: user_id", (user_id));
+//        Log.d("FreelancerOwnProfile: role_id", role_id);
+
         DatabaseHandler db = new DatabaseHandler(this);
         Freelancer fl = db.getFreelancer(userId);
         freelancerName = findViewById(R.id.name);
@@ -30,12 +42,14 @@ public class FreelancerOwnProfile extends AppCompatActivity implements View.OnCl
         editBtn = findViewById(R.id.editFreelancer);
         freelancerName.setText(fl.getName());
         freelancerDescription.setText(fl.getDescription());
+
         editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), FreelancerEditProfile.class);
                 startActivity(i);
-                finish();
+                // comment as user should be able to go back if they want
+                //finish();
             }
         });
     }
@@ -93,8 +107,6 @@ public class FreelancerOwnProfile extends AppCompatActivity implements View.OnCl
         startActivity(i);
 
     }
-
-
 
 
 }

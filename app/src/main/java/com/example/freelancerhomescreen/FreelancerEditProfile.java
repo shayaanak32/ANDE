@@ -43,7 +43,7 @@ public class FreelancerEditProfile extends AppCompatActivity implements View.OnC
                 db.updateFreelancer(f);
                 Intent i = new Intent(getApplicationContext(), FreelancerOwnProfile.class);
                 startActivity(i);
-                finish();
+                //finish();
             }
         });
     }

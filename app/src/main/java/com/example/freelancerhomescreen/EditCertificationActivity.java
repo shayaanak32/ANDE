@@ -39,7 +39,7 @@ public class EditCertificationActivity extends AppCompatActivity {
     SharedPreferences edPref;
     EditCertSkillAdapter adapter;
     String[] skillsArray;
-    public static final String START_DATE = "StartDate";
+    public static final String START_DATE = "StartDateCert";
     public static final String END_DATE = "EndDate";
     RecyclerView recyclerView;
     String name;
@@ -81,7 +81,7 @@ public class EditCertificationActivity extends AppCompatActivity {
 
             name = getData.getString("name");
             link = getData.getString("link");
-            endDate = getData.getString("endDate");
+            endDate = getData.getString("completionDateSelected");
             Log.d("Date Chosen", endDate);
             description = getData.getString("description");
             skills = getData.getString("skills");
