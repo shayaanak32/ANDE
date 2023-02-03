@@ -3,7 +3,10 @@ package com.example.freelancerhomescreen;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -24,7 +27,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ProfilePage extends AppCompatActivity {
     ListView listView;
     TextView textView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,13 +69,19 @@ public class ProfilePage extends AppCompatActivity {
                 return false;
             }
         });
-        Employer emp = db.getContact(1);
-        //todo: get id from sharedPrefs
+        SharedPreferences prefs;
+        prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
+        int identity_id = Integer.parseInt(prefs.getString("Identity ID","-1"));
+        Employer emp = db.getContact(identity_id);
         TextView cName = (TextView)findViewById(R.id.companyName);
         TextView cAbout = (TextView)findViewById(R.id.aboutOrgInput);
         cName.setText(emp.getCompanyName());
         cAbout.setText(emp.getDescription());
-        pfp.setImageResource(R.drawable.profile_pic);
+        Log.d("konichiwa", emp.getProfileImg());
+        int imageResource = getResources().getIdentifier(emp.getProfileImg(), "drawable", this.getPackageName());
+        Drawable d= getResources().getDrawable(imageResource);
+        pfp.setImageDrawable(d);
+//        pfp.setImageResource(R.drawable.profile_pic);
         listView=(ListView)findViewById(R.id.orgPriosInput);
         textView=(TextView)findViewById(R.id.textViewProg);
         String prioStr = emp.getPriorities();
@@ -104,7 +112,10 @@ public class ProfilePage extends AppCompatActivity {
         TextView cAbout = (TextView)findViewById(R.id.aboutOrgInput);
         cName.setText(emp.getCompanyName());
         cAbout.setText(emp.getDescription());
-        pfp.setImageResource(R.drawable.profile_pic);
+        int imageResource = getResources().getIdentifier(emp.getProfileImg(), "drawable", this.getPackageName());
+        Drawable d= getResources().getDrawable(imageResource);
+        pfp.setImageDrawable(d);
+//        pfp.setImageResource(R.drawable.profile_pic);
         listView=(ListView)findViewById(R.id.orgPriosInput);
         textView=(TextView)findViewById(R.id.textViewProg);
         String prioStr = emp.getPriorities();

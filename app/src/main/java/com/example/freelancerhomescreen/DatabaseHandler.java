@@ -218,13 +218,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_EMPLOYERS, new String[]{KEY_NAME,
-                        KEY_DESCRIPTION, KEY_PRIORITIES}, KEY_USERID + "=?",
+                        KEY_DESCRIPTION, KEY_PRIORITIES, KEY_PFP, KEY_USERID,KEY_EMAIL}, KEY_USERID + "=?",
                 new String[]{String.valueOf(id)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
-
+        Log.d("konichiwa22", cursor.getString((3)));
         Employer contact = new Employer(cursor.getString(0),
-                cursor.getString(1), cursor.getString(2));
+                cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getInt(Integer.parseInt(cursor.getString(4))), cursor.getString(5));
         // return contact
         return contact;
     }
@@ -253,6 +253,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         Freelancer f = new Freelancer(cursor.getString(0),
                 cursor.getString(1), cursor.getString(2), cursor.getString(3));
+        Log.d("konichiwa555",cursor.getString(3));
         // return contact
         return f;
     }
@@ -264,7 +265,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_PASSWORD, password);
         values.put(KEY_DESCRIPTION, description);
         values.put(KEY_YOUR_SKILLS, skills);
-        values.put(KEY_PFP, "R.drawable.default_pfp");
+        values.put(KEY_PFP, profilePic);
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
         db.insert(TABLE_FREELANCERS, null, values);
@@ -308,7 +309,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_DESCRIPTION, description);
         values.put(KEY_PRIORITIES, priorities);
         values.put(KEY_UEN, uen);
-        values.put(KEY_PFP, "R.drawable.default_pfp");
+        values.put(KEY_PFP, profilePic);
         Log.d("Inputting values:", empEmail + empPassword + companyName + description + priorities + uen);
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
