@@ -100,7 +100,7 @@ public class FeedPage extends AppCompatActivity {
                 //todo: retrieve user role from shared preference
                 Intent i;
                 int profileID = country.getId();
-                Log.d("poooooooo", profileID+"");
+
                 switch(userRole){
                     case 1:
                         i = new Intent(getApplicationContext(), FreelancerProfile.class);

@@ -91,7 +91,6 @@ public class EditExperienceActivity extends AppCompatActivity {
         updateExperienceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("I am being clicked", "Clicked!");
 
                 String experienceName = editTextUpdateName.getText().toString();
                 String startDate = startDatePickerUpd.getText().toString();
@@ -100,13 +99,13 @@ public class EditExperienceActivity extends AppCompatActivity {
 
 
                 if (experienceName != null && !experienceName.isEmpty() && startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty() && companyName != null && !companyName.isEmpty() && description != null && !description.isEmpty()) {
-                    Log.d("Form Status", "Fields Complete");
+
                     Experience e = new Experience(experienceName, startDate, endDate, companyName, description, 1);
                     ct.updateExperience(e);
                     Intent i = new Intent(EditExperienceActivity.this, ExperienceMainActivity.class);
 
                 } else {
-                    Log.d("Form Status", "Missing Fields");
+
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(EditExperienceActivity.this);
                     builder1.setMessage("Please fill in all the fields!");
                     builder1.setCancelable(true);
@@ -159,15 +158,15 @@ public class EditExperienceActivity extends AppCompatActivity {
     public void updateSD() {
         SharedPreferences sdsp = getSharedPreferences(START_DATE, MODE_PRIVATE);
         String text = sdsp.getString("ChosenStartDate", "");
-        Log.d("Inside UpdateSD Checking Text", text);
+
         startDatePickerUpd.setText(text);
     }
 
     public void updateED() {
-        Log.d("Inside UpdateED", "endDate clicked is false");
+
         SharedPreferences edsp = getSharedPreferences(END_DATE, MODE_PRIVATE);
         String text2 = edsp.getString("ChosenEndDate", "");
-        Log.d("Inside UpdateED Checking Text", text2);
+
 
         endDatePickerUpd.setText(text2);
     }

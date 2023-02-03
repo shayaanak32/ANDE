@@ -96,14 +96,12 @@ public class AddCertification extends AppCompatActivity {
                 String link = addCertificationEditLink.getText().toString();
 
                 if (name != null && !name.isEmpty() && completionDate != null && !completionDate.isEmpty() && description != null && !description.isEmpty() && textListSkills != null ) {
-                    Log.d("Form Status", "Fields Complete");
                     // NOTE: Add the Identity_ID from shared Preferences Here!
 
                     Certification e = new Certification(name, link, completionDate, textListSkills, description, 1);
                     db.addCertifications(e);
                     finish();
                 } else {
-                    Log.d("Form Status", "Missing Fields");
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(AddCertification.this);
                     builder1.setMessage("Please fill in all the fields!");
                     builder1.setCancelable(true);

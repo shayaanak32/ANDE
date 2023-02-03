@@ -34,7 +34,6 @@ public class CertificationAdapter extends RecyclerView.Adapter<CertificationAdap
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.rvcertifications_card, parent, false);
         //Create View Holder
         final CertificationAdapter.MyViewHolder myViewHolder = new CertificationAdapter.MyViewHolder(itemView,crai);
-        Log.d("STATUS", "View Holder created");
 
         return myViewHolder;
     }

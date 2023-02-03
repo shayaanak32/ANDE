@@ -82,18 +82,7 @@ public class AddExperience extends AppCompatActivity {
                 String startDate = startDateField.getText().toString();
                 String endDate = endDateField.getText().toString();
                 String companyName = editTextCompany.getText().toString();
-                Log.d("Company Name",companyName);
                 String description = descriptionField.getText().toString();
-//                Log.d("experienceName", experienceName);
-//                Log.d("Name Check", Boolean.toString(experienceName != null && !experienceName.isEmpty()));
-//                Log.d("startDate", startDate);
-//                Log.d("Start Date Check", Boolean.toString(startDate != null && !startDate.isEmpty()));
-//                Log.d("endDate", endDate);
-//                Log.d("End Date Check", Boolean.toString(endDate != null && !endDate.isEmpty()));
-//                Log.d("companyName", companyName);
-//                Log.d("Company Name Check", Boolean.toString(companyName != null && !companyName.isEmpty()));
-//                Log.d("description", description);
-//                Log.d("Description Check", Boolean.toString(description != null && !description.isEmpty()));
 
 
                 if (experienceName != null && !experienceName.isEmpty() && startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty() && companyName != null && !companyName.isEmpty() && description != null && !description.isEmpty()) {
@@ -102,7 +91,7 @@ public class AddExperience extends AppCompatActivity {
                     Intent i = new Intent(AddExperience.this, ExperienceMainActivity.class);
 
                 } else {
-                    Log.d("Form Status", "Missing Fields");
+
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(AddExperience.this);
                     builder1.setMessage("Please fill in all the fields!");
                     builder1.setCancelable(true);
@@ -192,15 +181,14 @@ public class AddExperience extends AppCompatActivity {
     public void updateSD() {
         SharedPreferences sdsp = getSharedPreferences(START_DATE, MODE_PRIVATE);
         String text = sdsp.getString("ChosenStartDate", "");
-        Log.d("Inside UpdateSD Checking Text", text);
+
         startDateField.setText(text);
     }
 
     public void updateED() {
-        Log.d("Inside UpdateED", "endDate clicked is false");
+
         SharedPreferences edsp = getSharedPreferences(END_DATE, MODE_PRIVATE);
         String text2 = edsp.getString("ChosenEndDate", "");
-        Log.d("Inside UpdateED Checking Text", text2);
 
         endDateField.setText(text2);
     }
@@ -208,7 +196,7 @@ public class AddExperience extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Log.d("onStart msg", "The onStart() event");
+
     }
 
     /**
@@ -217,7 +205,7 @@ public class AddExperience extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("onResume msg", "The onResume() event");
+
     }
 
     /**
@@ -226,7 +214,7 @@ public class AddExperience extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d("onPause msg", "The onPause() event");
+
     }
 
     /**
@@ -235,7 +223,7 @@ public class AddExperience extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d("onStop msg", "The onStop() event");
+
     }
 
     /**
@@ -244,7 +232,7 @@ public class AddExperience extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d("onDestroy msg", "The onDestroy() event");
+
     }
 
 

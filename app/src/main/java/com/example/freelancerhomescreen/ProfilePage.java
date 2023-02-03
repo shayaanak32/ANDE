@@ -77,7 +77,6 @@ public class ProfilePage extends AppCompatActivity {
         TextView cAbout = (TextView)findViewById(R.id.aboutOrgInput);
         cName.setText(emp.getCompanyName());
         cAbout.setText(emp.getDescription());
-        Log.d("konichiwa", emp.getProfileImg());
         int imageResource = getResources().getIdentifier(emp.getProfileImg(), "drawable", this.getPackageName());
         Drawable d= getResources().getDrawable(imageResource);
         pfp.setImageDrawable(d);
