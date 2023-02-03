@@ -75,6 +75,13 @@
             android:name=".RegisterCompanyBioDetails"
             android:exported="false" />
         <activity
+            android:name=".RegisterCheckScreen"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".RegisterBioDetails"
             android:exported="false" />
         <activity

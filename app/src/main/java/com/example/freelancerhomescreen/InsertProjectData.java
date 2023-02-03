@@ -19,7 +19,7 @@ public class InsertProjectData extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        CreateTables db = new CreateTables(this);
+//        CreateTables db = new CreateTables(this);
         String startDate1 = "2020-09-21 10:20:05.123";
         String startDate2 = "2020-12-25 10:20:05.123";
         String startDate3 = "2019-01-01 10:20:05.123";

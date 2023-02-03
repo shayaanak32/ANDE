@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 public class RegisterCompanyBioDetails extends AppCompatActivity implements View.OnClickListener {
 
-    EditText infoInput;
+    EditText infoInput, pwInput;
     String name, email, uen, role;
 
     @Override
@@ -19,7 +19,7 @@ public class RegisterCompanyBioDetails extends AppCompatActivity implements View
         setContentView(R.layout.activity_register_company_bio_details);
 
         infoInput = findViewById(R.id.infoInput);
-
+        pwInput = findViewById(R.id.pwInput);
         email=getIntent().getExtras().getString("email");
         name=getIntent().getExtras().getString("name");
         uen=getIntent().getExtras().getString("uen");
@@ -31,19 +31,20 @@ public class RegisterCompanyBioDetails extends AppCompatActivity implements View
         Intent i;
         switch(view.getId()){
             case R.id.nextBtn:
-                if(String.valueOf(infoInput.getText()).isEmpty()){
+                if(String.valueOf(infoInput.getText()).isEmpty()||String.valueOf(pwInput.getText()).isEmpty()){
                     Toast.makeText(this, "Fill in all info", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    i = new Intent(this, Register.class);
                     String info = String.valueOf(infoInput.getText());
-                    i.putExtra("status", "employer");
-                    i.putExtra("email", email);
-                    i.putExtra("name", name);
-                    i.putExtra("uen", uen);
-                    i.putExtra("role", role);
-                    i.putExtra("info", info);
+                    String pw = String.valueOf(pwInput.getText());
+                    DatabaseHandler db = new DatabaseHandler(this);
+                    db.addEmployer(name,"start,",info,email,pw,uen,"");
+                    int id = db.getEmployerUserIdByEmail(email);
+                    db.addUser(name,1, email, pw, id);
+                    Toast.makeText(this, "Successful Registration", Toast.LENGTH_SHORT).show();
+                    i = new Intent(this, LoginScreen.class);
                     startActivity(i);
+                    finish();
                 }
 
                 break;

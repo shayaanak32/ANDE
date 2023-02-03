@@ -36,6 +36,7 @@ public class FeedPage extends AppCompatActivity {
                 ArrayList<Freelancer> fl = db.getAllFreelancer();
                 for(Freelancer f : fl){
                     freelancers.add(new Recycleritem(f.getId(),f.getName(), f.getIndividualSkill(f.getSkills()), f.getDescription(), f.getProfileImg()));
+                    Log.d("skill debug", f.getIndividualSkill(f.getSkills()).length+"");
                 }
                 break;
             case 2:

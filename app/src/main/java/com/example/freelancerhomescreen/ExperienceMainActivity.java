@@ -19,8 +19,7 @@ public class ExperienceMainActivity extends AppCompatActivity implements Experie
 
     public List<Experience> contactsList;
     public RecyclerView recyclerView;
-    InsertExperienceData db = new InsertExperienceData();
-    CreateTables ct = new CreateTables(this);
+    DatabaseHandler db = new DatabaseHandler(this);
     public ArrayList<ExperienceRecyclerItem> mExperiences = new ArrayList<>();
 
     @Override
@@ -45,7 +44,9 @@ public class ExperienceMainActivity extends AppCompatActivity implements Experie
 
 
     private void bindContactData() {
-        List<Experience> experienceList = ct.getAllExperience();
+        SharedPreferences prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
+        int identity_id = Integer.parseInt(prefs.getString("Identity ID","-1"));
+        List<Experience> experienceList = db.getAllExperience(identity_id);
         int index = 0;
         for (Experience e : experienceList) {
             String name = e.getName();

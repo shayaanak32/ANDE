@@ -11,7 +11,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
@@ -71,7 +70,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_EMAIL + " TEXT NOT NULL,"
                 + KEY_PASSWORD + " TEXT NOT NULL,"
                 + KEY_DESCRIPTION + " TEXT NOT NULL, "
-                + KEY_YOUR_SKILLS + " TEXT NOT NULL, "
+                + KEY_YOUR_SKILLS + " TEXT DEFAULT \"start,\" NOT NULL, "
                 + KEY_PFP + " TEXT"
                 + ");";
         String CREATE_PROJECTS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_PROJECTS + "("
@@ -200,12 +199,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // code to add the new contact
     public void addContact(Employer contact) {
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues cr = new ContentValues();
-        cr.put(KEY_EMAIL, "test@test.com");
-        cr.put(KEY_PASSWORD, "test");
-        cr.put(KEY_DESCRIPTION, "test");
-        cr.put(KEY_NAME, "test");
-        db.insert(TABLE_EMPLOYERS, null, cr);
         ContentValues values = new ContentValues();
         values.put(KEY_EMAIL, contact.getEmpEmail());
         values.put(KEY_PASSWORD, contact.getEmpPassword());// Contact Phone
@@ -271,7 +264,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_PASSWORD, password);
         values.put(KEY_DESCRIPTION, description);
         values.put(KEY_YOUR_SKILLS, skills);
-        values.put(KEY_PFP, profilePic);
+        values.put(KEY_PFP, "R.drawable.default_pfp");
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
         db.insert(TABLE_FREELANCERS, null, values);
@@ -315,7 +308,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_DESCRIPTION, description);
         values.put(KEY_PRIORITIES, priorities);
         values.put(KEY_UEN, uen);
-        values.put(KEY_PFP, profilePic);
+        values.put(KEY_PFP, "R.drawable.default_pfp");
         Log.d("Inputting values:", empEmail + empPassword + companyName + description + priorities + uen);
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
@@ -418,7 +411,32 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // return contact list
         return projectList;
     }
+    public int getFreelancerUserIdByEmail(String email){
+        String selectQuery = "SELECT freelancerId FROM " + TABLE_FREELANCERS + " WHERE " + KEY_EMAIL + " = '" + email +"'";
 
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        cursor.moveToFirst();
+
+        int uid = Integer.parseInt(cursor.getString(0));
+
+        cursor.close();
+        db.close();
+        return uid;
+    }
+    public int getEmployerUserIdByEmail(String email){
+        String selectQuery = "SELECT userid FROM " + TABLE_EMPLOYERS + " WHERE " + KEY_EMAIL + " = '" + email +"'";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        cursor.moveToFirst();
+
+        int uid = Integer.parseInt(cursor.getString(0));
+
+        cursor.close();
+        db.close();
+        return uid;
+    }
     public Users checkUser(String email, String password) {
         Log.i("Info", "Trying to run query...");
         String selectQuery = "SELECT * FROM " + TABLE_USERS + " WHERE " + KEY_EMAIL + " = '" + email + "' AND " + KEY_PASSWORD + " = '" + password + "'";
@@ -453,7 +471,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
         return u;
     }
+    public int updateCertification(Certification certification) {
+        SQLiteDatabase db = this.getWritableDatabase();
 
+        ContentValues values = new ContentValues();
+
+//        values.put(KEY_CERTID, certification.getID());
+        values.put(KEY_NAME, certification.getName());
+        values.put(KEY_LINK, certification.getLink());
+        values.put(KEY_DATE, certification.getEndDate());
+        values.put(KEY_SKILLS, certification.getSkills());
+        values.put(KEY_DESCRIPTION, certification.getDescription());
+
+        // updating row
+        return db.update(TABLE_CERTIFICATIONS, values, KEY_CERTID + " = ?",
+                new String[]{String.valueOf(certification.getID())});
+    }
     ArrayList<Certification> getCertification(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<Certification> certificationArrayList = new ArrayList<Certification>();

@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OtherCertPage extends AppCompatActivity implements CertificationRecyclerAdapterInterface {
+    SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,9 @@ public class OtherCertPage extends AppCompatActivity implements CertificationRec
 
 
     private void bindContactData() {
-        List<Certification> certificationList = db.getAllCertifications();
+        prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
+        int profile = Integer.parseInt(prefs.getString("Identity ID","-1"));
+        List<Certification> certificationList = db.getCertification(1);
         int index = 0;
         for (Certification e : certificationList) {
             String name = e.getName();

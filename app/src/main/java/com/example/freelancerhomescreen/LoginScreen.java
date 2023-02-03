@@ -34,6 +34,7 @@ public class LoginScreen extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences(APP_STARTS, MODE_PRIVATE);
         userDetailsPref = getSharedPreferences("UserDetails", MODE_PRIVATE);
         int appStarts = prefs.getInt("AppStarts", 0);
+//        int appStarts=0;
         Log.d("OPened?",appStarts+"");
         DatabaseHandler db = new DatabaseHandler(this);
         SharedPreferences.Editor editor = prefs.edit();
@@ -111,10 +112,10 @@ public class LoginScreen extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = emailInput.getText().toString();
-                String password = passwordInput.getText().toString();
-//                String email = "com2@gmail.com";
-//                String password = "asdfg";
+//                String email = emailInput.getText().toString();
+//                String password = passwordInput.getText().toString();
+                String email = "com2@gmail.com";
+                String password = "asdfg";
                 Log.d("email", email);
                 Log.d("password", password);
                 Users u = dbHandler.checkUser(email, password);
