@@ -26,7 +26,7 @@ public class FreelancerOwnProfile extends AppCompatActivity implements View.OnCl
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_freelancer_own_profile);
-        SharedPreferences prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("UserDetails", MODE_PRIVATE);
         int userId = Integer.parseInt(prefs.getString("Identity ID","-1"));
         Log.d("contents own profile", userId+"");
         //todo: get from sharedPrefs
@@ -58,7 +58,7 @@ public class FreelancerOwnProfile extends AppCompatActivity implements View.OnCl
     @Override
     protected void onResume() {
         super.onResume();
-        SharedPreferences prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("UserDetails", MODE_PRIVATE);
         int userId = Integer.parseInt(prefs.getString("Identity ID","-1"));
 
         DatabaseHandler db = new DatabaseHandler(this);
@@ -80,7 +80,7 @@ public class FreelancerOwnProfile extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View view) {
-        SharedPreferences prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("UserDetails", MODE_PRIVATE);
         int userId = Integer.parseInt(prefs.getString("Identity ID","-1"));
         Intent i = new Intent(getApplicationContext(), FreelancerOwnProfile.class);
         switch(view.getId()){

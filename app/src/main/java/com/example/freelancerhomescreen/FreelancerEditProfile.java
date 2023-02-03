@@ -30,7 +30,7 @@ public class FreelancerEditProfile extends AppCompatActivity implements View.OnC
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_freelancer_edit_profile);
-        prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
+        prefs = getSharedPreferences("UserDetails", MODE_PRIVATE);
         int identity_id = Integer.parseInt(prefs.getString("Identity ID","-1"));
         //todo: get from sharedPrefs
 

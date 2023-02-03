@@ -44,7 +44,7 @@ public class ExperienceMainActivity extends AppCompatActivity implements Experie
 
 
     private void bindContactData() {
-        SharedPreferences prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("UserDetails", MODE_PRIVATE);
         int identity_id = Integer.parseInt(prefs.getString("Identity ID","-1"));
         List<Experience> experienceList = db.getAllExperience(identity_id);
         int index = 0;

@@ -102,7 +102,7 @@ public class RecyclerItemArrayAdapter extends RecyclerView.Adapter<RecyclerItemA
                 break;
         }
 
-//        freelancerPfp.setImageResource(R.drawable.default_pfp);
+
 
     }
 
