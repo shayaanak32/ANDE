@@ -98,7 +98,7 @@ public class AddExperience extends AppCompatActivity {
 
                 if (experienceName != null && !experienceName.isEmpty() && startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty() && companyName != null && !companyName.isEmpty() && description != null && !description.isEmpty()) {
                     Experience e = new Experience(experienceName, startDate, endDate, companyName, description,1);
-                    ct.addExperience(e);
+                    db.addExperience(e);
                     Intent i = new Intent(AddExperience.this, ExperienceMainActivity.class);
 
                 } else {
