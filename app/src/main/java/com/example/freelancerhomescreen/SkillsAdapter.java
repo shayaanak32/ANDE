@@ -27,8 +27,6 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.MyViewHold
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.skills_list, parent, false);
         //Create View Holder
         final SkillsAdapter.MyViewHolder myViewHolder = new SkillsAdapter.MyViewHolder(itemView);
-        Log.d("STATUS", "View Holder created");
-
         return myViewHolder;
     }
 

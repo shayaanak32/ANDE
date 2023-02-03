@@ -1,4 +1,4 @@
-package com.example.freelancerhomescreen;
+        package com.example.freelancerhomescreen;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -97,10 +97,8 @@ public class AddExperience extends AppCompatActivity {
 
 
                 if (experienceName != null && !experienceName.isEmpty() && startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty() && companyName != null && !companyName.isEmpty() && description != null && !description.isEmpty()) {
-
-                    Experience e = new Experience(experienceName, startDate, endDate, companyName, description, 1);
+                    Experience e = new Experience(experienceName, startDate, endDate, companyName, description,1);
                     db.addExperience(e);
-                    Log.d("Form Status", "Fields Complete");
                     Intent i = new Intent(AddExperience.this, ExperienceMainActivity.class);
 
                 } else {
@@ -177,17 +175,11 @@ public class AddExperience extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        Log.d("Inside onSaveInstanceState ", "About to Save Instance!!!");
         String experienceName = editTextExpName.getText().toString();
         String startDate = startDateField.getText().toString();
         String endDate = endDateField.getText().toString();
         String companyName = editTextCompany.getText().toString();
         String description = descriptionField.getText().toString();
-        Log.d("experienceName", experienceName);
-        Log.d("startDate", startDate);
-        Log.d("endDate", endDate);
-        Log.d("companyName", companyName);
-        Log.d("description", description);
 
         outState.putString("experience_name", experienceName);
         outState.putString("start_name", startDate);

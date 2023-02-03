@@ -29,14 +29,10 @@ public class SkillsPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_skills_page);
         MaterialButton addSkill = (MaterialButton) findViewById(R.id.addSkillBtn);
         EditText addSkillField = (EditText) findViewById(R.id.editTextSkill);
-        Log.d("is addSkill btn null?", Boolean.toString((addSkill == null)));
-        Log.d("is addSkillField null?", Boolean.toString((addSkillField == null)));
-
 
         addSkill.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,10 +83,8 @@ public class SkillsPage extends AppCompatActivity {
     private void bindContactData() {
         Intent intent = getIntent();
         int profileID = intent.getIntExtra("profileid",0);
-        Log.d("OIOIOI",profileID+"");
         Freelancer f = db.getFreelancers(profileID);
         boolean isNull = (f == null);
-        Log.d("POPOPOOPO", f.getSkills());
         String[] skillsList = f.getIndividualSkill(f.getSkills());
         if(skillsList.length>1){
             for (int i =0;i<skillsList.length;i++) {

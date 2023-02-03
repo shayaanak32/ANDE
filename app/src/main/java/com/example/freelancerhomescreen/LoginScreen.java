@@ -29,19 +29,15 @@ public class LoginScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
-        //SplashWelcome sw = new SplashWelcome();
 
         SharedPreferences prefs = getSharedPreferences(APP_STARTS, MODE_PRIVATE);
         userDetailsPref = getSharedPreferences("UserDetails", MODE_PRIVATE);
         int appStarts = prefs.getInt("AppStarts", 0);
-//        int appStarts=0;
-        Log.d("OPened?",appStarts+"");
         DatabaseHandler db = new DatabaseHandler(this);
         SharedPreferences.Editor editor = prefs.edit();
 
         if (appStarts == 0) {
-            Log.d("About to Insert Data", "App Starts is 0");
-            db.addUser("test", 1, "email@gmail.com", "password", 1);
+            db.addUser("test", 1, "email@gmail.com", "password", 4);
             db.addUser("Test Thing Company", 1, "testing@testCompany.gov.sg", "12345", 1);
             db.addUser("Company Too", 1, "com2@gmail.com", "asdfg", 2);
             db.addUser("Company 3", 1, "com3@gmail.com", "asdfrffg", 3);
@@ -94,8 +90,6 @@ public class LoginScreen extends AppCompatActivity {
             db.addExperience(e2);
             db.addExperience(e3);
 
-
-//            SharedPreferences.Editor editor = prefs.edit();
             editor.putInt("AppStarts", 1);
             editor.commit();
         }
@@ -112,38 +106,19 @@ public class LoginScreen extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                String email = emailInput.getText().toString();
-//                String password = passwordInput.getText().toString();
-                String email = "com2@gmail.com";
-                String password = "asdfg";
-                Log.d("email", email);
-                Log.d("password", password);
+                String email = emailInput.getText().toString();
+                String password = passwordInput.getText().toString();
                 Users u = dbHandler.checkUser(email, password);
                 boolean check = !(u == null);
-                Log.d(TAG, u.toString());
-                Log.d(TAG,"PPPPPPP"+u.getIdentityID());
-                Log.d(TAG, "PUTANG INA MO");
-                Log.d(TAG, check + "");
                 if (check) {
                     int role = u.getRole();
                     int user_id = u.getUser_id();
                     int identityId;
-                    Log.d(TAG, role + "");
                     editor.putInt("role", role);
                     editor.putInt("user_id", user_id);
                     editor.commit();
-                    Log.d("role", Integer.toString(role));
-                    Log.d("email", u.getEmail());
-                    Log.d("password", u.getPassword());
-                    Log.d("user_id", Integer.toString(u.getUser_id()));
                     if (role == 1) {
-                        Log.d(TAG, "onClick: PUTANG INA MO 2");
-                        //userDetailsPref = getSharedPreferences("UserDetails", MODE_PRIVATE);
                         SharedPreferences.Editor editor2 = userDetailsPref.edit();
-
-                        Log.d("Identity ID", Integer.toString(u.getIdentityID()));
-                        Log.d("User ID", Integer.toString(u.getUser_id()));
-                        Log.d("RoleID", Integer.toString(u.getRole()));
                         editor2.putString(IdentityID, Integer.toString(u.getIdentityID()));
                         editor2.putString(UserID, Integer.toString(u.getUser_id()));
                         editor2.putString(RoleID, Integer.toString(u.getRole()));
@@ -154,12 +129,7 @@ public class LoginScreen extends AppCompatActivity {
                         WelcomeScreen.welcomeScreenActivity.finish();
 
                     } else if (role == 2) {
-                        Log.d(TAG,"here");
-                        Log.d(TAG, u.getIdentityID()+"");
                         freelancerUserPref = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
-                        Log.d("Identity ID", Integer.toString(u.getIdentityID()));
-                        Log.d("User ID", Integer.toString(u.getUser_id()));
-                        Log.d("RoleID", Integer.toString(u.getRole()));
                         SharedPreferences.Editor editor2 = freelancerUserPref.edit();
                         editor2.putString(IdentityID, Integer.toString(u.getIdentityID()));
                         editor2.putString(UserID, Integer.toString(u.getUser_id()));
@@ -172,10 +142,12 @@ public class LoginScreen extends AppCompatActivity {
 
                     }
                 } else {
-                    emailInput.setText("");
-                    passwordInput.setText("");
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(LoginScreen.this);
-                    builder1.setMessage("Please fill in all the fields!");
+                    if (email.matches("") || password.matches("")) {
+                        builder1.setMessage("Please fill in all the fields!");
+                    } else {
+                        builder1.setMessage("Credentials invalid!");
+                    }
                     builder1.setCancelable(true);
                     builder1.setPositiveButton(
                             "OK",
@@ -187,6 +159,8 @@ public class LoginScreen extends AppCompatActivity {
 
                     AlertDialog alert11 = builder1.create();
                     alert11.show();
+                    emailInput.setText("");
+                    passwordInput.setText("");
 
                 }
             }

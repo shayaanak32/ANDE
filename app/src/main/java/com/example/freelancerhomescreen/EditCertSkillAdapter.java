@@ -25,7 +25,6 @@ public class EditCertSkillAdapter extends RecyclerView.Adapter<EditCertSkillAdap
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.skills_list, parent, false);
         //Create View Holder
         final EditCertSkillAdapter.MyViewHolder myViewHolder = new EditCertSkillAdapter.MyViewHolder(itemView);
-        Log.d("STATUS", "View Holder created");
 
         return myViewHolder;
     }

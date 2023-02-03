@@ -86,7 +86,6 @@ public class CertificationAdapter extends RecyclerView.Adapter<CertificationAdap
             editBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.d("editing certification","button pressed!!");
                     if (crai != null) {
                         int position = getAdapterPosition();
                         if(position != RecyclerView.NO_POSITION){
