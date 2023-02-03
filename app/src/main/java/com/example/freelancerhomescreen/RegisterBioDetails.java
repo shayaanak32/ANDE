@@ -38,7 +38,6 @@ public class RegisterBioDetails extends AppCompatActivity implements View.OnClic
                     DatabaseHandler db = new DatabaseHandler(this);
                     db.addFreelancer(name,email, pw, bio, "","");
                     int id = db.getFreelancerUserIdByEmail(email);
-                    Log.d("popopopopopo11111",id+"");
                     db.addUser(name,2,email,pw,id);
                     Toast.makeText(this, "Successful Registration", Toast.LENGTH_SHORT).show();
                     i = new Intent(this, LoginScreen.class);

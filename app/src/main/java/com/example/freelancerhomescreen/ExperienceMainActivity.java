@@ -54,10 +54,6 @@ public class ExperienceMainActivity extends AppCompatActivity implements Experie
             String endDate = e.getEndDate();
             String description = e.getDescription();
             String companyName = e.getCompany();
-            Log.d("Name ", name);
-            Log.d("Start Date ", startDate);
-            Log.d("End Date ", endDate);
-            Log.d("Description ", description);
             mExperiences.add(new ExperienceRecyclerItem(name, startDate, endDate, description,companyName));
             index++;
         }

@@ -43,14 +43,6 @@ public class ExperienceRecyclerAdapter extends RecyclerView.Adapter<ExperienceRe
         String startDate = experience_list.get(position).getStartDate();
         String endDate = experience_list.get(position).getEndDate();
         String description = experience_list.get(position).getDescription();
-//        Boolean isVisible = e.getDescVisibility();
-//        Boolean isSeeMoreVisibility = e.getSeeMoreVisiblity();
-//        holder.constraintLayout.setVisibility(isVisible ? View.VISIBLE : View.GONE);
-//        holder.seeMoreTxt.setVisibility(isSeeMoreVisibility ? View.VISIBLE : View.GONE);
-        Log.d("Name: ", name);
-        Log.d("Start Date: ", startDate);
-        Log.d("End Date: ", endDate);
-        Log.d("Description: ", description);
 
         holder.jobTitle.setText(name);
         holder.startDate.setText(startDate);

@@ -24,11 +24,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 String name = getIntent().getExtras().getString("name");
                 String bio = getIntent().getExtras().getString("bio");
 
-                Log.d("FREELANCER Input",
-                        "Email: " + email +
-                            "\nName: " + name +
-                            "\nBio: " + bio);
-
             }else{
                 // is employer
                 String email = getIntent().getExtras().getString("email");
@@ -37,12 +32,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 String role = getIntent().getExtras().getString("role");
                 String info = getIntent().getExtras().getString("info");
 
-                Log.d("EMPLOYER Input",
-                        "Email: " + email +
-                            "\nName: " + name +
-                            "\nUEN: " + uen +
-                            "\nRole: " + role +
-                            "\nInfo: " + info);
 
             }
         }
