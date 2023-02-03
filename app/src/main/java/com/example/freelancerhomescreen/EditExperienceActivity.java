@@ -56,7 +56,7 @@ public class EditExperienceActivity extends AppCompatActivity {
         descriptionFieldUpd.setText(description);
         editTextCompany.setText(companyName);
 
-        CreateTables ct = new CreateTables(this);
+        DatabaseHandler ct = new DatabaseHandler(this);
 
         startDatePickerUpd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +76,12 @@ public class EditExperienceActivity extends AppCompatActivity {
 
                 Intent i = new Intent(EditExperienceActivity.this, CalendarViewActivity.class);
                 endDateClicked = true;
+                String experienceName = editTextUpdateName.getText().toString();
+                String startDate = startDatePickerUpd.getText().toString();
+                String endDate = endDatePickerUpd.getText().toString();
+                String description = descriptionFieldUpd.getText().toString();
                 i.putExtra("endDateClicked", endDateClicked);
+                i.putExtra("","");
                 startActivity(i);
 
             }
@@ -86,20 +91,12 @@ public class EditExperienceActivity extends AppCompatActivity {
         updateExperienceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("I am being clicked", "Clicked!");
+
                 String experienceName = editTextUpdateName.getText().toString();
                 String startDate = startDatePickerUpd.getText().toString();
                 String endDate = endDatePickerUpd.getText().toString();
                 String description = descriptionFieldUpd.getText().toString();
-//                Log.d("experienceName", experienceName);
-//                Log.d("Name Check", Boolean.toString(experienceName != null && !experienceName.isEmpty()));
-//                Log.d("startDate", startDate);
-//                Log.d("Start Date Check", Boolean.toString(startDate != null && !startDate.isEmpty()));
-//                Log.d("endDate", endDate);
-//                Log.d("End Date Check", Boolean.toString(endDate != null && !endDate.isEmpty()));
-//                Log.d("companyName", companyName);
-//                Log.d("Company Name Check", Boolean.toString(companyName != null && !companyName.isEmpty()));
-//                Log.d("description", description);
-//                Log.d("Description Check", Boolean.toString(description != null && !description.isEmpty()));
 
 
                 if (experienceName != null && !experienceName.isEmpty() && startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty() && companyName != null && !companyName.isEmpty() && description != null && !description.isEmpty()) {

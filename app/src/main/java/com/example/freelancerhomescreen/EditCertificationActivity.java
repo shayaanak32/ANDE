@@ -39,7 +39,7 @@ public class EditCertificationActivity extends AppCompatActivity {
     SharedPreferences edPref;
     EditCertSkillAdapter adapter;
     String[] skillsArray;
-    public static final String START_DATE = "StartDate";
+    public static final String START_DATE = "StartDateCert";
     public static final String END_DATE = "EndDate";
     RecyclerView recyclerView;
     String name;
@@ -53,6 +53,7 @@ public class EditCertificationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        DatabaseHandler db = new DatabaseHandler(this);
         setContentView(R.layout.activity_edit_certification);
         Bundle getData = getIntent().getExtras();
         editTextUpdateName = (EditText) findViewById(R.id.editName);
@@ -81,7 +82,7 @@ public class EditCertificationActivity extends AppCompatActivity {
 
             name = getData.getString("name");
             link = getData.getString("link");
-            endDate = getData.getString("endDate");
+            endDate = getData.getString("completionDateSelected");
             Log.d("Date Chosen", endDate);
             description = getData.getString("description");
             skills = getData.getString("skills");
@@ -106,7 +107,6 @@ public class EditCertificationActivity extends AppCompatActivity {
         Log.d("ArrayList for the Skills", Boolean.toString(skillsArrayList == null));
 
         setAdapter(skillsArrayList);
-        CreateTables ct = new CreateTables(this);
 
         endDatePickerUpd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,16 +172,6 @@ public class EditCertificationActivity extends AppCompatActivity {
                     }
                 }
 
-//                Log.d("experienceName", experienceName);
-//                Log.d("Name Check", Boolean.toString(experienceName != null && !experienceName.isEmpty()));
-//                Log.d("startDate", startDate);
-//                Log.d("Start Date Check", Boolean.toString(startDate != null && !startDate.isEmpty()));
-//                Log.d("endDate", endDate);
-//                Log.d("End Date Check", Boolean.toString(endDate != null && !endDate.isEmpty()));
-//                Log.d("companyName", companyName);
-//                Log.d("Company Name Check", Boolean.toString(companyName != null && !companyName.isEmpty()));
-//                Log.d("description", description);
-//                Log.d("Description Check", Boolean.toString(description != null && !description.isEmpty()));
 
 
                 if (certName != null && !certName.isEmpty() && completionDate != null && !completionDate.isEmpty() && endDate != null && !endDate.isEmpty() && description != null && !description.isEmpty()) {
@@ -257,7 +247,7 @@ public class EditCertificationActivity extends AppCompatActivity {
                 if (certName != null && !certName.isEmpty() && completionDate != null && !completionDate.isEmpty() && description != null && !description.isEmpty() && editedLink != null && !editedLink.isEmpty() && textListSkills != null && !textListSkills.isEmpty()) {
                     Log.d("Form Status", "Fields Complete");
                     Certification c = new Certification(1, certName, editedLink, completionDate, textListSkills, description);
-                    ct.updateCertification(c);
+                    db.updateCertification(c);
                     Intent i = new Intent(EditCertificationActivity.this, CertificationPage.class);
 
                 } else {

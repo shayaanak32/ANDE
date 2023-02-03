@@ -25,6 +25,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/default_pfp"
+            android:background="@drawable/field_background"
             tools:layout_editor_absoluteY="108dp" />
 
         <TextView

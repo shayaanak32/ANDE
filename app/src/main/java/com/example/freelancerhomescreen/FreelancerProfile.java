@@ -6,6 +6,7 @@ import androidx.cardview.widget.CardView;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -19,11 +20,15 @@ import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class FreelancerProfile extends AppCompatActivity implements View.OnClickListener{
 
     private final String TAG = "FreelancerProfile";
     TextView freelancerName, freelancerDescription;
     CardView skills, proj, exp, certs;
+    CircleImageView pfp;
+    int imageResource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +39,15 @@ public class FreelancerProfile extends AppCompatActivity implements View.OnClick
         Intent intent = getIntent();
         int profileID = intent.getIntExtra("profileid",0);
 
-        Freelancer fl = db.getFreelancer(profileID);
+        Freelancer fl = db.getFreelancers(profileID);
         freelancerName = findViewById(R.id.name);
         freelancerDescription = findViewById(R.id.desc);
         freelancerName.setText(fl.getName());
         freelancerDescription.setText(fl.getDescription());
+        pfp = findViewById(R.id.profile_image);
+        imageResource = getResources().getIdentifier(fl.getProfileImg(), "drawable", this.getPackageName());
+        Drawable d= getResources().getDrawable(imageResource);
+        pfp.setImageDrawable(d);
         skills = findViewById(R.id.skillsCard);
         certs = findViewById(R.id.certificationsCard);
         proj = findViewById(R.id.projectsCard);

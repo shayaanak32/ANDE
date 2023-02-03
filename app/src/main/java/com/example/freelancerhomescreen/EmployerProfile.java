@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -67,7 +68,9 @@ public class EmployerProfile extends AppCompatActivity {
         TextView cAbout = (TextView)findViewById(R.id.aboutOrgInput);
         cName.setText(emp.getCompanyName());
         cAbout.setText(emp.getDescription());
-        pfp.setImageResource(R.drawable.profile_pic);
+        int imageResource = getResources().getIdentifier(emp.getProfileImg(), "drawable", this.getPackageName());
+        Drawable d= getResources().getDrawable(imageResource);
+        pfp.setImageDrawable(d);
         listView=(ListView)findViewById(R.id.orgPriosInput);
         textView=(TextView)findViewById(R.id.textViewProg);
         String prioStr = emp.getPriorities();

@@ -35,6 +35,7 @@ public class LoginScreen extends AppCompatActivity {
         int appStarts = prefs.getInt("AppStarts", 0);
         DatabaseHandler db = new DatabaseHandler(this);
         SharedPreferences.Editor editor = prefs.edit();
+
         if (appStarts == 0) {
             db.addUser("test", 1, "email@gmail.com", "password", 4);
             db.addUser("Test Thing Company", 1, "testing@testCompany.gov.sg", "12345", 1);
@@ -44,13 +45,13 @@ public class LoginScreen extends AppCompatActivity {
             db.addUser("Michael Brown", 2, "michaelbrown@gmail.com", "asdfghjkl", 2);
             db.addUser("Ashley Taylor", 2, "ashleytaylor@gmail.com", "hashpassword6", 3);
 
-            db.addEmployer("Test Thing Company", "Programmers, Software Engineers", "A fun tech company", "testing@testCompany.gov.sg", "12345", "T123456789", "R.drawable.profile_pic");
-            db.addEmployer("Company Too", "Coders, Interns", "Another boring company", "com2@gmail.com", "asdfg", "T0001112", "R.drawable.companypfp1");
-            db.addEmployer("Company 3", "Coders, Internvvs", "Another bland company", "com3@gmail.com", "asdfrffg", "T3001112", "R.drawable.companypfp2");
+            db.addEmployer("Test Thing Company", "Programmers, Software Engineers", "A fun tech company", "testing@testCompany.gov.sg", "12345", "T123456789", "profile_pic");
+            db.addEmployer("Company Too", "Coders, Interns", "Another boring company", "com2@gmail.com", "asdfg", "T0001112", "companypfp1");
+            db.addEmployer("Company 3", "Coders, Internvvs", "Another bland company", "com3@gmail.com", "asdfrffg", "T3001112", "companypfp2");
 
-            db.addFreelancer("Emily Davis", "emilydavis@gmail.com", "1234567890", "Computing and stuff", "Java, C++, NodeJS", "R.drawable.freelancepfp1");
-            db.addFreelancer("Michael Brown", "michaelbrown@gmail.com", "asdfghjkl", "More Computing and More Computing", "Java, NodeJS", "R.drawable.freelancepfp2");
-            db.addFreelancer("Ashley Taylor", "ashleytaylor@gmail.com", "hashpassword6", "I love tech", "Python", "R.drawable.freelancepfp3");
+            db.addFreelancer("Emily Davis", "emilydavis@gmail.com", "1234567890", "Computing and stuff", "Java, C++, NodeJS", "freelancepfp1");
+            db.addFreelancer("Michael Brown", "michaelbrown@gmail.com", "asdfghjkl", "More Computing and More Computing", "Java, NodeJS", "freelancerpfp2");
+            db.addFreelancer("Ashley Taylor", "ashleytaylor@gmail.com", "hashpassword6", "I love tech", "Python", "freelancerpfp3");
 
             Projects p1 = new Projects("Student Management System", "January 2019", "Januray 2022", "https://github.com/shayaanak32/JADProjectRepo", "Java,J2EE", "Description1", 1);
             Projects p2 = new Projects("IceBreaker!", "August 2020", "December 2022", "https://github.com/VielenKaat/ADES-Repo", "Java,J2EE", "Description1", 1);
@@ -60,10 +61,10 @@ public class LoginScreen extends AppCompatActivity {
             db.addProjects(p3);
 
 
-            Certification c1 = new Certification("OCP 11 Java Programmer", "https://www.aws.training/certification", "Januray 2020", "Java,JavaScript", "Description1");
-            Certification c2 = new Certification("IBM Professional Data Science Certification", "https://www.coursera.org/professional-certificates/ibm-data-science", "August 2021", "Python,Java", "Description2");
-            Certification c3 = new Certification("DataCamp Certified Data Professional", "https://www.coursera.org/professional-certificates/ibm-data-science", "January 2022", "Java", "Description3");
-            Certification c4 = new Certification("Google Cloud Certified Data Scientist", "https://www.coursera.org/professional-certificates/ibm-data-science", "May 2022", "Java", "Description4");
+            Certification c1 = new Certification("OCP 11 Java Programmer", "https://www.aws.training/certification", "Januray 2020", "Java,JavaScript", "Description1",1);
+            Certification c2 = new Certification("IBM Professional Data Science Certification", "https://www.coursera.org/professional-certificates/ibm-data-science", "August 2021", "Python,Java", "Description2",2);
+            Certification c3 = new Certification("DataCamp Certified Data Professional", "https://www.coursera.org/professional-certificates/ibm-data-science", "January 2022", "Java", "Description3",3);
+            Certification c4 = new Certification("Google Cloud Certified Data Scientist", "https://www.coursera.org/professional-certificates/ibm-data-science", "May 2022", "Java", "Description4",1);
             db.addCertifications(c1);
             db.addCertifications(c2);
             db.addCertifications(c3);

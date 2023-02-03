@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private final String TAG = "MainActivity";
 
     //InsertCertificationData db = new InsertCertificationData(this);
-    CreateTables ct = new CreateTables(this);
 //    ShowData sd = new ShowData(this);
 //    CreateTables ct = new CreateTables(this);
 
