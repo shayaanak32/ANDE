@@ -29,7 +29,6 @@ public class upload_activity extends AppCompatActivity {
         });
     }
     private void chooseAndCropImage() {
-        Log.d("We in","hi");
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);

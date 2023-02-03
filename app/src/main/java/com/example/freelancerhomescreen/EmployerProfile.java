@@ -34,7 +34,6 @@ public class EmployerProfile extends AppCompatActivity {
         CircleImageView pfp = findViewById(R.id.profile_image);
         Intent intent = getIntent();
         int profileID = intent.getIntExtra("profileid",0);
-        Log.d("11111111111111", profileID+"");
         BottomNavigationView bv =findViewById(R.id.bottomNavigationView);
         DatabaseHandler db = new DatabaseHandler(this);
         bv.setSelectedItemId(R.id.profileNav);

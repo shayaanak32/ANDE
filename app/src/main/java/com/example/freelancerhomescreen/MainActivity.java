@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
 
-        Log.d(TAG, "onClick: putang ina mo");
 //        switch (view.getId()) {
 //            case R.id.showDataButton:
 //                Log.d("Status ", "Inside onClick !!!");

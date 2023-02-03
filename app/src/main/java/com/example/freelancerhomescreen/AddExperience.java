@@ -48,7 +48,6 @@ public class AddExperience extends AppCompatActivity {
         addExperienceBtn = (MaterialButton) findViewById(R.id.addExperienceButton);
 
         if (savedInstanceState != null) {
-            Log.d("Saved Instance State is not null!","About to restore the data!");
             String experienceName = savedInstanceState.getString("experience_name", "");
             String startDate = savedInstanceState.getString("start_name", "");
             String endDate = savedInstanceState.getString("end_name", "");
@@ -106,8 +105,6 @@ public class AddExperience extends AppCompatActivity {
 
 
                 if (experienceName != null && !experienceName.isEmpty() && startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty() && companyName != null && !companyName.isEmpty() && description != null && !description.isEmpty()) {
-                    Log.d("Form Status", "Fields Complete");
-
                     Experience e = new Experience(experienceName, startDate, endDate, companyName, description,1);
                     ct.addExperience(e);
                     Intent i = new Intent(AddExperience.this, ExperienceMainActivity.class);
@@ -186,17 +183,11 @@ public class AddExperience extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        Log.d("Inside onSaveInstanceState ", "About to Save Instance!!!");
         String experienceName = editTextExpName.getText().toString();
         String startDate = startDateField.getText().toString();
         String endDate = endDateField.getText().toString();
         String companyName = editTextCompany.getText().toString();
         String description = descriptionField.getText().toString();
-        Log.d("experienceName", experienceName);
-        Log.d("startDate", startDate);
-        Log.d("endDate", endDate);
-        Log.d("companyName", companyName);
-        Log.d("description", description);
 
         outState.putString("experience_name", experienceName);
         outState.putString("start_name", startDate);
