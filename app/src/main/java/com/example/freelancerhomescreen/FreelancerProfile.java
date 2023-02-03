@@ -1,9 +1,11 @@
 package com.example.freelancerhomescreen;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.drawable.Drawable;
@@ -11,6 +13,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.RoundedCorner;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +21,9 @@ import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.navigation.NavigationBarView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -38,7 +43,44 @@ public class FreelancerProfile extends AppCompatActivity implements View.OnClick
         DatabaseHandler db = new DatabaseHandler(this);
         Intent intent = getIntent();
         int profileID = intent.getIntExtra("profileid",0);
+        SharedPreferences prefs =getSharedPreferences("UserDetails", MODE_PRIVATE);
+        BottomNavigationView bv =findViewById(R.id.bottomNavigationView);
+        int userRole = Integer.parseInt(prefs.getString("RoleID","-1"));
+        bv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            Intent i;
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.profileNav:
+                        if(userRole==1){
+                            i = new Intent(FreelancerProfile.this, ProfilePage.class);
+                            startActivity(i);
+                            finish();
+                        }else if(userRole==2){
+                            i = new Intent(FreelancerProfile.this, FreelancerOwnProfile.class);
+                            startActivity(i);
+                            finish();
+                        }else{
+                            i = new Intent(FreelancerProfile.this, LoginScreen.class);
+                            startActivity(i);
+                            finish();
+                        }
 
+                        return true;
+                    case R.id.feedNav:
+                        i = new Intent(FreelancerProfile.this, FeedPage.class);
+                        startActivity(i);
+                        finish();
+                        return true;
+                    case R.id.settingsNav:
+                        i = new Intent(FreelancerProfile.this, SettingsPage.class);
+                        startActivity(i);
+                        finish();
+                        return true;
+                }
+                return false;
+            }
+        });
         Freelancer fl = db.getFreelancers(profileID);
         freelancerName = findViewById(R.id.name);
         freelancerDescription = findViewById(R.id.desc);

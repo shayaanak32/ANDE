@@ -216,7 +216,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // code to get the single contact
     Employer getContact(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-
+        Log.d("employerid", id+"");
         Cursor cursor = db.query(TABLE_EMPLOYERS, new String[]{KEY_NAME,
                         KEY_DESCRIPTION, KEY_PRIORITIES, KEY_PFP, KEY_USERID,KEY_EMAIL}, KEY_USERID + "=?",
                 new String[]{String.valueOf(id)}, null, null, null, null);

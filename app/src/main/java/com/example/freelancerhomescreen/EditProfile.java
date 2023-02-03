@@ -52,7 +52,7 @@ public class EditProfile extends AppCompatActivity {
             }
         });
         SharedPreferences prefs;
-        prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
+        prefs = getSharedPreferences("UserDetails", MODE_PRIVATE);
         int identity_id = Integer.parseInt(prefs.getString("Identity ID","-1"));
         Employer emp = db.getContact(identity_id);
         TextView cName = (TextView) findViewById(R.id.comapnyNameEdit);
@@ -92,17 +92,29 @@ public class EditProfile extends AppCompatActivity {
             }
         });
 
-        BottomNavigationView bv = findViewById(R.id.bottomNavigationView);
+        BottomNavigationView bv =findViewById(R.id.bottomNavigationView);
+        int userRole = Integer.parseInt(prefs.getString("RoleID","-1"));
+        bv.setSelectedItemId(R.id.profileNav);
         bv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             Intent i;
-
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
+                switch (item.getItemId()){
                     case R.id.profileNav:
-                        i = new Intent(EditProfile.this, ProfilePage.class);
-                        startActivity(i);
-                        finish();
+                        if(userRole==1){
+                            i = new Intent(EditProfile.this, ProfilePage.class);
+                            startActivity(i);
+                            finish();
+                        }else if(userRole==2){
+                            i = new Intent(EditProfile.this, FreelancerOwnProfile.class);
+                            startActivity(i);
+                            finish();
+                        }else{
+                            i = new Intent(EditProfile.this, LoginScreen.class);
+                            startActivity(i);
+                            finish();
+                        }
+
                         return true;
                     case R.id.feedNav:
                         i = new Intent(EditProfile.this, FeedPage.class);
@@ -118,6 +130,7 @@ public class EditProfile extends AppCompatActivity {
                 return false;
             }
         });
+
 
         Button updateBtn = findViewById(R.id.saveUpdateBtn);
         updateBtn.setOnClickListener(new View.OnClickListener() {

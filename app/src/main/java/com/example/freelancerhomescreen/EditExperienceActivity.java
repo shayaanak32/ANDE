@@ -57,36 +57,36 @@ public class EditExperienceActivity extends AppCompatActivity {
         editTextCompany.setText(companyName);
 
         DatabaseHandler ct = new DatabaseHandler(this);
-
-        startDatePickerUpd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(EditExperienceActivity.this, CalendarViewActivity.class);
-                startDateClicked = true;
-                fromEditExperience = true;
-                i.putExtra("startDateClicked", startDateClicked);
-                i.putExtra("fromEditExperience", fromEditExperience);
-                startActivity(i);
-            }
-
-        });
-        endDatePickerUpd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent i = new Intent(EditExperienceActivity.this, CalendarViewActivity.class);
-                endDateClicked = true;
-                String experienceName = editTextUpdateName.getText().toString();
-                String startDate = startDatePickerUpd.getText().toString();
-                String endDate = endDatePickerUpd.getText().toString();
-                String description = descriptionFieldUpd.getText().toString();
-                i.putExtra("endDateClicked", endDateClicked);
-                i.putExtra("","");
-                startActivity(i);
-
-            }
-
-        });
+//
+//        startDatePickerUpd.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent i = new Intent(EditExperienceActivity.this, CalendarViewActivity.class);
+//                startDateClicked = true;
+//                fromEditExperience = true;
+//                i.putExtra("startDateClicked", startDateClicked);
+//                i.putExtra("fromEditExperience", fromEditExperience);
+//                startActivity(i);
+//            }
+//
+//        });
+//        endDatePickerUpd.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent i = new Intent(EditExperienceActivity.this, CalendarViewActivity.class);
+//                endDateClicked = true;
+//                String experienceName = editTextUpdateName.getText().toString();
+//                String startDate = startDatePickerUpd.getText().toString();
+//                String endDate = endDatePickerUpd.getText().toString();
+//                String description = descriptionFieldUpd.getText().toString();
+//                i.putExtra("endDateClicked", endDateClicked);
+//                i.putExtra("","");
+//                startActivity(i);
+//
+//            }
+//
+//        });
 
         updateExperienceButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,47 +128,47 @@ public class EditExperienceActivity extends AppCompatActivity {
 
         });
 
-        if (getData != null) {
-            sdPref = getSharedPreferences(START_DATE, MODE_PRIVATE);
-            edPref = getSharedPreferences(END_DATE, MODE_PRIVATE);
-            SharedPreferences.Editor editor = sdPref.edit();
-            SharedPreferences.Editor editor2 = edPref.edit();
-            startDateClicked = getData.getBoolean("startDateClicked");
-            endDateClicked = getData.getBoolean("endDateClicked");
-
-            if (startDateClicked) {
-                startDateChosen = getData.getString("startDateChosen");
-                editor.putString("ChosenStartDate", startDateChosen);
-                editor.apply();
-                startDatePickerUpd.setText(startDateChosen);
-            } else {
-                updateSD();
-            }
-
-            if (endDateClicked) {
-                endDateChosen = getData.getString("endDateChosen");
-                editor2.putString("ChosenEndDate", endDateChosen);
-                editor2.apply();
-                endDatePickerUpd.setText(endDateChosen);
-            } else {
-                updateED();
-            }
-        }
+//        if (getData != null) {
+//            sdPref = getSharedPreferences(START_DATE, MODE_PRIVATE);
+//            edPref = getSharedPreferences(END_DATE, MODE_PRIVATE);
+//            SharedPreferences.Editor editor = sdPref.edit();
+//            SharedPreferences.Editor editor2 = edPref.edit();
+//            startDateClicked = getData.getBoolean("startDateClicked");
+//            endDateClicked = getData.getBoolean("endDateClicked");
+//
+//            if (startDateClicked) {
+//                startDateChosen = getData.getString("startDateChosen");
+//                editor.putString("ChosenStartDate", startDateChosen);
+//                editor.apply();
+//                startDatePickerUpd.setText(startDateChosen);
+//            } else {
+//                updateSD();
+//            }
+//
+//            if (endDateClicked) {
+//                endDateChosen = getData.getString("endDateChosen");
+//                editor2.putString("ChosenEndDate", endDateChosen);
+//                editor2.apply();
+//                endDatePickerUpd.setText(endDateChosen);
+//            } else {
+//                updateED();
+//            }
+//        }
     }
-
-    public void updateSD() {
-        SharedPreferences sdsp = getSharedPreferences(START_DATE, MODE_PRIVATE);
-        String text = sdsp.getString("ChosenStartDate", "");
-        Log.d("Inside UpdateSD Checking Text", text);
-        startDatePickerUpd.setText(text);
-    }
-
-    public void updateED() {
-        Log.d("Inside UpdateED", "endDate clicked is false");
-        SharedPreferences edsp = getSharedPreferences(END_DATE, MODE_PRIVATE);
-        String text2 = edsp.getString("ChosenEndDate", "");
-        Log.d("Inside UpdateED Checking Text", text2);
-
-        endDatePickerUpd.setText(text2);
-    }
+//
+//    public void updateSD() {
+//        SharedPreferences sdsp = getSharedPreferences(START_DATE, MODE_PRIVATE);
+//        String text = sdsp.getString("ChosenStartDate", "");
+//        Log.d("Inside UpdateSD Checking Text", text);
+//        startDatePickerUpd.setText(text);
+//    }
+//
+//    public void updateED() {
+//        Log.d("Inside UpdateED", "endDate clicked is false");
+//        SharedPreferences edsp = getSharedPreferences(END_DATE, MODE_PRIVATE);
+//        String text2 = edsp.getString("ChosenEndDate", "");
+//        Log.d("Inside UpdateED Checking Text", text2);
+//
+//        endDatePickerUpd.setText(text2);
+//    }
 }
