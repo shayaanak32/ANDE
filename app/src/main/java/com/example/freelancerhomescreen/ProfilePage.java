@@ -61,9 +61,11 @@ public class ProfilePage extends AppCompatActivity {
                         }else if(userRole==2){
                             i = new Intent(ProfilePage.this, FreelancerOwnProfile.class);
                             startActivity(i);
+                            finish();
                         }else{
                             i = new Intent(ProfilePage.this, LoginScreen.class);
                             startActivity(i);
+                            finish();
                         }
 
                         return true;

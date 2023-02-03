@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,26 +36,40 @@ public class EmployerProfile extends AppCompatActivity {
         CircleImageView pfp = findViewById(R.id.profile_image);
         Intent intent = getIntent();
         int profileID = intent.getIntExtra("profileid",0);
-        BottomNavigationView bv =findViewById(R.id.bottomNavigationView);
         DatabaseHandler db = new DatabaseHandler(this);
-        bv.setSelectedItemId(R.id.profileNav);
+
+        SharedPreferences prefs =getSharedPreferences("UserDetails", MODE_PRIVATE);
+        BottomNavigationView bv =findViewById(R.id.bottomNavigationView);
+        int userRole = Integer.parseInt(prefs.getString("RoleID","-1"));
+        bv.setSelectedItemId(R.id.feedNav);
+
+
         bv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             Intent i;
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.profileNav:
-                        i = new Intent(getApplicationContext(), ProfilePage.class);
-                        startActivity(i);
-                        finish();
+                        if(userRole==1){
+                            i = new Intent(EmployerProfile.this, ProfilePage.class);
+                            startActivity(i);
+                        }else if(userRole==2){
+                            i = new Intent(EmployerProfile.this, FreelancerOwnProfile.class);
+                            startActivity(i);
+                        }else{
+                            i = new Intent(EmployerProfile.this, LoginScreen.class);
+                            startActivity(i);
+                            finish();
+                        }
+
                         return true;
                     case R.id.feedNav:
-                        i = new Intent(getApplicationContext(), FeedPage.class);
+                        i = new Intent(EmployerProfile.this, FeedPage.class);
                         startActivity(i);
                         finish();
                         return true;
                     case R.id.settingsNav:
-                        i = new Intent(getApplicationContext(), SettingsPage.class);
+                        i = new Intent(EmployerProfile.this, SettingsPage.class);
                         startActivity(i);
                         finish();
                         return true;
@@ -62,6 +77,7 @@ public class EmployerProfile extends AppCompatActivity {
                 return false;
             }
         });
+
         Employer emp = db.getContact(profileID);
         // to make the thing dynamic
         TextView cName = (TextView)findViewById(R.id.companyName);

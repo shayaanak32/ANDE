@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.MenuItem;
@@ -54,9 +55,11 @@ public class SettingsPage extends AppCompatActivity {
         });
 
         BottomNavigationView bv = findViewById(R.id.bottomNavigationView);
-
         bv.setSelectedItemId(R.id.settingsNav);
 
+        SharedPreferences prefs =getSharedPreferences("UserDetails", MODE_PRIVATE);
+
+        int userRole = Integer.parseInt(prefs.getString("RoleID","-1"));
 
         bv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             Intent i;
@@ -64,20 +67,34 @@ public class SettingsPage extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.profileNav:
-                        i = new Intent(SettingsPage.this, ProfilePage.class);
-                        startActivity(i);
+                        if(userRole==1){
+                            i = new Intent(SettingsPage.this, ProfilePage.class);
+                            startActivity(i);
+                            finish();
+                        }else if(userRole==2){
+                            i = new Intent(SettingsPage.this, FreelancerOwnProfile.class);
+                            startActivity(i);
+                            finish();
+                        }else{
+                            i = new Intent(SettingsPage.this, LoginScreen.class);
+                            startActivity(i);
+                        }
+
                         return true;
                     case R.id.feedNav:
                         i = new Intent(SettingsPage.this, FeedPage.class);
                         startActivity(i);
+                        finish();
                         return true;
                     case R.id.settingsNav:
                         i = new Intent(SettingsPage.this, SettingsPage.class);
                         startActivity(i);
+                        finish();
                         return true;
                 }
                 return false;
             }
         });
+
     }
 }

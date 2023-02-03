@@ -1,5 +1,6 @@
 package com.example.freelancerhomescreen;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
@@ -8,12 +9,16 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -62,6 +67,48 @@ public class FreelancerEditProfile extends AppCompatActivity implements View.OnC
                 Intent i = new Intent(getApplicationContext(), FreelancerOwnProfile.class);
                 startActivity(i);
                 //finish();
+            }
+        });
+        prefs = getSharedPreferences("UserDetails", MODE_PRIVATE);
+
+        BottomNavigationView bv =findViewById(R.id.bottomNavigationView);
+        int userRole = Integer.parseInt(prefs.getString("RoleID","-1"));
+
+        bv.setSelectedItemId(R.id.profileNav);
+
+        bv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            Intent i;
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.profileNav:
+                        if(userRole==1){
+                            i = new Intent(FreelancerEditProfile.this, ProfilePage.class);
+                            startActivity(i);
+                            finish();
+                        }else if(userRole==2){
+                            i = new Intent(FreelancerEditProfile.this, FreelancerOwnProfile.class);
+                            startActivity(i);
+                            finish();
+                        }else{
+                            i = new Intent(FreelancerEditProfile.this, LoginScreen.class);
+                            startActivity(i);
+                            finish();
+                        }
+
+                        return true;
+                    case R.id.feedNav:
+                        i = new Intent(FreelancerEditProfile.this, FeedPage.class);
+                        startActivity(i);
+                        finish();
+                        return true;
+                    case R.id.settingsNav:
+                        i = new Intent(FreelancerEditProfile.this, SettingsPage.class);
+                        startActivity(i);
+                        finish();
+                        return true;
+                }
+                return false;
             }
         });
     }

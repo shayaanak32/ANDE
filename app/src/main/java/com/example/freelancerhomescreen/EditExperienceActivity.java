@@ -1,5 +1,6 @@
 package com.example.freelancerhomescreen;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -8,11 +9,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class EditExperienceActivity extends AppCompatActivity {
     private EditText editTextUpdateName;
@@ -126,7 +130,48 @@ public class EditExperienceActivity extends AppCompatActivity {
             }
 
         });
+        SharedPreferences prefs = getSharedPreferences("UserDetails", MODE_PRIVATE);
 
+        BottomNavigationView bv =findViewById(R.id.bottomNavigationView);
+        int userRole = Integer.parseInt(prefs.getString("RoleID","-1"));
+
+        bv.setSelectedItemId(R.id.profileNav);
+
+        bv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            Intent i;
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.profileNav:
+                        if(userRole==1){
+                            i = new Intent(EditExperienceActivity.this, ProfilePage.class);
+                            startActivity(i);
+                            finish();
+                        }else if(userRole==2){
+                            i = new Intent(EditExperienceActivity.this, FreelancerOwnProfile.class);
+                            startActivity(i);
+                            finish();
+                        }else{
+                            i = new Intent(EditExperienceActivity.this, LoginScreen.class);
+                            startActivity(i);
+                            finish();
+                        }
+
+                        return true;
+                    case R.id.feedNav:
+                        i = new Intent(EditExperienceActivity.this, FeedPage.class);
+                        startActivity(i);
+                        finish();
+                        return true;
+                    case R.id.settingsNav:
+                        i = new Intent(EditExperienceActivity.this, SettingsPage.class);
+                        startActivity(i);
+                        finish();
+                        return true;
+                }
+                return false;
+            }
+        });
 //        if (getData != null) {
 //            sdPref = getSharedPreferences(START_DATE, MODE_PRIVATE);
 //            edPref = getSharedPreferences(END_DATE, MODE_PRIVATE);

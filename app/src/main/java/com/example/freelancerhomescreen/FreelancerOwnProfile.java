@@ -1,5 +1,6 @@
 package com.example.freelancerhomescreen;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,8 +8,12 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -52,6 +57,47 @@ public class FreelancerOwnProfile extends AppCompatActivity implements View.OnCl
                 //finish();
             }
         });
+
+        BottomNavigationView bv =findViewById(R.id.bottomNavigationView);
+        int userRole = Integer.parseInt(prefs.getString("RoleID","-1"));
+
+        bv.setSelectedItemId(R.id.profileNav);
+
+        bv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            Intent i;
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.profileNav:
+                        if(userRole==1){
+                            i = new Intent(FreelancerOwnProfile.this, ProfilePage.class);
+                            startActivity(i);
+                            finish();
+                        }else if(userRole==2){
+                            i = new Intent(FreelancerOwnProfile.this, FreelancerOwnProfile.class);
+                            startActivity(i);
+                        }else{
+                            i = new Intent(FreelancerOwnProfile.this, LoginScreen.class);
+                            startActivity(i);
+                            finish();
+                        }
+
+                        return true;
+                    case R.id.feedNav:
+                        i = new Intent(FreelancerOwnProfile.this, FeedPage.class);
+                        startActivity(i);
+                        finish();
+                        return true;
+                    case R.id.settingsNav:
+                        i = new Intent(FreelancerOwnProfile.this, SettingsPage.class);
+                        startActivity(i);
+                        finish();
+                        return true;
+                }
+                return false;
+            }
+        });
+
     }
 
 
