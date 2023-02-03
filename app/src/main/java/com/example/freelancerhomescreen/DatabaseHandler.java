@@ -471,7 +471,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
         return u;
     }
+    public int updateCertification(Certification certification) {
+        SQLiteDatabase db = this.getWritableDatabase();
 
+        ContentValues values = new ContentValues();
+
+//        values.put(KEY_CERTID, certification.getID());
+        values.put(KEY_NAME, certification.getName());
+        values.put(KEY_LINK, certification.getLink());
+        values.put(KEY_DATE, certification.getEndDate());
+        values.put(KEY_SKILLS, certification.getSkills());
+        values.put(KEY_DESCRIPTION, certification.getDescription());
+
+        // updating row
+        return db.update(TABLE_CERTIFICATIONS, values, KEY_CERTID + " = ?",
+                new String[]{String.valueOf(certification.getID())});
+    }
     ArrayList<Certification> getCertification(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<Certification> certificationArrayList = new ArrayList<Certification>();

@@ -16,7 +16,7 @@ public class InsertEmployerData extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        CreateTables db = new CreateTables(this);
+//        CreateTables db = new CreateTables(this);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -29,14 +29,14 @@ public class InsertEmployerData extends AppCompatActivity {
 //        db.addEmployers(e1);
 //        db.addEmployers(e2);
 //        db.addEmployers(e3);
-        List<Employer> certifications = db.getAllEmployer();
+//        List<Employer> certifications = db.getAllEmployer();
 //
-        for (Employer cn : certifications) {
-            String log = "Id: " + cn.getEmployerID() + " ,Name: " + cn.getCompanyName() + " ,Link: " +
-                    cn.getDescription();
-            // Writing Contacts to log
-            Log.d("Name: ", log);
-        }
+//        for (Employer cn : certifications) {
+//            String log = "Id: " + cn.getEmployerID() + " ,Name: " + cn.getCompanyName() + " ,Link: " +
+//                    cn.getDescription();
+//            // Writing Contacts to log
+//            Log.d("Name: ", log);
+//        }
 
     }
 

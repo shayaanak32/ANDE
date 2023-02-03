@@ -3,6 +3,7 @@ package com.example.freelancerhomescreen;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,6 +21,7 @@ public class AddProject extends AppCompatActivity {
     TextView indiSkill;
     ListView skillsList;
     Button addSkills, submitBtn;
+    SharedPreferences prefs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,9 +84,9 @@ public class AddProject extends AppCompatActivity {
                     }
                     skillsP+=adapter.getItem(adapter.getCount()-1);
                 }
-
-                Projects p2 = new Projects(p1.getProjectID(),pN, pSD, pED,pL, skillsP, pD, 1);
-                // TODO: 1/2/2023 get user id from shared Pref
+                prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
+        int identity_id = Integer.parseInt(prefs.getString("Identity ID","-1"));
+                Projects p2 = new Projects(p1.getProjectID(),pN, pSD, pED,pL, skillsP, pD, identity_id);
                 db.addProjects(p2);
                 Intent i = new Intent(AddProject.this, ProjectsPage.class);
                 startActivity(i);

@@ -40,7 +40,7 @@ public class AddExperience extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_experience);
-
+        DatabaseHandler db = new DatabaseHandler(this);
         startDateField = (TextView) findViewById(R.id.startDatePickerExp);
         endDateField = (TextView) findViewById(R.id.endDatePicker);
         editTextExpName = (EditText) findViewById(R.id.editTextExpName);
@@ -49,7 +49,7 @@ public class AddExperience extends AppCompatActivity {
         addExperienceBtn = (MaterialButton) findViewById(R.id.addExperienceButton);
 
 
-        CreateTables ct = new CreateTables(this);
+
         startDateField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,7 +99,7 @@ public class AddExperience extends AppCompatActivity {
                 if (experienceName != null && !experienceName.isEmpty() && startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty() && companyName != null && !companyName.isEmpty() && description != null && !description.isEmpty()) {
 
                     Experience e = new Experience(experienceName, startDate, endDate, companyName, description, 1);
-                    ct.addExperience(e);
+                    db.addExperience(e);
                     Log.d("Form Status", "Fields Complete");
                     Intent i = new Intent(AddExperience.this, ExperienceMainActivity.class);
 

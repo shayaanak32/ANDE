@@ -19,7 +19,7 @@ public class InsertFreelancerData extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        CreateTables db = new CreateTables(this);
+//        CreateTables db = new CreateTables(this);
 
 //        Freelancer f1 = new Freelancer("Rai Shayaan Kharal","rskharal@icloud.com","pgfjfisen21423","I am a driven individual who specialises in object" +
 //                "oriented languages, with a knack for finishing work to the highest quality");

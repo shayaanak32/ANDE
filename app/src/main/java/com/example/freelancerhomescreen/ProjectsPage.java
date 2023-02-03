@@ -1,6 +1,7 @@
 package com.example.freelancerhomescreen;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,7 @@ public class ProjectsPage extends AppCompatActivity {
     TextView addNP;
     ArrayList<Projects> listItem;
     private final String TAG = "ProjectsPage";
+    SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +34,9 @@ public class ProjectsPage extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        listItem = db.getAllProjects(1);
-        //todo get userid from sharedPrefs
+        prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
+        int identity_id = Integer.parseInt(prefs.getString("Identity ID","-1"));
+        listItem = db.getAllProjects(identity_id);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
