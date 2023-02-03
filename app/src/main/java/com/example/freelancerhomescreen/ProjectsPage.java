@@ -34,7 +34,7 @@ public class ProjectsPage extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
+        prefs = getSharedPreferences("UserDetails", MODE_PRIVATE);
         int identity_id = Integer.parseInt(prefs.getString("Identity ID","-1"));
         listItem = db.getAllProjects(identity_id);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

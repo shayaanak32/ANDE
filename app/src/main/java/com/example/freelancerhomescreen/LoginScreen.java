@@ -114,27 +114,19 @@ public class LoginScreen extends AppCompatActivity {
                     int role = u.getRole();
                     int user_id = u.getUser_id();
                     int identityId;
-                    editor.putInt("role", role);
-                    editor.putInt("user_id", user_id);
-                    editor.commit();
+                    SharedPreferences.Editor editor2 = userDetailsPref.edit();
+                    editor2.putString(IdentityID, Integer.toString(u.getIdentityID()));
+                    editor2.putString(UserID, Integer.toString(u.getUser_id()));
+                    editor2.putString(RoleID, Integer.toString(u.getRole()));
+                    editor2.commit();
+
                     if (role == 1) {
-                        SharedPreferences.Editor editor2 = userDetailsPref.edit();
-                        editor2.putString(IdentityID, Integer.toString(u.getIdentityID()));
-                        editor2.putString(UserID, Integer.toString(u.getUser_id()));
-                        editor2.putString(RoleID, Integer.toString(u.getRole()));
-                        editor2.commit();
 
                         startActivity(new Intent(LoginScreen.this, ProfilePage.class));
                         finish();
                         WelcomeScreen.welcomeScreenActivity.finish();
 
                     } else if (role == 2) {
-                        freelancerUserPref = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
-                        SharedPreferences.Editor editor2 = freelancerUserPref.edit();
-                        editor2.putString(IdentityID, Integer.toString(u.getIdentityID()));
-                        editor2.putString(UserID, Integer.toString(u.getUser_id()));
-                        editor2.putString(RoleID, Integer.toString(u.getRole()));
-                        editor2.commit();
                         startActivity(new Intent(LoginScreen.this, FreelancerOwnProfile.class));
                         WelcomeScreen.welcomeScreenActivity.finish();
 
