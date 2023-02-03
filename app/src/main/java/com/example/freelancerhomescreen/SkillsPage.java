@@ -21,7 +21,6 @@ public class SkillsPage extends AppCompatActivity {
     public RecyclerView recyclerView;
     //ArrayList<RecyclerSkillsItem> items = new ArrayList<RecyclerSkillsItem>();
     SkillsAdapter adapter;
-    CreateTables ct = new CreateTables(this);
     DatabaseHandler db = new DatabaseHandler(this);
     public ArrayList<RecyclerSkillsItem> mSkills = new ArrayList<RecyclerSkillsItem>();
     // in this page get the ID from the shared preferences!!

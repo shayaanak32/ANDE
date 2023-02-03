@@ -100,17 +100,16 @@
 
                         </TextView>
 
-                        <TextView
+                        <EditText
                             android:id="@+id/startDatePicker"
                             android:layout_width="wrap_content"
                             android:layout_height="50dp"
-
-                            android:layout_weight="1"
                             android:background="@drawable/field_background"
+                            android:layout_weight="1"
                             android:ems="10"
                             android:inputType="textPersonName"
-                            android:onClick="onClick"
-                            android:text="" />
+                            android:textColor="@color/black"
+ />
 
 
                     </LinearLayout>
@@ -133,17 +132,16 @@
 
                         </TextView>
 
-                        <TextView
+                        <EditText
                             android:id="@+id/endDatePicker"
                             android:layout_width="wrap_content"
                             android:layout_height="50dp"
                             android:layout_weight="1"
                             android:background="@drawable/field_background"
+
                             android:ems="10"
                             android:inputType="textPersonName"
-                            android:onClick="onClick"
-                            android:text=""
-
+android:textColor="@color/black"
                             />
                     </LinearLayout>
 

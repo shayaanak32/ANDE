@@ -3,6 +3,7 @@ package com.example.freelancerhomescreen;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,17 +19,19 @@ public class FreelancerEditProfile extends AppCompatActivity implements View.OnC
     EditText freelancerName, freelancerDescription;
     Button saveChanges;
     CircleImageView pfp;
+    SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_freelancer_edit_profile);
-        int userid = 1;
+        prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
+        int identity_id = Integer.parseInt(prefs.getString("Identity ID","-1"));
         //todo: get from sharedPrefs
 
         DatabaseHandler db = new DatabaseHandler(this);
-        Freelancer fl = db.getFreelancer(userid);
+        Freelancer fl = db.getFreelancer(identity_id);
         freelancerName = findViewById(R.id.nameEdit);
         freelancerDescription = findViewById(R.id.descEdit);
         saveChanges = findViewById(R.id.saveChanges);
@@ -39,7 +42,7 @@ public class FreelancerEditProfile extends AppCompatActivity implements View.OnC
             public void onClick(View view) {
                 String fN = freelancerName.getText().toString();
                 String fD = freelancerDescription.getText().toString();
-                Freelancer f = new Freelancer(userid, fN, fD);
+                Freelancer f = new Freelancer(identity_id, fN, fD);
                 db.updateFreelancer(f);
                 Intent i = new Intent(getApplicationContext(), FreelancerOwnProfile.class);
                 startActivity(i);

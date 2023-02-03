@@ -65,8 +65,8 @@ public class CertificationPage extends AppCompatActivity implements Certificatio
     private void bindContactData() {
         DatabaseHandler db = new DatabaseHandler(this);
         prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
-        int identity_id = prefs.getInt("IdentityID", 0);
-        List<Certification> certificationList = db.getCertification(1);
+        int identity_id = Integer.parseInt(prefs.getString("Identity ID","-1"));
+        List<Certification> certificationList = db.getCertification(identity_id);
         int index = 0;
         for (Certification e : certificationList) {
             String name = e.getName();

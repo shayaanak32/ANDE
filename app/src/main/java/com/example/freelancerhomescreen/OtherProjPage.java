@@ -27,7 +27,6 @@ public class OtherProjPage extends AppCompatActivity {
         Intent intent = getIntent();
         int profileID = intent.getIntExtra("profileid",0);
         listItem = db.getAllProjects(profileID);
-        //todo get userid from sharedPrefs
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
