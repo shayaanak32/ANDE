@@ -87,14 +87,14 @@ public class SkillsPage extends AppCompatActivity {
 
     private void bindContactData() {
         Intent intent = getIntent();
-        int profileID = intent.getIntExtra("profileid",0);
-        Log.d("OIOIOI",profileID+"");
+        int profileID = intent.getIntExtra("profileid", 0);
+        Log.d("OIOIOI", profileID + "");
         Freelancer f = db.getFreelancers(profileID);
         boolean isNull = (f == null);
         Log.d("POPOPOOPO", f.getSkills());
         String[] skillsList = f.getIndividualSkill(f.getSkills());
-        if(skillsList.length>1){
-            for (int i =0;i<skillsList.length;i++) {
+        if (skillsList.length > 1) {
+            for (int i = 0; i < skillsList.length; i++) {
                 String name = skillsList[i];
                 mSkills.add(new RecyclerSkillsItem(name));
             }

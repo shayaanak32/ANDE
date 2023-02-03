@@ -66,6 +66,16 @@ public class EditExperienceActivity extends AppCompatActivity {
                 fromEditExperience = true;
                 i.putExtra("startDateClicked", startDateClicked);
                 i.putExtra("fromEditExperience", fromEditExperience);
+                String experienceName = editTextUpdateName.getText().toString();
+                String startDate = startDatePickerUpd.getText().toString();
+                String endDate = endDatePickerUpd.getText().toString();
+                String description = descriptionFieldUpd.getText().toString();
+                String companyName = editTextCompany.getText().toString();
+                i.putExtra("experienceName", experienceName);
+                i.putExtra("startDate",startDate);
+                i.putExtra("endDate",endDate);
+                i.putExtra("description",description);
+                i.putExtra("companyName",companyName);
                 startActivity(i);
             }
 
@@ -80,8 +90,11 @@ public class EditExperienceActivity extends AppCompatActivity {
                 String startDate = startDatePickerUpd.getText().toString();
                 String endDate = endDatePickerUpd.getText().toString();
                 String description = descriptionFieldUpd.getText().toString();
-                i.putExtra("endDateClicked", endDateClicked);
-                i.putExtra("","");
+                i.putExtra("experienceName", experienceName);
+                i.putExtra("startDate",startDate);
+                i.putExtra("endDate",endDate);
+                i.putExtra("description",description);
+
                 startActivity(i);
 
             }

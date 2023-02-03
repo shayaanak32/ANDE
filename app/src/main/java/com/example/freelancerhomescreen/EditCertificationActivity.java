@@ -26,7 +26,7 @@ public class EditCertificationActivity extends AppCompatActivity {
     SharedPreferences formData;
     TextView endDatePickerUpd;
     EditText descriptionFieldUpd;
-    boolean startDateClicked = false;
+    boolean startDateClicked;
     boolean endDateClicked = false;
     private String startDateChosen;
     private String endDateChosen;
@@ -64,6 +64,7 @@ public class EditCertificationActivity extends AppCompatActivity {
         MaterialButton addCertSkillBtn = (MaterialButton) findViewById(R.id.addCertSkillBtn);
         EditText editTextSkillField = (EditText) findViewById(R.id.editTextSkillField);
         updateCertificationButton = (MaterialButton) findViewById(R.id.updateCertificationButton);
+
         if (getData.getBoolean("fromCertificationPage")) {
             Log.d("From Where??", "From the Certifications Main Activity Page!!!");
             name = getData.getString("name");
@@ -82,7 +83,7 @@ public class EditCertificationActivity extends AppCompatActivity {
             name = getData.getString("name");
             link = getData.getString("link");
             endDate = getData.getString("completionDateSelected");
-            Log.d("Date Chosen", endDate);
+
             description = getData.getString("description");
             skills = getData.getString("skills");
             skillsArrayList = getStringArrayList(skills);
@@ -114,21 +115,9 @@ public class EditCertificationActivity extends AppCompatActivity {
                 Log.d("End Date Picker Clicked", "Clicked!");
                 name = editTextUpdateName.getText().toString();
                 endDate = endDatePickerUpd.getText().toString();
-                 description = descriptionFieldUpd.getText().toString();
-                 link = editLink.getText().toString();
-//                String textListSkills = "";
-//                for (int counter = 0; counter < skillsArray.length; counter++) {
-//                    if (counter != skillsArray.length) {
-//                        String nameOfSkill = skillsArray[counter];
-//                        if (counter == skillsArray.length) {
-//                            textListSkills += nameOfSkill;
-//                        } else {
-//                            textListSkills += nameOfSkill + ",";
-//                            counter++;
-//
-//                        }
-//                    }
-//                }
+                description = descriptionFieldUpd.getText().toString();
+                link = editLink.getText().toString();
+
                 Intent i = new Intent(EditCertificationActivity.this, CalendarViewActivity.class);
                 startDateClicked = true;
                 i.putExtra("startDateClicked", startDateClicked);
@@ -137,7 +126,9 @@ public class EditCertificationActivity extends AppCompatActivity {
                 i.putExtra("link", link);
                 i.putExtra("endDate", endDate);
                 i.putExtra("description", description);
-                i.putExtra("skills", skills);
+                String skillsString = skillsStringify();
+
+                Log.d("skillsString", skillsString);
 
                 startActivity(i);
             }
@@ -220,7 +211,7 @@ public class EditCertificationActivity extends AppCompatActivity {
 
                 RecyclerSkillsItem s = new RecyclerSkillsItem(addedSkill);
                 int insertIndex = 0;
-                skillsArrayList.add(insertIndex,addedSkill);
+                skillsArrayList.add(insertIndex, addedSkill);
                 Log.d("Is Adapter Null?", Boolean.toString(adapter == null));
                 adapter.notifyItemInserted(insertIndex);
 
@@ -239,26 +230,15 @@ public class EditCertificationActivity extends AppCompatActivity {
                 String description = descriptionFieldUpd.getText().toString();
                 String editedLink = editLink.getText().toString();
                 int counter = 0;
-                for (String s : skillsArrayList) {
-                    if (counter != skillsArrayList.size()) {
-                        String nameOfSkill = s;
-                        if (counter == skillsArrayList.size() - 1) {
-                            textListSkills += nameOfSkill;
-                        } else {
-                            textListSkills += nameOfSkill + ",";
-                            counter++;
-
-                        }
-                    }
-                }
-
-
+                textListSkills = skillsStringify();
 
                 if (certName != null && !certName.isEmpty() && completionDate != null && !completionDate.isEmpty() && description != null && !description.isEmpty() && editedLink != null && !editedLink.isEmpty() && textListSkills != null && !textListSkills.isEmpty()) {
                     Log.d("Form Status", "Fields Complete");
                     Certification c = new Certification(1, certName, editedLink, completionDate, textListSkills, description);
                     ct.updateCertification(c);
                     Intent i = new Intent(EditCertificationActivity.this, CertificationPage.class);
+                    startActivity(i);
+                    finish();
 
                 } else {
                     Log.d("Form Status", "Missing Fields");
@@ -310,6 +290,33 @@ public class EditCertificationActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    public String skillsStringify() {
+        String textListSkills = "";
+        int counter = 0;
+        for (String s : skillsArrayList) {
+            if (counter != skillsArrayList.size()) {
+                String nameOfSkill = s;
+                if (counter == skillsArrayList.size() - 1) {
+                    textListSkills += nameOfSkill;
+                } else {
+                    textListSkills += nameOfSkill + ",";
+                    counter++;
+
+                }
+            }
+        }
+        return textListSkills;
+    }
+
+    public ArrayList<String> skillsUnstringify(String skills) {
+        ArrayList<String> tempSkillsList = new ArrayList<String>();
+        String[]tempSkillsArray = skills.split(",");
+        for(int z = 0; z < tempSkillsArray.length;z++){
+            tempSkillsList.add(tempSkillsArray[z]);
+        }
+        return tempSkillsList;
     }
 
     public void updateSD() {

@@ -141,7 +141,7 @@ public class CalendarViewActivity extends AppCompatActivity implements CalendarA
                         startActivity(i2);
                     }
                     if (fromEditCertifications) {
-                        Log.d("Calendar View Activity -->", "Intent has Come from EditCertifications (select date)");
+                        Log.d("INSIDE!!!", "Intent has Come from EditCertifications (select date)");
                         Intent i2 = new Intent(CalendarViewActivity.this, EditCertificationActivity.class);
                         i2.putExtra("startDateChosen", selectedMonthYear);
                         i2.putExtra("startDateClicked", startDateClicked);
@@ -151,11 +151,7 @@ public class CalendarViewActivity extends AppCompatActivity implements CalendarA
                         i2.putExtra("description", getData.getString("description"));
                         i2.putExtra("skills", getData.getString("skills"));
                         i2.putExtra("fromCalendarViewActivity", true);
-//                        i.putExtra("name", name);
-//                        i.putExtra("link", link);
-//                        i.putExtra("endDate", endDate);
-//                        i.putExtra("description", description);
-//                        i.putExtra("skills", skillsArrayList);
+
 
                         startActivity(i2);
 
@@ -164,8 +160,16 @@ public class CalendarViewActivity extends AppCompatActivity implements CalendarA
                     if (fromEditExperience) {
                         Intent i3 = new Intent(CalendarViewActivity.this, EditExperienceActivity.class);
                         Log.d("selectedMonthYear", selectedMonthYear);
-                        i3.putExtra("startDateChosen", selectedMonthYear);
+                        i3.putExtra("startDate", selectedMonthYear);
                         i3.putExtra("startDateClicked", startDateClicked);
+                        i3.putExtra("experienceName", getData.getString("experienceName"));
+                        i3.putExtra("description",getData.getString("description"));
+                        i3.putExtra("companyName",getData.getString("companyName"));
+//                        i.putExtra("experienceName", experienceName);
+//                        i.putExtra("startDate",startDate);
+//                        i.putExtra("endDate",endDate);
+//                        i.putExtra("description",description);
+
                         startActivity(i3);
                     }
                     if (fromEditProject) {

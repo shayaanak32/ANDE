@@ -94,13 +94,12 @@
                             android:layout_marginRight="10dp"
                             android:fontFamily="@font/montserrat"
                             android:text="Start Date"
-                            android:layout_marginTop="15dp"
                             android:textColor="@color/black"
                             android:textSize="15dp">
 
                         </TextView>
 
-                        <TextView
+                        <EditText
                             android:id="@+id/startDatePicker"
                             android:layout_width="wrap_content"
                             android:layout_height="50dp"
@@ -128,12 +127,11 @@
                             android:fontFamily="@font/montserrat"
                             android:text="End Date"
                             android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:layout_marginTop="10dp">
+                            android:textSize="15dp">
 
                         </TextView>
 
-                        <TextView
+                        <EditText
                             android:id="@+id/endDatePicker"
                             android:layout_width="wrap_content"
                             android:layout_height="50dp"
