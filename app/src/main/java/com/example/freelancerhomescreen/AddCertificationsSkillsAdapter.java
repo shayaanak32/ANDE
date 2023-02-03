@@ -24,8 +24,6 @@ public class AddCertificationsSkillsAdapter extends RecyclerView.Adapter<AddCert
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.skills_list, parent, false);
         //Create View Holder
         final AddCertificationsSkillsAdapter.MyViewHolder myViewHolder = new AddCertificationsSkillsAdapter.MyViewHolder(itemView);
-        Log.d("STATUS", "View Holder created");
-
         return myViewHolder;
     }
 

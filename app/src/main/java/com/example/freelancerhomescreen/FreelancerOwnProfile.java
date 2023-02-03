@@ -39,7 +39,6 @@ public class FreelancerOwnProfile extends AppCompatActivity implements View.OnCl
         DatabaseHandler db = new DatabaseHandler(this);
         Freelancer fl = db.getFreelancers(userId);
         pfp = findViewById(R.id.profile_image);
-        Log.d("konichiwa888",fl.getProfileImg());
         int imageResource = getResources().getIdentifier(fl.getProfileImg(), "drawable", this.getPackageName());
         Drawable d= getResources().getDrawable(imageResource);
         pfp.setImageDrawable(d);

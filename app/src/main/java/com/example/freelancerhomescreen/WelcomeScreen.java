@@ -23,7 +23,6 @@ public class WelcomeScreen extends AppCompatActivity {
         prefs = getSharedPreferences(APP_STARTS, MODE_PRIVATE);
         welcomeScreenActivity = this;
         int appStarts = prefs.getInt("AppStarts", 0);
-        Log.d("App starts are equal to ", Integer.toString(appStarts));
 
         if (appStarts == 0) {
             SharedPreferences.Editor editor = prefs.edit();

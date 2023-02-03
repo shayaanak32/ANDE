@@ -98,9 +98,7 @@ public class OtherCertPage extends AppCompatActivity implements CertificationRec
             String endDate = e.getEndDate();
             String skills = e.getSkills();
             String description = e.getDescription();
-            Log.d("Skills ", skills);
-            Log.d("End Date ", endDate);
-            Log.d("Description ", description);
+
             mCertifications.add(new CertificationRecyclerItem(name, link, endDate, skills, description));
             index++;
         }
@@ -111,7 +109,7 @@ public class OtherCertPage extends AppCompatActivity implements CertificationRec
 
     @Override
     public void onItemClick(int position) {
-        Log.d("skills in recycler item", mCertifications.get(position).getSkills());
+
         Intent intent = new Intent(this, EditCertificationActivity.class);
         boolean fromCertificationPage = true;
         intent.putExtra("name", mCertifications.get(position).getName());
@@ -126,7 +124,7 @@ public class OtherCertPage extends AppCompatActivity implements CertificationRec
 
     @Override
     public void goToLink(int position) {
-        Log.d("position", Integer.toString(position));
+
         String url = mCertifications.get(position).getLink();
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(browserIntent);
