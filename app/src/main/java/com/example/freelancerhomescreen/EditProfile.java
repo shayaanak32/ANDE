@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -49,9 +51,10 @@ public class EditProfile extends AppCompatActivity {
                 showCustomDialog();
             }
         });
-        Employer emp = db.getContact(1);
-        // TODO: for the id, reference from sharedPreference instead;
-
+        SharedPreferences prefs;
+        prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
+        int identity_id = Integer.parseInt(prefs.getString("Identity ID","-1"));
+        Employer emp = db.getContact(identity_id);
         TextView cName = (TextView) findViewById(R.id.comapnyNameEdit);
         TextView cAbout = (TextView) findViewById(R.id.companyAboutEdit);
         Button addSkills = findViewById(R.id.addBtn);
@@ -61,7 +64,9 @@ public class EditProfile extends AppCompatActivity {
         cAbout.setText(emp.getDescription());
 
 
-        pfp.setImageResource(R.drawable.profile_pic);
+        int imageResource = getResources().getIdentifier(emp.getProfileImg(), "drawable", this.getPackageName());
+        Drawable d= getResources().getDrawable(imageResource);
+        pfp.setImageDrawable(d);
         ArrayList<String> listItem = new ArrayList<String>(Arrays.asList(emp.getPriorities().split(",")));
         final CustomAdapter adapter = new CustomAdapter(EditProfile.this, listItem);
         listView.setAdapter(adapter);

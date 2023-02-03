@@ -49,13 +49,13 @@ public class LoginScreen extends AppCompatActivity {
             db.addUser("Michael Brown", 2, "michaelbrown@gmail.com", "asdfghjkl", 2);
             db.addUser("Ashley Taylor", 2, "ashleytaylor@gmail.com", "hashpassword6", 3);
 
-            db.addEmployer("Test Thing Company", "Programmers, Software Engineers", "A fun tech company", "testing@testCompany.gov.sg", "12345", "T123456789", "R.drawable.profile_pic");
-            db.addEmployer("Company Too", "Coders, Interns", "Another boring company", "com2@gmail.com", "asdfg", "T0001112", "R.drawable.companypfp1");
-            db.addEmployer("Company 3", "Coders, Internvvs", "Another bland company", "com3@gmail.com", "asdfrffg", "T3001112", "R.drawable.companypfp2");
+            db.addEmployer("Test Thing Company", "Programmers, Software Engineers", "A fun tech company", "testing@testCompany.gov.sg", "12345", "T123456789", "profile_pic");
+            db.addEmployer("Company Too", "Coders, Interns", "Another boring company", "com2@gmail.com", "asdfg", "T0001112", "companypfp1");
+            db.addEmployer("Company 3", "Coders, Internvvs", "Another bland company", "com3@gmail.com", "asdfrffg", "T3001112", "companypfp2");
 
-            db.addFreelancer("Emily Davis", "emilydavis@gmail.com", "1234567890", "Computing and stuff", "Java, C++, NodeJS", "R.drawable.freelancepfp1");
-            db.addFreelancer("Michael Brown", "michaelbrown@gmail.com", "asdfghjkl", "More Computing and More Computing", "Java, NodeJS", "R.drawable.freelancepfp2");
-            db.addFreelancer("Ashley Taylor", "ashleytaylor@gmail.com", "hashpassword6", "I love tech", "Python", "R.drawable.freelancepfp3");
+            db.addFreelancer("Emily Davis", "emilydavis@gmail.com", "1234567890", "Computing and stuff", "Java, C++, NodeJS", "freelancepfp1");
+            db.addFreelancer("Michael Brown", "michaelbrown@gmail.com", "asdfghjkl", "More Computing and More Computing", "Java, NodeJS", "freelancerpfp2");
+            db.addFreelancer("Ashley Taylor", "ashleytaylor@gmail.com", "hashpassword6", "I love tech", "Python", "freelancerpfp3");
 
             Projects p1 = new Projects("Student Management System", "January 2019", "Januray 2022", "https://github.com/shayaanak32/JADProjectRepo", "Java,J2EE", "Description1", 1);
             Projects p2 = new Projects("IceBreaker!", "August 2020", "December 2022", "https://github.com/VielenKaat/ADES-Repo", "Java,J2EE", "Description1", 1);

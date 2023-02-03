@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -44,6 +45,7 @@ public class FeedPage extends AppCompatActivity {
                 for(Employer f : emp){
                     freelancers.add(new Recycleritem(f.getEmployerID(), f.getCompanyName(), f.getBrokenPriorities(f.getPriorities()), f.getDescription(),f.getProfileImg()));
                 }
+
                 break;
         }
 
