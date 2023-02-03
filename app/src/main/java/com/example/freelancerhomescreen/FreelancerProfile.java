@@ -55,11 +55,9 @@ public class FreelancerProfile extends AppCompatActivity implements View.OnClick
                         if(userRole==1){
                             i = new Intent(FreelancerProfile.this, ProfilePage.class);
                             startActivity(i);
-                            finish();
                         }else if(userRole==2){
                             i = new Intent(FreelancerProfile.this, FreelancerOwnProfile.class);
                             startActivity(i);
-                            finish();
                         }else{
                             i = new Intent(FreelancerProfile.this, LoginScreen.class);
                             startActivity(i);
@@ -94,6 +92,7 @@ public class FreelancerProfile extends AppCompatActivity implements View.OnClick
         certs = findViewById(R.id.certificationsCard);
         proj = findViewById(R.id.projectsCard);
         exp = findViewById(R.id.experienceCard);
+        bv.setSelectedItemId(R.id.feedNav);
         skills.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

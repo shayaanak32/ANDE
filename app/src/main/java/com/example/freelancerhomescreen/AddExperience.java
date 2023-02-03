@@ -9,12 +9,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.navigation.NavigationBarView;
 
 import org.w3c.dom.Text;
 
@@ -48,7 +51,48 @@ public class AddExperience extends AppCompatActivity {
         descriptionField = (EditText) findViewById(R.id.descriptionField);
         addExperienceBtn = (MaterialButton) findViewById(R.id.addExperienceButton);
 
+        SharedPreferences prefs = getSharedPreferences("UserDetails", MODE_PRIVATE);
 
+        BottomNavigationView bv =findViewById(R.id.bottomNavigationView);
+        int userRole = Integer.parseInt(prefs.getString("RoleID","-1"));
+
+        bv.setSelectedItemId(R.id.profileNav);
+
+        bv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            Intent i;
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.profileNav:
+                        if(userRole==1){
+                            i = new Intent(AddExperience.this, ProfilePage.class);
+                            startActivity(i);
+                            finish();
+                        }else if(userRole==2){
+                            i = new Intent(AddExperience.this, FreelancerOwnProfile.class);
+                            startActivity(i);
+                            finish();
+                        }else{
+                            i = new Intent(AddExperience.this, LoginScreen.class);
+                            startActivity(i);
+                            finish();
+                        }
+
+                        return true;
+                    case R.id.feedNav:
+                        i = new Intent(AddExperience.this, FeedPage.class);
+                        startActivity(i);
+                        finish();
+                        return true;
+                    case R.id.settingsNav:
+                        i = new Intent(AddExperience.this, SettingsPage.class);
+                        startActivity(i);
+                        finish();
+                        return true;
+                }
+                return false;
+            }
+        });
 
         startDateField.setOnClickListener(new View.OnClickListener() {
             @Override

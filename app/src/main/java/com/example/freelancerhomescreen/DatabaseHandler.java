@@ -265,7 +265,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_PASSWORD, password);
         values.put(KEY_DESCRIPTION, description);
         values.put(KEY_YOUR_SKILLS, skills);
-        values.put(KEY_PFP, profilePic);
+        String finalPfp;
+        if (profilePic.trim()==""){
+            finalPfp="default_pfp";
+        }else{
+            finalPfp = profilePic;
+        }
+        values.put(KEY_PFP, finalPfp);
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
         db.insert(TABLE_FREELANCERS, null, values);
@@ -309,7 +315,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_DESCRIPTION, description);
         values.put(KEY_PRIORITIES, priorities);
         values.put(KEY_UEN, uen);
-        values.put(KEY_PFP, profilePic);
+        String finalPfp;
+        if (profilePic.trim()==""){
+            finalPfp="default_pfp";
+        }else{
+            finalPfp = profilePic;
+        }
+        values.put(KEY_PFP, finalPfp);
         Log.d("Inputting values:", empEmail + empPassword + companyName + description + priorities + uen);
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
