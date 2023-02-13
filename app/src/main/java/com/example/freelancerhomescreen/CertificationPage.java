@@ -64,7 +64,7 @@ public class CertificationPage extends AppCompatActivity implements Certificatio
 
     private void bindContactData() {
         DatabaseHandler db = new DatabaseHandler(this);
-        prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
+        prefs = getSharedPreferences("UserDetails", MODE_PRIVATE);
         int identity_id = Integer.parseInt(prefs.getString("Identity ID","-1"));
         List<Certification> certificationList = db.getCertification(identity_id);
         int index = 0;
@@ -74,9 +74,7 @@ public class CertificationPage extends AppCompatActivity implements Certificatio
             String endDate = e.getEndDate();
             String skills = e.getSkills();
             String description = e.getDescription();
-            Log.d("Skills ", skills);
-            Log.d("End Date ", endDate);
-            Log.d("Description ", description);
+
             mCertifications.add(new CertificationRecyclerItem(name, link, endDate, skills, description));
             index++;
         }
@@ -94,14 +92,12 @@ public class CertificationPage extends AppCompatActivity implements Certificatio
         intent.putExtra("description", mCertifications.get(position).getDescription());
         intent.putExtra("skills", mCertifications.get(position).getSkills());
         intent.putExtra("fromCertificationPage",fromCertificationPage);
-        Log.d("skills in recycler item", mCertifications.get(position).getSkills());
         startActivity(intent);
 
     }
 
     @Override
     public void goToLink(int position) {
-        Log.d("position", Integer.toString(position));
         String url = mCertifications.get(position).getLink();
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(browserIntent);

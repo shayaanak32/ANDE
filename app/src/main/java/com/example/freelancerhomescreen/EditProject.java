@@ -2,6 +2,7 @@ package com.example.freelancerhomescreen;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -97,7 +98,7 @@ public class EditProject extends AppCompatActivity {
                     }
                     skillsP+=adapter.getItem(adapter.getCount()-1);
                 }
-                prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
+                prefs = getSharedPreferences("UserDetails", MODE_PRIVATE);
         int identity_id = Integer.parseInt(prefs.getString("Identity ID","-1"));
                 Projects p2 = new Projects(p1.getProjectID(), pN, pSD, pED, pL, skillsP, pD, identity_id);
                 db.updateProjects(p2);

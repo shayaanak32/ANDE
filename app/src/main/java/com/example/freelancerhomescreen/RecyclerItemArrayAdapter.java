@@ -83,6 +83,7 @@ public class RecyclerItemArrayAdapter extends RecyclerView.Adapter<RecyclerItemA
         freelancerAbout.setText(userArrayList.get(position).getAbout());
         //Set Freelancer Name
         String[] skillList= userArrayList.get(position).getPrios();
+
         switch(skillList.length){
             case 1:
                 skill1.setText(skillList[0]);
@@ -101,7 +102,7 @@ public class RecyclerItemArrayAdapter extends RecyclerView.Adapter<RecyclerItemA
                 break;
         }
 
-        freelancerPfp.setImageResource(R.drawable.profile_pic);
+
 
     }
 
@@ -129,6 +130,7 @@ public class RecyclerItemArrayAdapter extends RecyclerView.Adapter<RecyclerItemA
         MyViewHolder(@NonNull View itemView) {
             super(itemView);
             freelancerPfp = itemView.findViewById(R.id.freelancerPfp);
+
         }
     }
 

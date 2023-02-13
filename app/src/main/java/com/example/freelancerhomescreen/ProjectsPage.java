@@ -34,14 +34,13 @@ public class ProjectsPage extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
+        prefs = getSharedPreferences("UserDetails", MODE_PRIVATE);
         int identity_id = Integer.parseInt(prefs.getString("Identity ID","-1"));
         listItem = db.getAllProjects(identity_id);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 int project_id = listItem.get(i).getProjectID();
-                Log.d(TAG, project_id+"");
 
                 // set extra, so when opening new page can get project id data
                 Intent intent = new Intent(getApplicationContext(), EditProject.class);

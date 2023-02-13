@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -49,9 +51,10 @@ public class EditProfile extends AppCompatActivity {
                 showCustomDialog();
             }
         });
-        Employer emp = db.getContact(1);
-        // TODO: for the id, reference from sharedPreference instead;
-
+        SharedPreferences prefs;
+        prefs = getSharedPreferences("UserDetails", MODE_PRIVATE);
+        int identity_id = Integer.parseInt(prefs.getString("Identity ID","-1"));
+        Employer emp = db.getContact(identity_id);
         TextView cName = (TextView) findViewById(R.id.comapnyNameEdit);
         TextView cAbout = (TextView) findViewById(R.id.companyAboutEdit);
         Button addSkills = findViewById(R.id.addBtn);
@@ -61,7 +64,9 @@ public class EditProfile extends AppCompatActivity {
         cAbout.setText(emp.getDescription());
 
 
-        pfp.setImageResource(R.drawable.profile_pic);
+        int imageResource = getResources().getIdentifier(emp.getProfileImg(), "drawable", this.getPackageName());
+        Drawable d= getResources().getDrawable(imageResource);
+        pfp.setImageDrawable(d);
         ArrayList<String> listItem = new ArrayList<String>(Arrays.asList(emp.getPriorities().split(",")));
         final CustomAdapter adapter = new CustomAdapter(EditProfile.this, listItem);
         listView.setAdapter(adapter);
@@ -87,17 +92,29 @@ public class EditProfile extends AppCompatActivity {
             }
         });
 
-        BottomNavigationView bv = findViewById(R.id.bottomNavigationView);
+        BottomNavigationView bv =findViewById(R.id.bottomNavigationView);
+        int userRole = Integer.parseInt(prefs.getString("RoleID","-1"));
+        bv.setSelectedItemId(R.id.profileNav);
         bv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             Intent i;
-
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
+                switch (item.getItemId()){
                     case R.id.profileNav:
-                        i = new Intent(EditProfile.this, ProfilePage.class);
-                        startActivity(i);
-                        finish();
+                        if(userRole==1){
+                            i = new Intent(EditProfile.this, ProfilePage.class);
+                            startActivity(i);
+                            finish();
+                        }else if(userRole==2){
+                            i = new Intent(EditProfile.this, FreelancerOwnProfile.class);
+                            startActivity(i);
+                            finish();
+                        }else{
+                            i = new Intent(EditProfile.this, LoginScreen.class);
+                            startActivity(i);
+                            finish();
+                        }
+
                         return true;
                     case R.id.feedNav:
                         i = new Intent(EditProfile.this, FeedPage.class);
@@ -113,6 +130,7 @@ public class EditProfile extends AppCompatActivity {
                 return false;
             }
         });
+
 
         Button updateBtn = findViewById(R.id.saveUpdateBtn);
         updateBtn.setOnClickListener(new View.OnClickListener() {

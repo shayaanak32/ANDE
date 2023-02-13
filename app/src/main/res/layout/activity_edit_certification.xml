@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddExperience">
+    tools:context=".EditCertificationActivity">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="wrap_content"
@@ -107,7 +107,7 @@
 
                         </TextView>
 
-                        <TextView
+                        <EditText
                             android:id="@+id/completionDatePickerExp"
                             android:layout_width="wrap_content"
                             android:layout_height="50dp"

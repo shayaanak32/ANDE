@@ -4,16 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class FreelancerOwnProfile extends AppCompatActivity implements View.OnClickListener {
 
     private final String TAG = "MainActivity";
     TextView freelancerName, freelancerDescription, editBtn;
-    SharedPreferences prefs;
+    CircleImageView pfp;
     private final String IdentityID = "IdentityID";
     private final String UserID = "UserID";
     private final String RoleID = "RoleID";
@@ -23,20 +26,18 @@ public class FreelancerOwnProfile extends AppCompatActivity implements View.OnCl
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_freelancer_own_profile);
-        SharedPreferences prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("UserDetails", MODE_PRIVATE);
         int userId = Integer.parseInt(prefs.getString("Identity ID","-1"));
         Log.d("contents own profile", userId+"");
         //todo: get from sharedPrefs
-//        prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
-//        String identity_id = prefs.getString(IdentityID, "");
-//        String user_id = prefs.getString(UserID, "");
-//        String role_id = prefs.getString(RoleID, "");
-//        Log.d("FreelancerOwnProfile: identity_id", identity_id);
-//        Log.d("FreelancerOwnProfile: user_id", (user_id));
-//        Log.d("FreelancerOwnProfile: role_id", role_id);
 
         DatabaseHandler db = new DatabaseHandler(this);
-        Freelancer fl = db.getFreelancer(userId);
+        Freelancer fl = db.getFreelancers(userId);
+        pfp = findViewById(R.id.profile_image);
+        Log.d("konichiwa888",fl.getProfileImg());
+        int imageResource = getResources().getIdentifier(fl.getProfileImg(), "drawable", this.getPackageName());
+        Drawable d= getResources().getDrawable(imageResource);
+        pfp.setImageDrawable(d);
         freelancerName = findViewById(R.id.name);
         freelancerDescription = findViewById(R.id.desc);
         editBtn = findViewById(R.id.editFreelancer);
@@ -58,7 +59,7 @@ public class FreelancerOwnProfile extends AppCompatActivity implements View.OnCl
     @Override
     protected void onResume() {
         super.onResume();
-        SharedPreferences prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("UserDetails", MODE_PRIVATE);
         int userId = Integer.parseInt(prefs.getString("Identity ID","-1"));
 
         DatabaseHandler db = new DatabaseHandler(this);
@@ -80,7 +81,7 @@ public class FreelancerOwnProfile extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View view) {
-        SharedPreferences prefs = getSharedPreferences("FreelancerUserDetails", MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("UserDetails", MODE_PRIVATE);
         int userId = Integer.parseInt(prefs.getString("Identity ID","-1"));
         Intent i = new Intent(getApplicationContext(), FreelancerOwnProfile.class);
         switch(view.getId()){

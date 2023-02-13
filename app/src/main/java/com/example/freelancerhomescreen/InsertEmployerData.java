@@ -12,7 +12,6 @@ import java.util.List;
 
 public class InsertEmployerData extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-//    DatabaseReference userDbRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +19,6 @@ public class InsertEmployerData extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        userDbRef = FirebaseDatabase.getInstance().getReference().child("Employers");
-//        insertEmployerData();
 
         Employer e1 = new Employer("Prince Kharal Tech", "Singapore", "Description1");
         Employer e2 = new Employer("NCS", "Singapore", "Description2");
@@ -39,17 +36,5 @@ public class InsertEmployerData extends AppCompatActivity {
 //        }
 
     }
-
-//    public void insertEmployerData() {
-//
-//
-//        Employer e1 = new Employer("Prince Kharal Tech", "Singapore", "Description1");
-//        Employer e2 = new Employer("NCS", "Singapore", "Description2");
-//        Employer e3 = new Employer("A*STAR", "Singapore", "Description3");
-//        userDbRef.push().setValue(e1);
-//        userDbRef.push().setValue(e2);
-//        userDbRef.push().setValue(e3);
-//
-//    }
 
 }

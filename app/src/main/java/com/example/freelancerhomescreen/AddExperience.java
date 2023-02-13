@@ -27,8 +27,8 @@ public class AddExperience extends AppCompatActivity {
     public static final String END_DATE = "EndDate";
     SharedPreferences sdPref;
     SharedPreferences edPref;
-    TextView startDateField;
-    TextView endDateField;
+    EditText startDateField;
+    EditText endDateField;
     EditText editTextExpName;
     EditText editTextCompany;
     EditText descriptionField;
@@ -41,40 +41,39 @@ public class AddExperience extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_experience);
         DatabaseHandler db = new DatabaseHandler(this);
-        startDateField = (TextView) findViewById(R.id.startDatePickerExp);
-        endDateField = (TextView) findViewById(R.id.endDatePicker);
+        startDateField = (EditText) findViewById(R.id.startDatePickerExp);
+        endDateField = (EditText) findViewById(R.id.endDatePicker);
         editTextExpName = (EditText) findViewById(R.id.editTextExpName);
         editTextCompany = (EditText) findViewById(R.id.editTextCompany);
         descriptionField = (EditText) findViewById(R.id.descriptionField);
         addExperienceBtn = (MaterialButton) findViewById(R.id.addExperienceButton);
 
 
-
-        startDateField.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(AddExperience.this, CalendarViewActivity.class);
-                startDateClicked = true;
-
-                i.putExtra("startDateClicked", startDateClicked);
-                i.putExtra("fromAddExperience",true);
-                startActivity(i);
-
-            }
-
-        });
-        endDateField.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent i = new Intent(AddExperience.this, CalendarViewActivity.class);
-                endDateClicked = true;
-                i.putExtra("endDateClicked", endDateClicked);
-                startActivity(i);
-
-            }
-
-        });
+//        startDateField.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent i = new Intent(AddExperience.this, CalendarViewActivity.class);
+//                startDateClicked = true;
+//
+//                i.putExtra("startDateClicked", startDateClicked);
+//                i.putExtra("fromAddExperience",true);
+//                startActivity(i);
+//
+//            }
+//
+//        });
+//        endDateField.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent i = new Intent(AddExperience.this, CalendarViewActivity.class);
+//                endDateClicked = true;
+//                i.putExtra("endDateClicked", endDateClicked);
+//                startActivity(i);
+//
+//            }
+//
+//        });
         addExperienceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,7 +81,7 @@ public class AddExperience extends AppCompatActivity {
                 String startDate = startDateField.getText().toString();
                 String endDate = endDateField.getText().toString();
                 String companyName = editTextCompany.getText().toString();
-                Log.d("Company Name",companyName);
+                Log.d("Company Name", companyName);
                 String description = descriptionField.getText().toString();
 //                Log.d("experienceName", experienceName);
 //                Log.d("Name Check", Boolean.toString(experienceName != null && !experienceName.isEmpty()));
@@ -97,12 +96,10 @@ public class AddExperience extends AppCompatActivity {
 
 
                 if (experienceName != null && !experienceName.isEmpty() && startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty() && companyName != null && !companyName.isEmpty() && description != null && !description.isEmpty()) {
-
-                    Experience e = new Experience(experienceName, startDate, endDate, companyName, description, 1);
+                    Experience e = new Experience(experienceName, startDate, endDate, companyName, description,1);
                     db.addExperience(e);
-                    Log.d("Form Status", "Fields Complete");
                     Intent i = new Intent(AddExperience.this, ExperienceMainActivity.class);
-
+                    startActivity(i);
                 } else {
                     Log.d("Form Status", "Missing Fields");
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(AddExperience.this);
@@ -126,35 +123,35 @@ public class AddExperience extends AppCompatActivity {
 
         });
 
-        Bundle getData = getIntent().getExtras();
-        if (getData != null) {
-            sdPref = getSharedPreferences(START_DATE, MODE_PRIVATE);
-            edPref = getSharedPreferences(END_DATE, MODE_PRIVATE);
-            SharedPreferences.Editor editor = sdPref.edit();
-            SharedPreferences.Editor editor2 = edPref.edit();
-            startDateClicked = getData.getBoolean("startDateClicked");
-            endDateClicked = getData.getBoolean("endDateClicked");
-
-            if (startDateClicked) {
-                startDateChosen = getData.getString("startDateChosen");
-                editor.putString("ChosenStartDate", startDateChosen);
-                editor.apply();
-                startDateField.setText(startDateChosen);
-            } else {
-                updateSD();
-            }
-
-            if (endDateClicked) {
-                endDateChosen = getData.getString("endDateChosen");
-                editor2.putString("ChosenEndDate", endDateChosen);
-                editor2.apply();
-                endDateField.setText(endDateChosen);
-            } else {
-                updateED();
-            }
-        } else {
-            //Toast.makeText(getApplicationContext(),"Failed to get Data",Toast.LENGTH_LONG).show();
-        }
+//        Bundle getData = getIntent().getExtras();
+//        if (getData != null) {
+//            sdPref = getSharedPreferences(START_DATE, MODE_PRIVATE);
+//            edPref = getSharedPreferences(END_DATE, MODE_PRIVATE);
+//            SharedPreferences.Editor editor = sdPref.edit();
+//            SharedPreferences.Editor editor2 = edPref.edit();
+//            startDateClicked = getData.getBoolean("startDateClicked");
+//            endDateClicked = getData.getBoolean("endDateClicked");
+//
+//            if (startDateClicked) {
+//                startDateChosen = getData.getString("startDateChosen");
+//                editor.putString("ChosenStartDate", startDateChosen);
+//                editor.apply();
+//                startDateField.setText(startDateChosen);
+//            } else {
+//                updateSD();
+//            }
+//
+//            if (endDateClicked) {
+//                endDateChosen = getData.getString("endDateChosen");
+//                editor2.putString("ChosenEndDate", endDateChosen);
+//                editor2.apply();
+//                endDateField.setText(endDateChosen);
+//            } else {
+//                updateED();
+//            }
+//        } else {
+//            //Toast.makeText(getApplicationContext(),"Failed to get Data",Toast.LENGTH_LONG).show();
+//        }
 
     }
 
@@ -174,86 +171,44 @@ public class AddExperience extends AppCompatActivity {
 //        descriptionField.setText(description);
 //    }
 
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        Log.d("Inside onSaveInstanceState ", "About to Save Instance!!!");
-        String experienceName = editTextExpName.getText().toString();
-        String startDate = startDateField.getText().toString();
-        String endDate = endDateField.getText().toString();
-        String companyName = editTextCompany.getText().toString();
-        String description = descriptionField.getText().toString();
-        Log.d("experienceName", experienceName);
-        Log.d("startDate", startDate);
-        Log.d("endDate", endDate);
-        Log.d("companyName", companyName);
-        Log.d("description", description);
-
-        outState.putString("experience_name", experienceName);
-        outState.putString("start_name", startDate);
-        outState.putString("end_name", endDate);
-        outState.putString("company_name", companyName);
-        outState.putString("description", description);
-    }
-
-
-    public void updateSD() {
-        SharedPreferences sdsp = getSharedPreferences(START_DATE, MODE_PRIVATE);
-        String text = sdsp.getString("ChosenStartDate", "");
-        Log.d("Inside UpdateSD Checking Text", text);
-        startDateField.setText(text);
-    }
-
-    public void updateED() {
-        Log.d("Inside UpdateED", "endDate clicked is false");
-        SharedPreferences edsp = getSharedPreferences(END_DATE, MODE_PRIVATE);
-        String text2 = edsp.getString("ChosenEndDate", "");
-        Log.d("Inside UpdateED Checking Text", text2);
-
-        endDateField.setText(text2);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d("onStart msg", "The onStart() event");
-    }
-
-    /**
-     * Called when the activity has become visible.
-     */
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d("onResume msg", "The onResume() event");
-    }
-
-    /**
-     * Called when another activity is taking focus.
-     */
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d("onPause msg", "The onPause() event");
-    }
-
-    /**
-     * Called when the activity is no longer visible.
-     */
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d("onStop msg", "The onStop() event");
-    }
-
-    /**
-     * Called just before the activity is destroyed.
-     */
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.d("onDestroy msg", "The onDestroy() event");
-    }
+//    @Override
+//    protected void onSaveInstanceState(@NonNull Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//        Log.d("Inside onSaveInstanceState ", "About to Save Instance!!!");
+//        String experienceName = editTextExpName.getText().toString();
+//        String startDate = startDateField.getText().toString();
+//        String endDate = endDateField.getText().toString();
+//        String companyName = editTextCompany.getText().toString();
+//        String description = descriptionField.getText().toString();
+//        Log.d("experienceName", experienceName);
+//        Log.d("startDate", startDate);
+//        Log.d("endDate", endDate);
+//        Log.d("companyName", companyName);
+//        Log.d("description", description);
+//
+//        outState.putString("experience_name", experienceName);
+//        outState.putString("start_name", startDate);
+//        outState.putString("end_name", endDate);
+//        outState.putString("company_name", companyName);
+//        outState.putString("description", description);
+//    }
+//
+//
+//    public void updateSD() {
+//        SharedPreferences sdsp = getSharedPreferences(START_DATE, MODE_PRIVATE);
+//        String text = sdsp.getString("ChosenStartDate", "");
+//        Log.d("Inside UpdateSD Checking Text", text);
+//        startDateField.setText(text);
+//    }
+//
+//    public void updateED() {
+//        Log.d("Inside UpdateED", "endDate clicked is false");
+//        SharedPreferences edsp = getSharedPreferences(END_DATE, MODE_PRIVATE);
+//        String text2 = edsp.getString("ChosenEndDate", "");
+//        Log.d("Inside UpdateED Checking Text", text2);
+//
+//        endDateField.setText(text2);
+//    }
 
 
 }

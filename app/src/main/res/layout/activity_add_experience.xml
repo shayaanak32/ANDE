@@ -100,7 +100,7 @@
 
                     </TextView>
 
-                    <TextView
+                    <EditText
                         android:id="@+id/startDatePickerExp"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
@@ -134,7 +134,7 @@
 
                     </TextView>
 
-                    <TextView
+                    <EditText
                         android:id="@+id/endDatePicker"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
