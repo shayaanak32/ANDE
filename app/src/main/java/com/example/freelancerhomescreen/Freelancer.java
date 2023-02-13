@@ -114,7 +114,7 @@ public class Freelancer {
     public String[] getIndividualSkill(String skills) {
         individualSkill = skills.split(",");
         for(int i =0; i<individualSkill.length;i++){
-            Log.d("skill of freelancer", individualSkill[i]);
+
         }
         return individualSkill;
     }

@@ -4,13 +4,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +34,47 @@ public class ExperienceMainActivity extends AppCompatActivity implements Experie
         recyclerView = (RecyclerView) findViewById(R.id.experiences);
         bindContactData();
         setAdapter();
+        SharedPreferences prefs = getSharedPreferences("UserDetails", MODE_PRIVATE);
 
+        BottomNavigationView bv =findViewById(R.id.bottomNavigationView);
+        int userRole = Integer.parseInt(prefs.getString("RoleID","-1"));
+
+        bv.setSelectedItemId(R.id.profileNav);
+
+        bv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            Intent i;
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.profileNav:
+                        if(userRole==1){
+                            i = new Intent(ExperienceMainActivity.this, ProfilePage.class);
+                            startActivity(i);
+                            finish();
+                        }else if(userRole==2){
+                            i = new Intent(ExperienceMainActivity.this, FreelancerOwnProfile.class);
+                            startActivity(i);
+                        }else{
+                            i = new Intent(ExperienceMainActivity.this, LoginScreen.class);
+                            startActivity(i);
+                            finish();
+                        }
+
+                        return true;
+                    case R.id.feedNav:
+                        i = new Intent(ExperienceMainActivity.this, FeedPage.class);
+                        startActivity(i);
+                        finish();
+                        return true;
+                    case R.id.settingsNav:
+                        i = new Intent(ExperienceMainActivity.this, SettingsPage.class);
+                        startActivity(i);
+                        finish();
+                        return true;
+                }
+                return false;
+            }
+        });
     }
 
     private void setAdapter() {
@@ -54,10 +98,6 @@ public class ExperienceMainActivity extends AppCompatActivity implements Experie
             String endDate = e.getEndDate();
             String description = e.getDescription();
             String companyName = e.getCompany();
-            Log.d("Name ", name);
-            Log.d("Start Date ", startDate);
-            Log.d("End Date ", endDate);
-            Log.d("Description ", description);
             mExperiences.add(new ExperienceRecyclerItem(name, startDate, endDate, description,companyName));
             index++;
         }

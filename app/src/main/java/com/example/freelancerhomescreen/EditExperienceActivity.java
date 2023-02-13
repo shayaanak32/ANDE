@@ -1,5 +1,6 @@
 package com.example.freelancerhomescreen;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -8,11 +9,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class EditExperienceActivity extends AppCompatActivity {
     private EditText editTextUpdateName;
@@ -91,7 +95,6 @@ public class EditExperienceActivity extends AppCompatActivity {
         updateExperienceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("I am being clicked", "Clicked!");
 
                 String experienceName = editTextUpdateName.getText().toString();
                 String startDate = startDatePickerUpd.getText().toString();
@@ -100,13 +103,13 @@ public class EditExperienceActivity extends AppCompatActivity {
 
 
                 if (experienceName != null && !experienceName.isEmpty() && startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty() && companyName != null && !companyName.isEmpty() && description != null && !description.isEmpty()) {
-                    Log.d("Form Status", "Fields Complete");
+
                     Experience e = new Experience(experienceName, startDate, endDate, companyName, description, 1);
                     ct.updateExperience(e);
                     Intent i = new Intent(EditExperienceActivity.this, ExperienceMainActivity.class);
 
                 } else {
-                    Log.d("Form Status", "Missing Fields");
+
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(EditExperienceActivity.this);
                     builder1.setMessage("Please fill in all the fields!");
                     builder1.setCancelable(true);
@@ -127,7 +130,48 @@ public class EditExperienceActivity extends AppCompatActivity {
             }
 
         });
+        SharedPreferences prefs = getSharedPreferences("UserDetails", MODE_PRIVATE);
 
+        BottomNavigationView bv =findViewById(R.id.bottomNavigationView);
+        int userRole = Integer.parseInt(prefs.getString("RoleID","-1"));
+
+        bv.setSelectedItemId(R.id.profileNav);
+
+        bv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            Intent i;
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.profileNav:
+                        if(userRole==1){
+                            i = new Intent(EditExperienceActivity.this, ProfilePage.class);
+                            startActivity(i);
+                            finish();
+                        }else if(userRole==2){
+                            i = new Intent(EditExperienceActivity.this, FreelancerOwnProfile.class);
+                            startActivity(i);
+                            finish();
+                        }else{
+                            i = new Intent(EditExperienceActivity.this, LoginScreen.class);
+                            startActivity(i);
+                            finish();
+                        }
+
+                        return true;
+                    case R.id.feedNav:
+                        i = new Intent(EditExperienceActivity.this, FeedPage.class);
+                        startActivity(i);
+                        finish();
+                        return true;
+                    case R.id.settingsNav:
+                        i = new Intent(EditExperienceActivity.this, SettingsPage.class);
+                        startActivity(i);
+                        finish();
+                        return true;
+                }
+                return false;
+            }
+        });
 //        if (getData != null) {
 //            sdPref = getSharedPreferences(START_DATE, MODE_PRIVATE);
 //            edPref = getSharedPreferences(END_DATE, MODE_PRIVATE);

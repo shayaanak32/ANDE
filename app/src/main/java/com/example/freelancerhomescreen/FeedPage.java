@@ -58,10 +58,20 @@ public class FeedPage extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.profileNav:
-                        i = new Intent(FeedPage.this, ProfilePage.class);
-                        startActivity(i);
-                        finish();
+                        if(userRole==1){
+                            i = new Intent(FeedPage.this, ProfilePage.class);
+                            startActivity(i);
+                        }else if(userRole==2){
+                            i = new Intent(FeedPage.this, FreelancerOwnProfile.class);
+                            startActivity(i);
+                        }else{
+                            i = new Intent(FeedPage.this, LoginScreen.class);
+                            startActivity(i);
+                            finish();
+                        }
+
                         return true;
+
                     case R.id.feedNav:
 //                        i = new Intent(FeedPage.this, FeedPage.class);
 //                        startActivity(i);
@@ -100,7 +110,7 @@ public class FeedPage extends AppCompatActivity {
                 //todo: retrieve user role from shared preference
                 Intent i;
                 int profileID = country.getId();
-                Log.d("poooooooo", profileID+"");
+
                 switch(userRole){
                     case 1:
                         i = new Intent(getApplicationContext(), FreelancerProfile.class);

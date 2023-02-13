@@ -1,10 +1,13 @@
 package com.example.freelancerhomescreen;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,6 +15,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -107,114 +113,49 @@ public class EditProject extends AppCompatActivity {
                 finish();
             }
         });
+        prefs = getSharedPreferences("UserDetails", MODE_PRIVATE);
 
-//        pStart.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent i = new Intent(EditProject.this, CalendarViewActivity.class);
-//                startDateClicked = true;
-//                fromEditProject = true;
-//                i.putExtra("startDateClicked", startDateClicked);
-//                i.putExtra("fromEditProject", fromEditProject);
-//                i.putExtra("pN", pName.getText().toString());
-//                i.putExtra("pSD", pStart.getText().toString());
-//                i.putExtra("pD", pDesc.getText().toString());
-//                i.putExtra("pED", pEnd.getText().toString());
-//                i.putExtra("pL", pLink.getText().toString());
-//                i.putExtra("project_id",project_id);
-//
-//                startActivity(i);
-//            }
-//
-//        });
-//        pEnd.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Intent i = new Intent(EditProject.this, CalendarViewActivity.class);
-//                endDateClicked = true;
-//                i.putExtra("fromEditProject", fromEditProject);
-//                i.putExtra("pN", pName.getText().toString());
-//                i.putExtra("pSD", pStart.getText().toString());
-//                i.putExtra("pD", pDesc.getText().toString());
-//                i.putExtra("pED", pEnd.getText().toString());
-//                i.putExtra("pL", pLink.getText().toString());
-//                i.putExtra("endDateClicked", endDateClicked);
-//                i.putExtra("project_id",project_id);
-//
-//                startActivity(i);
-//
-//            }
+        BottomNavigationView bv =findViewById(R.id.bottomNavigationView);
+        int userRole = Integer.parseInt(prefs.getString("RoleID","-1"));
 
-//        });
+        bv.setSelectedItemId(R.id.profileNav);
 
-//        if (intent != null) {
-//            sdPref = getSharedPreferences(START_DATE, MODE_PRIVATE);
-//            edPref = getSharedPreferences(END_DATE, MODE_PRIVATE);
-//            SharedPreferences.Editor editor = sdPref.edit();
-//            SharedPreferences.Editor editor2 = edPref.edit();
-//            startDateClicked = intent.getBooleanExtra("startDateClicked", false);
-//            endDateClicked = intent.getBooleanExtra("endDateClicked", false);
-//
-//            if (startDateClicked) {
-//                Log.d("Start Date Clicked", "Received the Intent.");
-////                i.putExtra("pN", pName.getText().toString());
-////                i.putExtra("pSD", pStart.getText().toString());
-////                i.putExtra("pD", pDesc.getText().toString());
-////                i.putExtra("pED", pEnd.getText().toString());
-////                i.putExtra("pL", pLink.getText().toString());
-//                String name = intent.getStringExtra("pN");
-//                String description = intent.getStringExtra("pSD");
-//                String endDate = intent.getStringExtra("pED");
-//                String link = intent.getStringExtra("pL");
-//                startDateChosen = intent.getStringExtra("startDateChosen");
-//                editor.putString("ChosenStartDate", startDateChosen);
-//                editor.apply();
-//                pStart.setText(startDateChosen);
-//                pName.setText(name);
-//                pDesc.setText(description);
-//                pEnd.setText(endDate);
-//                pLink.setText(link);
-//            } else {
-//                updateSD();
-//            }
-//
-//            if (endDateClicked) {
-//                String name = intent.getStringExtra("pN");
-//                String description = intent.getStringExtra("pSD");
-//                String endDate = intent.getStringExtra("pED");
-//                String link = intent.getStringExtra("pL");
-//                startDateChosen = intent.getStringExtra("startDateChosen");
-//                endDateChosen = intent.getStringExtra("endDateChosen");
-//                editor2.putString("ChosenEndDate", endDateChosen);
-//                editor2.apply();
-//                pEnd.setText(endDateChosen);
-//                pStart.setText(startDateChosen);
-//                pName.setText(name);
-//                pDesc.setText(description);
-//                pEnd.setText(endDate);
-//                pLink.setText(link);
-//            } else {
-//                updateED();
-//            }
-//        }
+        bv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            Intent i;
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.profileNav:
+                        if(userRole==1){
+                            i = new Intent(EditProject.this, ProfilePage.class);
+                            startActivity(i);
+                            finish();
+                        }else if(userRole==2){
+                            i = new Intent(EditProject.this, FreelancerOwnProfile.class);
+                            startActivity(i);
+                            finish();
+                        }else{
+                            i = new Intent(EditProject.this, LoginScreen.class);
+                            startActivity(i);
+                            finish();
+                        }
+
+                        return true;
+                    case R.id.feedNav:
+                        i = new Intent(EditProject.this, FeedPage.class);
+                        startActivity(i);
+                        finish();
+                        return true;
+                    case R.id.settingsNav:
+                        i = new Intent(EditProject.this, SettingsPage.class);
+                        startActivity(i);
+                        finish();
+                        return true;
+                }
+                return false;
+            }
+        });
+
     }
-
-
-//    public void updateSD() {
-//        SharedPreferences sdsp = getSharedPreferences(START_DATE, MODE_PRIVATE);
-//        String text = sdsp.getString("ChosenStartDate", "");
-//        Log.d("Inside UpdateSD Checking Text", text);
-//        pStart.setText(text);
-//    }
-//
-//    public void updateED() {
-//        Log.d("Inside UpdateED", "endDate clicked is false");
-//        SharedPreferences edsp = getSharedPreferences(END_DATE, MODE_PRIVATE);
-//        String text2 = edsp.getString("ChosenEndDate", "");
-//        Log.d("Inside UpdateED Checking Text", text2);
-//
-//        pEnd.setText(text2);
-//    }
 
 }

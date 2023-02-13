@@ -9,12 +9,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.navigation.NavigationBarView;
 
 import org.w3c.dom.Text;
 
@@ -48,32 +51,74 @@ public class AddExperience extends AppCompatActivity {
         descriptionField = (EditText) findViewById(R.id.descriptionField);
         addExperienceBtn = (MaterialButton) findViewById(R.id.addExperienceButton);
 
+        SharedPreferences prefs = getSharedPreferences("UserDetails", MODE_PRIVATE);
 
-//        startDateField.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent i = new Intent(AddExperience.this, CalendarViewActivity.class);
-//                startDateClicked = true;
-//
-//                i.putExtra("startDateClicked", startDateClicked);
-//                i.putExtra("fromAddExperience",true);
-//                startActivity(i);
-//
-//            }
-//
-//        });
-//        endDateField.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Intent i = new Intent(AddExperience.this, CalendarViewActivity.class);
-//                endDateClicked = true;
-//                i.putExtra("endDateClicked", endDateClicked);
-//                startActivity(i);
-//
-//            }
-//
-//        });
+        BottomNavigationView bv =findViewById(R.id.bottomNavigationView);
+        int userRole = Integer.parseInt(prefs.getString("RoleID","-1"));
+
+        bv.setSelectedItemId(R.id.profileNav);
+
+        bv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            Intent i;
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.profileNav:
+                        if(userRole==1){
+                            i = new Intent(AddExperience.this, ProfilePage.class);
+                            startActivity(i);
+                            finish();
+                        }else if(userRole==2){
+                            i = new Intent(AddExperience.this, FreelancerOwnProfile.class);
+                            startActivity(i);
+                            finish();
+                        }else{
+                            i = new Intent(AddExperience.this, LoginScreen.class);
+                            startActivity(i);
+                            finish();
+                        }
+
+                        return true;
+                    case R.id.feedNav:
+                        i = new Intent(AddExperience.this, FeedPage.class);
+                        startActivity(i);
+                        finish();
+                        return true;
+                    case R.id.settingsNav:
+                        i = new Intent(AddExperience.this, SettingsPage.class);
+                        startActivity(i);
+                        finish();
+                        return true;
+                }
+                return false;
+            }
+        });
+
+        startDateField.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(AddExperience.this, CalendarViewActivity.class);
+                startDateClicked = true;
+
+                i.putExtra("startDateClicked", startDateClicked);
+                i.putExtra("fromAddExperience",true);
+                startActivity(i);
+
+            }
+
+        });
+        endDateField.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(AddExperience.this, CalendarViewActivity.class);
+                endDateClicked = true;
+                i.putExtra("endDateClicked", endDateClicked);
+                startActivity(i);
+
+            }
+
+        });
         addExperienceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,18 +126,7 @@ public class AddExperience extends AppCompatActivity {
                 String startDate = startDateField.getText().toString();
                 String endDate = endDateField.getText().toString();
                 String companyName = editTextCompany.getText().toString();
-                Log.d("Company Name", companyName);
                 String description = descriptionField.getText().toString();
-//                Log.d("experienceName", experienceName);
-//                Log.d("Name Check", Boolean.toString(experienceName != null && !experienceName.isEmpty()));
-//                Log.d("startDate", startDate);
-//                Log.d("Start Date Check", Boolean.toString(startDate != null && !startDate.isEmpty()));
-//                Log.d("endDate", endDate);
-//                Log.d("End Date Check", Boolean.toString(endDate != null && !endDate.isEmpty()));
-//                Log.d("companyName", companyName);
-//                Log.d("Company Name Check", Boolean.toString(companyName != null && !companyName.isEmpty()));
-//                Log.d("description", description);
-//                Log.d("Description Check", Boolean.toString(description != null && !description.isEmpty()));
 
 
                 if (experienceName != null && !experienceName.isEmpty() && startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty() && companyName != null && !companyName.isEmpty() && description != null && !description.isEmpty()) {
@@ -101,7 +135,7 @@ public class AddExperience extends AppCompatActivity {
                     Intent i = new Intent(AddExperience.this, ExperienceMainActivity.class);
                     startActivity(i);
                 } else {
-                    Log.d("Form Status", "Missing Fields");
+
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(AddExperience.this);
                     builder1.setMessage("Please fill in all the fields!");
                     builder1.setCancelable(true);

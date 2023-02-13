@@ -1,5 +1,6 @@
 package com.example.freelancerhomescreen;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,11 +11,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 
@@ -67,7 +71,7 @@ public class EditCertificationActivity extends AppCompatActivity {
         updateCertificationButton = (MaterialButton) findViewById(R.id.updateCertificationButton);
 
         if (getData.getBoolean("fromCertificationPage")) {
-            Log.d("From Where??", "From the Certifications Main Activity Page!!!");
+
             name = getData.getString("name");
             link = getData.getString("link");
             endDate = getData.getString("endDate");
@@ -77,14 +81,11 @@ public class EditCertificationActivity extends AppCompatActivity {
 
         }
         fromCalendarViewActivity = getData.getBoolean("fromCalendarViewActivity");
-        Log.d("Coming from CalendarViewActivity", Boolean.toString(getData.getBoolean("fromCalendarViewActivity")));
         if (getData.getBoolean("fromCalendarViewActivity")) {
-            Log.d("About to set the data", "Just came back from Calendar View Activity!");
 
             name = getData.getString("name");
             link = getData.getString("link");
             endDate = getData.getString("completionDateSelected");
-
             description = getData.getString("description");
             skills = getData.getString("skills");
             skillsArrayList = getStringArrayList(skills);
@@ -97,22 +98,17 @@ public class EditCertificationActivity extends AppCompatActivity {
         }
 
 
-//        updateExperienceButton = (MaterialButton) findViewById(R.id.updateExperienceButton);
-//        editTextCompany = (EditText) findViewById(R.id.editTextCompany);
         editTextUpdateName.setText(name);
         endDatePickerUpd.setText(endDate);
         descriptionFieldUpd.setText(description);
         editLink.setText(link);
-
-        Log.d("Setting Adapter", "About to set adapter......");
-        Log.d("ArrayList for the Skills", Boolean.toString(skillsArrayList == null));
 
         setAdapter(skillsArrayList);
 
         endDatePickerUpd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("End Date Picker Clicked", "Clicked!");
+
                 name = editTextUpdateName.getText().toString();
                 endDate = endDatePickerUpd.getText().toString();
                 description = descriptionFieldUpd.getText().toString();
@@ -166,13 +162,11 @@ public class EditCertificationActivity extends AppCompatActivity {
 
 
                 if (certName != null && !certName.isEmpty() && completionDate != null && !completionDate.isEmpty() && endDate != null && !endDate.isEmpty() && description != null && !description.isEmpty()) {
-                    Log.d("Form Status", "Fields Complete");
-//                    Experience e = new Experience(experienceName, startDate, endDate, companyName, description,1);
-                    //ct.updateExperience(e);
+
                     Intent i = new Intent(EditCertificationActivity.this, ExperienceMainActivity.class);
 
                 } else {
-                    Log.d("Form Status", "Missing Fields");
+
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(EditCertificationActivity.this);
                     builder1.setMessage("Please fill in all the fields!");
                     builder1.setCancelable(true);
@@ -223,7 +217,7 @@ public class EditCertificationActivity extends AppCompatActivity {
                 textListSkills = skillsStringify();
 
                 if (certName != null && !certName.isEmpty() && completionDate != null && !completionDate.isEmpty() && description != null && !description.isEmpty() && editedLink != null && !editedLink.isEmpty() && textListSkills != null && !textListSkills.isEmpty()) {
-                    Log.d("Form Status", "Fields Complete");
+
                     Certification c = new Certification(1, certName, editedLink, completionDate, textListSkills, description);
                     db.updateCertification(c);
                     Intent i = new Intent(EditCertificationActivity.this, CertificationPage.class);
@@ -231,7 +225,7 @@ public class EditCertificationActivity extends AppCompatActivity {
                     finish();
 
                 } else {
-                    Log.d("Form Status", "Missing Fields");
+
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(EditCertificationActivity.this);
                     builder1.setMessage("Please fill in all the fields!");
                     builder1.setCancelable(true);
@@ -279,6 +273,48 @@ public class EditCertificationActivity extends AppCompatActivity {
                 //updateED();
             }
         }
+        SharedPreferences prefs = getSharedPreferences("UserDetails", MODE_PRIVATE);
+
+        BottomNavigationView bv =findViewById(R.id.bottomNavigationView);
+        int userRole = Integer.parseInt(prefs.getString("RoleID","-1"));
+
+        bv.setSelectedItemId(R.id.profileNav);
+
+        bv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            Intent i;
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.profileNav:
+                        if(userRole==1){
+                            i = new Intent(EditCertificationActivity.this, ProfilePage.class);
+                            startActivity(i);
+                            finish();
+                        }else if(userRole==2){
+                            i = new Intent(EditCertificationActivity.this, FreelancerOwnProfile.class);
+                            startActivity(i);
+                            finish();
+                        }else{
+                            i = new Intent(EditCertificationActivity.this, LoginScreen.class);
+                            startActivity(i);
+                            finish();
+                        }
+
+                        return true;
+                    case R.id.feedNav:
+                        i = new Intent(EditCertificationActivity.this, FeedPage.class);
+                        startActivity(i);
+                        finish();
+                        return true;
+                    case R.id.settingsNav:
+                        i = new Intent(EditCertificationActivity.this, SettingsPage.class);
+                        startActivity(i);
+                        finish();
+                        return true;
+                }
+                return false;
+            }
+        });
 
     }
 
@@ -312,7 +348,6 @@ public class EditCertificationActivity extends AppCompatActivity {
     public void updateSD() {
         SharedPreferences sdsp = getSharedPreferences(START_DATE, MODE_PRIVATE);
         String text = sdsp.getString("ChosenStartDate", "");
-        Log.d("Inside UpdateSD Checking Text", text);
         endDatePickerUpd.setText(text);
     }
 
@@ -328,7 +363,7 @@ public class EditCertificationActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Log.d("onStart msg", "The onStart() event");
+
     }
 
     /**
@@ -337,21 +372,7 @@ public class EditCertificationActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("onResume msg", "The onResume() event");
-//        if (fromCalendarViewActivity) {
-////            formData = getSharedPreferences(FORM_DATA, MODE_PRIVATE);
-////            String name = formData.getString("Name", "");
-////            String completionDate = formData.getString("CompletionDate", "");
-////            String link = formData.getString("Link", "");
-////            String description = formData.getString("Description", "");
-////            String skills = formData.getString("Skills", "");
-////            skillsArrayList = getStringArrayList(skills);
-////            Log.d("ArrayList for Skills..", Boolean.toString(skillsArrayList == null));
-//            editTextUpdateName.setText(name);
-//            endDatePickerUpd.setText(endDate);
-//            descriptionFieldUpd.setText(description);
-//            editLink.setText(link);
-//        }
+
     }
 
     public ArrayList<String> getStringArrayList(String skills) {
@@ -370,7 +391,7 @@ public class EditCertificationActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d("onPause msg", "The onPause() event");
+
     }
 
     /**
@@ -396,6 +417,6 @@ public class EditCertificationActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d("onDestroy msg", "The onDestroy() event");
+
     }
 }

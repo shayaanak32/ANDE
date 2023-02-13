@@ -145,22 +145,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     void addCertifications(Certification certification) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Log.d(TAG, "addCertifications: RUNNING");
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, certification.getName()); // Contact Name
         values.put(KEY_DESCRIPTION, certification.getDescription()); // Contact Phone
         values.put(KEY_LINK, certification.getLink());
         values.put(KEY_SKILLS, certification.getSkills());
         values.put(KEY_DATE, certification.getEndDate());
-        Log.d(TAG, certification.getFreelancerID() + "");
         values.put("freelancerID", certification.getFreelancerID());
         // Contact Phone
         // Inserting Row
         db.insert(TABLE_CERTIFICATIONS, null, values);
         String selectQuery = "SELECT * FROM Certifications";
         Cursor cursor = db.rawQuery(selectQuery, null);
-
-        Log.d("Certifications Added", "Created.");
 
         //2nd argument is String containing nullColumnHack
         // Closing database connection
@@ -222,7 +218,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 new String[]{String.valueOf(id)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
-        Log.d("konichiwa22", cursor.getString((3)));
         Employer contact = new Employer(cursor.getString(0),
                 cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getInt(Integer.parseInt(cursor.getString(4))), cursor.getString(5));
         // return contact
@@ -232,7 +227,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // code to get the single contact
     Freelancer getFreelancer(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Log.d("contents DB", id+"");
         Cursor cursor = db.query(TABLE_FREELANCERS, new String[] { KEY_NAME,
                         KEY_DESCRIPTION },  "freelancerId =?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
@@ -253,7 +247,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         Freelancer f = new Freelancer(cursor.getString(0),
                 cursor.getString(1), cursor.getString(2), cursor.getString(3));
-        Log.d("konichiwa555",cursor.getString(3));
         // return contact
         return f;
     }
@@ -265,7 +258,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_PASSWORD, password);
         values.put(KEY_DESCRIPTION, description);
         values.put(KEY_YOUR_SKILLS, skills);
-        values.put(KEY_PFP, profilePic);
+        String finalPfp;
+        if (profilePic.trim()==""){
+            finalPfp="default_pfp";
+        }else{
+            finalPfp = profilePic;
+        }
+        values.put(KEY_PFP, finalPfp);
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
         db.insert(TABLE_FREELANCERS, null, values);
@@ -309,12 +308,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_DESCRIPTION, description);
         values.put(KEY_PRIORITIES, priorities);
         values.put(KEY_UEN, uen);
-        values.put(KEY_PFP, profilePic);
+        String finalPfp;
+        if (profilePic.trim()==""){
+            finalPfp="default_pfp";
+        }else{
+            finalPfp = profilePic;
+        }
+        values.put(KEY_PFP, finalPfp);
         Log.d("Inputting values:", empEmail + empPassword + companyName + description + priorities + uen);
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
         db.insert(TABLE_EMPLOYERS, null, values);
-        Log.i("Info", "User Added");
         db.close(); // Closing database connection
     }
 
@@ -328,7 +332,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         String temp = dumpCursorToString(cursor);
-        Log.d(TAG, temp);
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
@@ -354,7 +357,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_NAME, employer.getCompanyName());
         values.put(KEY_DESCRIPTION, employer.getDescription());
         values.put(KEY_PRIORITIES, employer.getPriorities());
-        Log.d("update debugging", employer.getEmployerID() + "");
         // updating row
         return db.update(TABLE_EMPLOYERS, values, KEY_USERID + " = ?",
                 new String[]{String.valueOf(employer.getEmployerID())});
@@ -385,10 +387,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public ArrayList<Projects> getAllProjects(int userid) {
-        Log.d(TAG, "get all projects called");
+
         ArrayList<Projects> projectList = new ArrayList<Projects>();
         // Select All Query
-//        String selectQuery = "SELECT  * FROM " + TABLE_PROJECTS +" WHERE freelancerID = "+userid;
         String selectQuery = "SELECT  * FROM " + TABLE_PROJECTS + " WHERE freelancerID = " + userid;
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -448,14 +449,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Users u;
 
         if (cursor.getCount() != 0) {
-            Log.d("Record Exists", Boolean.toString(exists));
-
-            Log.d("0", cursor.getString(0));
-            Log.d("0", cursor.getString(1));
-            Log.d("0", cursor.getString(2));
-            Log.d("0", cursor.getString(3));
-            Log.d("0", cursor.getString(4));
-            Log.d("0", cursor.getString(5));
 
             u = new Users(Integer.parseInt(cursor.getString(0)),
                         cursor.getString(1),
@@ -530,7 +523,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     void addProjects(Projects projects) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Log.d(KEY_NAME, projects.getNameOfProject());
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, projects.getNameOfProject()); // Contact Name
         values.put(KEY_startDATE, projects.getStartDate()); // Contact Phone
